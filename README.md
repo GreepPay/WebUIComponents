@@ -14,13 +14,7 @@ This package provides UI components for the AppName application.
 ### Installation
 
 ```bash
-npm install @app_name/ui-components
-```
-
-or
-
-```bash
-yarn add @app_name/ui-components
+npm install @greep/mobile-ui-components or add as ../file_path to your package.json
 ```
 
 ### Prerequisites
