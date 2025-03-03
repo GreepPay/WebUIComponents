@@ -1,24 +1,35 @@
 ---
-# https://vitepress.dev/reference/default-theme-home-page
 layout: home
 
 hero:
   name: "Greep UI Components"
-  text: "A doc for Mobile UI Components"
-  tagline: ""
+  text: "Modern Mobile UI Component Library"
+  tagline: "A comprehensive collection of Vue 3 components designed for mobile-first applications"
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: Get Started
+      link: /components/
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: View on GitHub
+      link: https://github.com/greeppay/mobile-ui-components
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - icon: 🎨
+    title: Modern Design System
+    details: Carefully crafted components following modern design principles and mobile-first approach
+  - icon: ⚡️
+    title: Performance Optimized
+    details: Lightweight components with minimal dependencies, optimized for mobile performance
+  - icon: 📱
+    title: Mobile-First Components
+    details: Form inputs, modals, cards, and UI elements specifically designed for mobile interactions
+  - icon: 🔧
+    title: Highly Customizable
+    details: Extensive prop system and Tailwind CSS integration for easy styling and customization
+  - icon: 🎯
+    title: TypeScript Ready
+    details: Full TypeScript support with comprehensive type definitions for better development experience
+  - icon: 📚
+    title: Well Documented
+    details: Detailed documentation with live examples and comprehensive API references for each component
 ---

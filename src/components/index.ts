@@ -4,6 +4,9 @@ import AppImageLoader from './AppImageLoader'
 import AppTransaction from './AppTransaction'
 import AppModal from './AppModal'
 import AppQrCode from './AppQrCode'
+import AppAvatar from './AppAvatar'
+import AppChip from './AppChip'
+import AppCard from './AppCard'
 import { AppHeaderText, AppNormalText } from './AppTypography'
 import {
   AppSelect,
@@ -31,6 +34,9 @@ export {
   AppIcon,
   AppImageLoader,
   AppTransaction,
-  AppQrCode,
   AppModal,
+  AppQrCode,
+  AppAvatar,
+  AppChip,
+  AppCard,
 }
