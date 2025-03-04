@@ -4,11 +4,16 @@ The Chip component is used to represent small blocks of information, typically u
 
 ## Basic Usage
 
+::: demo Basic Chip Examples
 ```vue
 <template>
-  <AppChip>Basic Chip</AppChip>
+  <div class="flex space-x-2">
+    <AppChip>Basic Chip</AppChip>
+    <AppChip variant="outlined">Outlined Chip</AppChip>
+  </div>
 </template>
 ```
+:::
 
 ## Props
 
@@ -23,75 +28,86 @@ The Chip component is used to represent small blocks of information, typically u
 
 ## Examples
 
-### Variants
+### Variants and Colors
 
+::: demo Chip Variants and Colors
 ```vue
 <template>
   <div class="space-y-4">
     <div class="space-x-2">
-      <AppChip>Filled Chip</AppChip>
-      <AppChip variant="outlined">Outlined Chip</AppChip>
+      <AppChip>Default Chip</AppChip>
+      <AppChip
+        bgColor="bg-blue-500"
+        textColor="text-white"
+      >
+        Blue Chip
+      </AppChip>
+      <AppChip
+        bgColor="bg-green-500"
+        textColor="text-white"
+      >
+        Green Chip
+      </AppChip>
+    </div>
+    <div class="space-x-2">
+      <AppChip variant="outlined">Default Outlined</AppChip>
+      <AppChip
+        variant="outlined"
+        borderColor="border-blue-500"
+        textColor="text-blue-500"
+      >
+        Blue Outlined
+      </AppChip>
+      <AppChip
+        variant="outlined"
+        borderColor="border-green-500"
+        textColor="text-green-500"
+      >
+        Green Outlined
+      </AppChip>
     </div>
   </div>
 </template>
 ```
-
-### Custom Colors
-
-```vue
-<template>
-  <div class="space-x-2">
-    <AppChip
-      bgColor="bg-blue-500"
-      textColor="text-white"
-    >
-      Blue Chip
-    </AppChip>
-    <AppChip
-      variant="outlined"
-      borderColor="border-green-500"
-      textColor="text-green-500"
-    >
-      Green Outlined
-    </AppChip>
-  </div>
-</template>
-```
+:::
 
 ### Closable Chips
 
+::: demo Closable Chip Examples
 ```vue
 <template>
   <div class="space-x-2">
     <AppChip
+      v-for="(chip, index) in chips"
+      :key="index"
       closable
-      @close="handleClose"
+      @close="removeChip(index)"
     >
-      Closable Chip
-    </AppChip>
-    <AppChip
-      variant="outlined"
-      closable
-      @close="handleClose"
-    >
-      Closable Outlined
+      {{ chip }}
     </AppChip>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      chips: ['Chip 1', 'Chip 2', 'Chip 3']
+    }
+  },
   methods: {
-    handleClose() {
-      // Handle close event
+    removeChip(index) {
+      this.chips.splice(index, 1)
     }
   }
 }
 </script>
 ```
+:::
 
-### With Icons/Prefix/Suffix
+### With Icons
 
+::: demo Chips with Icons
 ```vue
 <template>
   <div class="space-x-2">
@@ -99,14 +115,35 @@ export default {
       <template #prefix>
         <span class="mr-1">🔥</span>
       </template>
-      With Prefix
+      Trending
+    </AppChip>
+    <AppChip variant="outlined">
+      <template #prefix>
+        <span class="mr-1">✨</span>
+      </template>
+      Featured
     </AppChip>
     <AppChip>
-      With Suffix
+      New
       <template #suffix>
-        <span class="ml-1">✨</span>
+        <span class="ml-1">🆕</span>
       </template>
     </AppChip>
   </div>
 </template>
 ```
+:::
+
+### Disabled State
+
+::: demo Disabled Chip Examples
+```vue
+<template>
+  <div class="space-x-2">
+    <AppChip disabled>Disabled Filled</AppChip>
+    <AppChip variant="outlined" disabled>Disabled Outlined</AppChip>
+    <AppChip disabled closable>Disabled Closable</AppChip>
+  </div>
+</template>
+```
+:::

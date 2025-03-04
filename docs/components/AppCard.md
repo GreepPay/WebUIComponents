@@ -4,15 +4,14 @@ The Card component is a flexible container that can hold various types of conten
 
 ## Basic Usage
 
+::: demo Basic Card Example
 ```vue
 <template>
   <AppCard>
     <template #header>
       <h3 class="text-xl font-semibold">Card Title</h3>
     </template>
-    
     <p>This is the main content of the card.</p>
-    
     <template #footer>
       <div class="flex justify-end">
         <button class="text-primary">Action</button>
@@ -21,6 +20,7 @@ The Card component is a flexible container that can hold various types of conten
   </AppCard>
 </template>
 ```
+:::
 
 ## Props
 
@@ -36,6 +36,7 @@ The Card component is a flexible container that can hold various types of conten
 
 ### Basic Card
 
+::: demo Simple Card
 ```vue
 <template>
   <AppCard>
@@ -43,15 +44,17 @@ The Card component is a flexible container that can hold various types of conten
   </AppCard>
 </template>
 ```
+:::
 
-### Card with Media
+### Basic Card with Media
 
+::: demo Media Card
 ```vue
 <template>
   <AppCard>
     <template #media>
       <img
-        src="https://example.com/image.jpg"
+        src="https://picsum.photos/600/300"
         alt="Card media"
         class="w-full h-48 object-cover"
       />
@@ -59,31 +62,38 @@ The Card component is a flexible container that can hold various types of conten
     <template #header>
       <h3 class="text-xl font-semibold">Media Card</h3>
     </template>
-    <p>Card content with media.</p>
+    <p class="text-gray-600">
+      This card includes a media section at the top. The media section can contain images,
+      videos, or any other media content you want to display.
+    </p>
   </AppCard>
 </template>
 ```
+:::
 
 ### Different Elevations
 
+::: demo Card Elevations
 ```vue
 <template>
   <div class="space-y-4">
     <AppCard elevation="0">
-      <p>No elevation</p>
+      <p class="p-4">No elevation (flat)</p>
     </AppCard>
     <AppCard elevation="2">
-      <p>Medium elevation</p>
+      <p class="p-4">Medium elevation</p>
     </AppCard>
     <AppCard elevation="5">
-      <p>High elevation</p>
+      <p class="p-4">High elevation</p>
     </AppCard>
   </div>
 </template>
 ```
+:::
 
 ### Custom Styling
 
+::: demo Custom Styled Card
 ```vue
 <template>
   <AppCard
@@ -93,14 +103,56 @@ The Card component is a flexible container that can hold various types of conten
     footerClass="bg-primary-light"
   >
     <template #header>
-      <h3 class="text-xl font-semibold">Custom Styled Card</h3>
+      <h3 class="text-xl font-semibold p-4">Custom Styled Card</h3>
     </template>
-    <p>Content with custom styling.</p>
+    <p class="p-4">Content with custom styling applied through props.</p>
     <template #footer>
-      <div class="flex justify-end">
+      <div class="flex justify-end p-4">
         <button class="text-white">Action</button>
       </div>
     </template>
   </AppCard>
 </template>
 ```
+:::
+
+### Interactive Card
+
+::: demo Interactive Card Example
+```vue
+<template>
+  <AppCard class="hover:shadow-lg transition-shadow duration-300">
+    <template #header>
+      <div class="flex items-center space-x-4 p-4">
+        <AppAvatar
+          name="John Doe"
+          size="40"
+          bgColor="bg-blue-500"
+          textColor="text-white"
+        />
+        <div>
+          <h3 class="text-lg font-semibold">John Doe</h3>
+          <p class="text-sm text-gray-500">Software Engineer</p>
+        </div>
+      </div>
+    </template>
+    <div class="p-4">
+      <p class="text-gray-600">
+        This is an example of an interactive card that combines multiple components
+        and includes hover effects.
+      </p>
+    </div>
+    <template #footer>
+      <div class="flex justify-between items-center p-4 bg-gray-50">
+        <AppChip variant="outlined" textColor="text-blue-500" borderColor="border-blue-500">
+          Follow
+        </AppChip>
+        <button class="text-primary hover:text-primary-dark">
+          View Profile
+        </button>
+      </div>
+    </template>
+  </AppCard>
+</template>
+```
+:::
