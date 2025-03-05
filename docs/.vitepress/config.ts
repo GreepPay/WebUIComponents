@@ -1,10 +1,20 @@
 import { defineConfig } from 'vitepress'
 import { containerPreview, componentPreview } from '@vitepress-demo-preview/plugin'
+import path from 'path'
 
 export default defineConfig({
   title: "GreepPay UI Components",
   description: "Documentation for GreepPay UI Components",
   base: '/',
+  vite: {
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, '../../src'),
+        '~': path.resolve(__dirname, '../../')
+      }
+    },
+    assetsInclude: ['**/*.svg']
+  },
   themeConfig: {
     nav: [
       { text: 'Home', link: '/' },
