@@ -1,18 +1,18 @@
 <template>
-  <span>
-    <img :src="`/images/icons/${name}.svg`" :class="`${customClass}`" />
-  </span>
+  <div>
+    <!-- <img :src="`/images/icons/${name}.svg`" :class="`${customClass}`" /> -->
+  </div>
 </template>
 
-<script lang="ts">
+<script setup>
 import { defineComponent } from "vue";
 
 /**
  *  Reusable Icon component.  Loads icons from the `/images/icons` directory based on the `name` prop.
  */
-export default defineComponent({
+defineComponent({
   name: "AppIcon",
-  props: {
+  defineProps({
     /**
      * The name of the icon file (without the `.svg` extension).  The component will attempt to load `/images/icons/{name}.svg`.
      * @requires
@@ -27,8 +27,8 @@ export default defineComponent({
      */
     customClass: {
       type: String,
-      required: true,
+      default: "w-5 h-5",
     },
-  },
+  }),
 });
 </script>

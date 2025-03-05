@@ -27,14 +27,10 @@
         </AppTextField>
 
         <!-- With Icons -->
-        <AppTextField
-          v-model="search"
-          label="Search"
-          placeholder="Search..."
-        >
-          <template #inner-prefix>
+        <AppTextField v-model="search" label="Search" placeholder="Search...">
+          <!-- <template #inner-prefix>
             <img src="@/assets/svg/All/linear/search-normal.svg" class="w-5 h-5" />
-          </template>
+          </template> -->
         </AppTextField>
 
         <!-- With Clear Button -->
@@ -43,14 +39,14 @@
           label="Clearable Input"
           placeholder="Type something..."
         >
-          <template #inner-suffix>
-            <img 
+          <!-- <template #inner-suffix>
+            <img
               v-if="clearableText"
-              src="@/assets/svg/All/linear/close-circle.svg" 
+              src="@/assets/svg/All/linear/close-circle.svg"
               class="w-5 h-5 cursor-pointer"
               @click="clearableText = ''"
             />
-          </template>
+          </template> -->
         </AppTextField>
       </div>
     </section>
@@ -58,11 +54,11 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 import { AppTextField } from "../../../components";
 
-const amount = ref('');
-const weight = ref('');
-const search = ref('');
-const clearableText = ref('');
+const amount = ref("");
+const weight = ref("");
+const search = ref("");
+const clearableText = ref("");
 </script>
