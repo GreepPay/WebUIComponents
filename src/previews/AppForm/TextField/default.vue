@@ -2,7 +2,7 @@
   <div class="space-y-8">
     <!-- Basic Text Fields -->
     <section class="space-y-2">
-      <h3 class="text-lg font-semibold mb-4">Basic Text Fields</h3>
+      <h3 class="text-lg block font-semibold mb-4">Basic Text Fields</h3>
       <div class="space-y-4 max-w-md flex flex-col gap-4">
         <AppTextField v-model="text1" label="Default" />
 
