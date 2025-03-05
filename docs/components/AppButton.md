@@ -1,195 +1,95 @@
 # Button Component
 
-The Button component is a versatile, customizable button that supports various styles and states.
+> AppButton Component
 
-## Basic Usage
+:::preview Default Button || A versatile button component that supports various styles, colors, and sizes.
+demo-preview=../../src/previews/AppButton/default.vue
+:::
 
-::: demo Basic Button Examples
-```vue
-<template>
-  <div class="space-x-4">
-    <AppButton>Default Button</AppButton>
-    <AppButton bgColor="bg-secondary">Secondary</AppButton>
-    <AppButton bgColor="bg-success">Success</AppButton>
-  </div>
-</template>
-```
+A reusable button component with customizable styles and colors.
+
+## Colors
+
+:::preview Button Colors || Different color variants for the button component
+demo-preview=../../src/previews/AppButton/colors.vue
+:::
+
+## Sizes
+
+:::preview Button Sizes || Different size variants using padding classes
+demo-preview=../../src/previews/AppButton/sizes.vue
+:::
+
+## Custom Styles
+
+:::preview Custom Buttons || Examples of custom styled buttons including outlined, text, and gradient variants
+demo-preview=../../src/previews/AppButton/custom.vue
 :::
 
 ## Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| bgColor | String | 'bg-primary' | Background color class (TailwindCSS) |
-| textColor | String | 'text-white' | Text color class (TailwindCSS) |
-| customClass | String | '' | Additional CSS classes |
-| padding | String | 'py-2 px-4' | Padding classes (TailwindCSS) |
+| bgColor | String | 'bg-black' | Background color using TailwindCSS classes |
+| textColor | String | 'text-white' | Text color using TailwindCSS classes |
+| padding | String | 'py-2 px-4' | Padding using TailwindCSS classes |
+| customClass | String | '' | Additional custom classes |
+| icon | String | '' | Icon name from Iconsax library (without the isax- prefix) |
+| iconClass | String | 'text-current' | Additional classes for the icon |
 
-## Examples
+## Usage Examples
+
+### Basic Button with Icon
+```vue
+<AppButton icon="add">Add Item</AppButton>
+<AppButton icon="notification">Notifications</AppButton>
+<AppButton icon="wallet">Wallet</AppButton>
+```
 
 ### Color Variants
-
-::: demo Color Variants
 ```vue
-<template>
-  <div class="space-y-4">
-    <div class="space-x-4">
-      <AppButton>Primary</AppButton>
-      <AppButton bgColor="bg-secondary">Secondary</AppButton>
-      <AppButton bgColor="bg-success">Success</AppButton>
-    </div>
-    <div class="space-x-4">
-      <AppButton bgColor="bg-error">Error</AppButton>
-      <AppButton bgColor="bg-warning" textColor="text-gray-900">Warning</AppButton>
-      <AppButton bgColor="bg-gray-500">Neutral</AppButton>
-    </div>
-  </div>
-</template>
+<AppButton bgColor="bg-primary">Primary (#10BB76)</AppButton>
+<AppButton bgColor="bg-darkGreen">Dark Green (#1F8F69)</AppButton>
+<AppButton bgColor="bg-blue-green">Blue Green (#00A0B4)</AppButton>
+<AppButton bgColor="bg-blue">Blue (#009DE3)</AppButton>
+<AppButton bgColor="bg-red">Red (#FA1919)</AppButton>
+<AppButton bgColor="bg-purple">Purple (#8E3BE0)</AppButton>
+<AppButton bgColor="bg-orange">Orange (#FFAA1F)</AppButton>
 ```
-:::
+
+### Size Variants
+```vue
+<AppButton padding="py-1 px-2">Small</AppButton>
+<AppButton padding="py-2 px-4">Medium</AppButton>
+<AppButton padding="py-3 px-6">Large</AppButton>
+```
 
 ### Custom Styles
-
-::: demo Custom Button Styles
 ```vue
-<template>
-  <div class="space-y-4">
-    <div class="space-x-4">
-      <AppButton 
-        customClass="border-2 border-primary bg-transparent hover:bg-primary"
-        textColor="text-primary hover:text-white"
-      >
-        Outline
-      </AppButton>
-      <AppButton 
-        customClass="rounded-full"
-        bgColor="bg-purple-500 hover:bg-purple-600"
-      >
-        Rounded
-      </AppButton>
-      <AppButton 
-        customClass="shadow-lg transform hover:-translate-y-1 transition-all"
-        bgColor="bg-gradient-to-r from-blue-500 to-purple-500"
-      >
-        Gradient
-      </AppButton>
-    </div>
-  </div>
-</template>
-```
-:::
+<!-- Outlined Button with Icon -->
+<AppButton 
+  bgColor="bg-white" 
+  textColor="text-primary"
+  customClass="border border-primary"
+  icon="edit"
+>
+  Edit
+</AppButton>
 
-### Sizes
+<!-- Light Button with Icon -->
+<AppButton 
+  bgColor="bg-light-gray-one"
+  textColor="text-black"
+  icon="setting-2"
+>
+  Settings
+</AppButton>
 
-::: demo Button Sizes
-```vue
-<template>
-  <div class="space-x-4 items-center flex">
-    <AppButton padding="py-1 px-2" customClass="text-sm">
-      Small
-    </AppButton>
-    <AppButton>
-      Medium
-    </AppButton>
-    <AppButton padding="py-3 px-6" customClass="text-lg">
-      Large
-    </AppButton>
-  </div>
-</template>
-```
-:::
-
-### With Icons
-
-::: demo Buttons with Icons
-```vue
-<template>
-  <div class="space-x-4">
-    <AppButton>
-      <span class="mr-2">🚀</span>
-      Launch
-    </AppButton>
-    <AppButton bgColor="bg-green-500">
-      Save
-      <span class="ml-2">💾</span>
-    </AppButton>
-    <AppButton bgColor="bg-red-500">
-      <span class="mr-2">🗑️</span>
-      Delete
-    </AppButton>
-  </div>
-</template>
-```
-:::
-
-### Interactive States
-
-::: demo Interactive Button States
-```vue
-<template>
-  <div class="space-x-4">
-    <AppButton 
-      customClass="transition-all duration-300 hover:bg-primary-dark focus:ring-4 focus:ring-primary/50"
-    >
-      Hover & Focus
-    </AppButton>
-    <AppButton 
-      customClass="opacity-50 cursor-not-allowed"
-      bgColor="bg-gray-500"
-    >
-      Disabled
-    </AppButton>
-    <AppButton 
-      customClass="active:scale-95 transform transition-transform"
-      bgColor="bg-indigo-500"
-    >
-      Click Me!
-    </AppButton>
-  </div>
-</template>
-```
-:::
-
-### Loading State
-
-::: demo Loading Button State
-```vue
-<template>
-  <div class="space-x-4">
-    <AppButton 
-      customClass="relative"
-      :class="{ 'cursor-wait': isLoading }"
-      @click="toggleLoading"
-    >
-      <span :class="{ 'opacity-0': isLoading }">
-        {{ isLoading ? 'Processing...' : 'Click to Load' }}
-      </span>
-      <span 
-        v-if="isLoading" 
-        class="absolute inset-0 flex items-center justify-center"
-      >
-        ⏳
-      </span>
-    </AppButton>
-  </div>
-</template>
-
-<script>
-export default {
-  data() {
-    return {
-      isLoading: false
-    }
-  },
-  methods: {
-    toggleLoading() {
-      this.isLoading = true
-      setTimeout(() => {
-        this.isLoading = false
-      }, 2000)
-    }
-  }
-}
-</script>
-```
-:::
+<!-- Gradient Button with Icon -->
+<AppButton 
+  bgColor="bg-gradient-to-r from-primary to-blue"
+  customClass="shadow-lg"
+  icon="arrow-right"
+>
+  Continue
+</AppButton>

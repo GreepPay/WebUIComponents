@@ -5,6 +5,7 @@ The Text Field component provides a customizable input field with floating label
 ## Basic Usage
 
 ::: demo Basic Text Field
+
 ```vue
 <template>
   <div class="space-y-4">
@@ -20,17 +21,26 @@ The Text Field component provides a customizable input field with floating label
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 
-const text = ref('')
+const text = ref("");
 </script>
 ```
+
+:::
+
+:::preview title || A reusable input component with validation and customizable slots.
+
+demo-preview=../../../src/previews/AppForm/TextField/default.vue
+
 :::
 
 ## States
 
 ### Default State
+
 ::: demo Default Text Field
+
 ```vue
 <template>
   <div class="space-y-4">
@@ -46,15 +56,18 @@ const text = ref('')
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 
-const text = ref('')
+const text = ref("");
 </script>
 ```
+
 :::
 
 ### Active State
+
 ::: demo Active Text Field
+
 ```vue
 <template>
   <div class="space-y-4">
@@ -71,15 +84,18 @@ const text = ref('')
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 
-const text = ref('Input')
+const text = ref("Input");
 </script>
 ```
+
 :::
 
 ### Success State
+
 ::: demo Success Text Field
+
 ```vue
 <template>
   <div class="space-y-4">
@@ -96,15 +112,18 @@ const text = ref('Input')
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 
-const text = ref('Valid input')
+const text = ref("Valid input");
 </script>
 ```
+
 :::
 
 ### Error State
+
 ::: demo Error Text Field
+
 ```vue
 <template>
   <div class="space-y-4">
@@ -121,15 +140,18 @@ const text = ref('Valid input')
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 
-const text = ref('Invalid input')
+const text = ref("Invalid input");
 </script>
 ```
+
 :::
 
 ### Disabled State
+
 ::: demo Disabled Text Field
+
 ```vue
 <template>
   <div class="space-y-4">
@@ -146,30 +168,33 @@ const text = ref('Invalid input')
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 
-const text = ref('')
+const text = ref("");
 </script>
 ```
+
 :::
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| modelValue | String | '' | v-model binding value |
-| label | String | '' | Label text that floats when input is active or has content |
-| placeholder | String | '' | Placeholder text shown when input is empty |
-| supportingText | String | '' | Helper text shown below the input |
-| state | String | 'default' | Input state ('default', 'success', 'error') |
-| disabled | Boolean | false | Whether the input is disabled |
-| required | Boolean | false | Whether the input is required |
-| type | String | 'text' | Input type (text, email, password, etc.) |
+| Prop           | Type    | Default   | Description                                                |
+| -------------- | ------- | --------- | ---------------------------------------------------------- |
+| modelValue     | String  | ''        | v-model binding value                                      |
+| label          | String  | ''        | Label text that floats when input is active or has content |
+| placeholder    | String  | ''        | Placeholder text shown when input is empty                 |
+| supportingText | String  | ''        | Helper text shown below the input                          |
+| state          | String  | 'default' | Input state ('default', 'success', 'error')                |
+| disabled       | Boolean | false     | Whether the input is disabled                              |
+| required       | Boolean | false     | Whether the input is required                              |
+| type           | String  | 'text'    | Input type (text, email, password, etc.)                   |
 
 ## Input Types
 
 ### Password Input
+
 ::: demo Password Text Field
+
 ```vue
 <template>
   <div class="space-y-4">
@@ -186,15 +211,18 @@ const text = ref('')
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 
-const password = ref('')
+const password = ref("");
 </script>
 ```
+
 :::
 
 ### Email Input with Validation
+
 ::: demo Email Text Field with Validation
+
 ```vue
 <template>
   <div class="space-y-4">
@@ -213,32 +241,34 @@ const password = ref('')
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed } from "vue";
 
-const email = ref('')
-const emailState = ref('default')
-const emailSupportingText = ref('Enter your email address')
+const email = ref("");
+const emailState = ref("default");
+const emailSupportingText = ref("Enter your email address");
 
 const validateEmail = () => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!email.value) {
-    emailState.value = 'default'
-    emailSupportingText.value = 'Enter your email address'
+    emailState.value = "default";
+    emailSupportingText.value = "Enter your email address";
   } else if (emailRegex.test(email.value)) {
-    emailState.value = 'success'
-    emailSupportingText.value = 'Valid email address'
+    emailState.value = "success";
+    emailSupportingText.value = "Valid email address";
   } else {
-    emailState.value = 'error'
-    emailSupportingText.value = 'Please enter a valid email address'
+    emailState.value = "error";
+    emailSupportingText.value = "Please enter a valid email address";
   }
-}
+};
 </script>
 ```
+
 :::
 
 ## Form Example
 
 ::: demo Form with Multiple Text Fields
+
 ```vue
 <template>
   <div class="space-y-4">
@@ -270,32 +300,33 @@ const validateEmail = () => {
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive } from "vue";
 
 const form = reactive({
-  firstName: '',
-  lastName: '',
-  email: ''
-})
+  firstName: "",
+  lastName: "",
+  email: "",
+});
 
-const emailState = ref('default')
-const emailSupportingText = ref('Enter your email address')
+const emailState = ref("default");
+const emailSupportingText = ref("Enter your email address");
 
 const validateEmail = () => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!form.email) {
-    emailState.value = 'default'
-    emailSupportingText.value = 'Enter your email address'
+    emailState.value = "default";
+    emailSupportingText.value = "Enter your email address";
   } else if (emailRegex.test(form.email)) {
-    emailState.value = 'success'
-    emailSupportingText.value = 'Valid email address'
+    emailState.value = "success";
+    emailSupportingText.value = "Valid email address";
   } else {
-    emailState.value = 'error'
-    emailSupportingText.value = 'Please enter a valid email address'
+    emailState.value = "error";
+    emailSupportingText.value = "Please enter a valid email address";
   }
-}
+};
 
 const handleSubmit = () => {
-  console.log('Form submitted:', form)
-}
+  console.log("Form submitted:", form);
+};
 </script>
+```

@@ -4,7 +4,7 @@
 
 :::preview title || A reusable input component with validation and customizable slots.
 
-demo-preview=../../src/components/AppForm/textField.vue
+demo-preview=../../src/previews/AppForm/TextField/default.vue
 
 :::
 

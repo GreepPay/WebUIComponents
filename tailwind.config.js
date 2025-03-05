@@ -1,23 +1,29 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    './docs/**/*.{js,ts,vue,md}',
-    './src/**/*.{js,ts,vue}',
+    "./index.html",
+    "./src/**/*.{vue,js,ts,jsx,tsx}",
+    "./docs/**/*.{vue,js,ts,jsx,tsx,md}"
   ],
   theme: {
     extend: {
       colors: {
-        primary: '#007AFF',
-        'primary-dark': '#0056B3',
-        'primary-light': '#66B2FF',
-        secondary: '#6C757D',
-        success: '#28A745',
-        error: '#DC3545',
-        warning: '#FFC107',
-      },
-    },
+        green: "#10BB76",
+        primary: "#10BB76",
+        black: "#0A141E",
+        white: "#ffffff",
+        darkGreen: "#1F8F69",
+        "gray-one": "#1F8F69",
+        "gray-two": "#616161",
+        "light-gray-one": "#F0F3F6",
+        "light-gray-two": "#E0E2E4",
+        "blue-green": "#00A0B4",
+        blue: "#009DE3",
+        red: "#FA1919",
+        purple: "#8E3BE0",
+        orange: "#FFAA1F"
+      }
+    }
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-  ],
+  plugins: []
 }
