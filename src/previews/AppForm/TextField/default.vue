@@ -41,10 +41,12 @@
           placeholder="Search..."
         >
           <template #inner-prefix>
-            <!-- <img
-              src="@/assets/svg/All/linear/search-normal.svg"
-              class="w-5 h-5"
-            /> -->
+            <!-- 
+              <img
+                src="@/assets/svg/All/linear/search-normal.svg"
+                class="w-5 h-5"
+              /> 
+            -->
           </template>
         </AppTextField>
       </div>

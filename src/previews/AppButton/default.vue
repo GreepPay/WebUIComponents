@@ -5,33 +5,33 @@
       <h3 class="text-lg font-semibold">Primary Variant</h3>
       <div class="flex flex-wrap gap-4">
         <AppButton variant="primary">
-          <template #icon>
+          <!-- <template #icon>
             <img
               src="@/assets/svg/All/linear/wallet.svg"
               class="w-5 invert h-5"
             />
-          </template>
+          </template> -->
           Normal
         </AppButton>
 
         <AppButton variant="primary" outlined>
-          <template #icon>
+          <!-- <template #icon>
             <img src="@/assets/svg/All/linear/wallet.svg" class="w-5 h-5" />
-          </template>
+          </template> -->
           Outlined
         </AppButton>
 
         <AppButton variant="primary" disabled>
           <template #icon>
-            <img src="@/assets/svg/All/linear/wallet.svg" class="w-5 h-5 invert" />
+            <!-- <img src="@/assets/svg/All/linear/wallet.svg" class="w-5 h-5 invert" /> -->
           </template>
           Disabled
         </AppButton>
 
         <AppButton variant="primary" loading>
-          <template #icon>
+          <!-- <template #icon>
             <img src="@/assets/svg/All/linear/wallet.svg" class="w-5 invert h-5" />
-          </template>
+          </template> -->
           Loading
         </AppButton>
       </div>
@@ -42,30 +42,30 @@
       <h3 class="text-lg font-semibold">Secondary Variant</h3>
       <div class="flex flex-wrap gap-4">
         <AppButton variant="secondary">
-          <template #icon>
+          <!-- <template #icon>
             <img src="@/assets/svg/All/linear/add.svg" class="w-5 invert h-5" />
-          </template>
+          </template> -->
           Normal
         </AppButton>
 
         <AppButton variant="secondary" outlined>
-          <template #icon>
+          <!-- <template #icon>
             <img src="@/assets/svg/All/linear/add.svg" class="w-5 h-5" />
-          </template>
+          </template> -->
           Outlined
         </AppButton>
 
         <AppButton variant="secondary" disabled>
-          <template #icon>
+          <!-- <template #icon>
             <img src="@/assets/svg/All/linear/add.svg" class="w-5 h-5" />
-          </template>
+          </template> -->
           Disabled
         </AppButton>
 
         <AppButton variant="secondary" loading>
-          <template #icon>
+          <!-- <template #icon>
             <img src="@/assets/svg/All/linear/add.svg" class="w-5 h-5" />
-          </template>
+          </template> -->
           Loading
         </AppButton>
       </div>
@@ -76,30 +76,30 @@
       <h3 class="text-lg font-semibold text-white">Primary White Variant</h3>
       <div class="flex flex-wrap gap-4">
         <AppButton variant="primary-white">
-          <template #icon>
+          <!-- <template #icon>
             <img src="@/assets/svg/All/linear/notification.svg" class="w-5 h-5" />
-          </template>
+          </template> -->
           Normal
         </AppButton>
 
         <AppButton variant="primary-white" outlined>
-          <template #icon>
+          <!-- <template #icon>
             <img src="@/assets/svg/All/linear/notification.svg" class="w-5 h-5" />
-          </template>
+          </template> -->
           Outlined
         </AppButton>
 
         <AppButton variant="primary-white" disabled>
-          <template #icon>
+          <!-- <template #icon>
             <img src="@/assets/svg/All/linear/notification.svg" class="w-5 h-5" />
-          </template>
+          </template> -->
           Disabled
         </AppButton>
 
         <AppButton variant="primary-white" loading>
-          <template #icon>
+          <!-- <template #icon>
             <img src="@/assets/svg/All/linear/notification.svg" class="w-5 h-5" />
-          </template>
+          </template> -->
           Loading
         </AppButton>
       </div>
@@ -110,30 +110,30 @@
       <h3 class="text-lg font-semibold">Text Variant</h3>
       <div class="flex flex-wrap gap-4">
         <AppButton variant="text">
-          <template #icon>
+          <!-- <template #icon>
             <img src="@/assets/svg/All/linear/user.svg" class="w-5 h-5" />
-          </template>
+          </template> -->
           Normal
         </AppButton>
 
         <AppButton variant="text" outlined>
-          <template #icon>
+          <!-- <template #icon>
             <img src="@/assets/svg/All/linear/user.svg" class="w-5 h-5" />
-          </template>
+          </template> -->
           Outlined
         </AppButton>
 
         <AppButton variant="text" disabled>
-          <template #icon>
+          <!-- <template #icon>
             <img src="@/assets/svg/All/linear/user.svg" class="w-5 h-5" />
-          </template>
+          </template> -->
           Disabled
         </AppButton>
 
         <AppButton variant="text" loading>
-          <template #icon>
+          <!-- <template #icon>
             <img src="@/assets/svg/All/linear/user.svg" class="w-5 h-5" />
-          </template>
+          </template> -->
           Loading
         </AppButton>
       </div>
