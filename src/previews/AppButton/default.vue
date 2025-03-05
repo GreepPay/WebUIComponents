@@ -7,7 +7,7 @@
         <AppButton variant="primary">
           <template #icon>
             <img
-              src="../../assets/svg/All/linear/wallet.svg"
+              src="@/assets/svg/All/linear/wallet.svg"
               class="w-5 invert h-5"
             />
           </template>
@@ -16,27 +16,21 @@
 
         <AppButton variant="primary" outlined>
           <template #icon>
-            <img src="../../assets/svg/All/linear/wallet.svg" class="w-5 h-5" />
+            <img src="@/assets/svg/All/linear/wallet.svg" class="w-5 h-5" />
           </template>
           Outlined
         </AppButton>
 
         <AppButton variant="primary" disabled>
           <template #icon>
-            <img
-              src="../../assets/svg/All/linear/wallet.svg"
-              class="w-5 h-5 invert"
-            />
+            <img src="@/assets/svg/All/linear/wallet.svg" class="w-5 h-5 invert" />
           </template>
           Disabled
         </AppButton>
 
         <AppButton variant="primary" loading>
           <template #icon>
-            <img
-              src="../../assets/svg/All/linear/wallet.svg"
-              class="w-5 invert h-5"
-            />
+            <img src="@/assets/svg/All/linear/wallet.svg" class="w-5 invert h-5" />
           </template>
           Loading
         </AppButton>
@@ -49,31 +43,28 @@
       <div class="flex flex-wrap gap-4">
         <AppButton variant="secondary">
           <template #icon>
-            <img
-              src="../../assets/svg/All/linear/add.svg"
-              class="w-5 invert h-5"
-            />
+            <img src="@/assets/svg/All/linear/add.svg" class="w-5 invert h-5" />
           </template>
           Normal
         </AppButton>
 
         <AppButton variant="secondary" outlined>
           <template #icon>
-            <img src="../../assets/svg/All/linear/add.svg" class="w-5 h-5" />
+            <img src="@/assets/svg/All/linear/add.svg" class="w-5 h-5" />
           </template>
           Outlined
         </AppButton>
 
         <AppButton variant="secondary" disabled>
           <template #icon>
-            <img src="../../assets/svg/All/linear/add.svg" class="w-5 h-5" />
+            <img src="@/assets/svg/All/linear/add.svg" class="w-5 h-5" />
           </template>
           Disabled
         </AppButton>
 
         <AppButton variant="secondary" loading>
           <template #icon>
-            <img src="../../assets/svg/All/linear/add.svg" class="w-5 h-5" />
+            <img src="@/assets/svg/All/linear/add.svg" class="w-5 h-5" />
           </template>
           Loading
         </AppButton>
@@ -86,40 +77,28 @@
       <div class="flex flex-wrap gap-4">
         <AppButton variant="primary-white">
           <template #icon>
-            <img
-              src="../../assets/svg/All/linear/notification.svg"
-              class="w-5 h-5"
-            />
+            <img src="@/assets/svg/All/linear/notification.svg" class="w-5 h-5" />
           </template>
           Normal
         </AppButton>
 
         <AppButton variant="primary-white" outlined>
           <template #icon>
-            <img
-              src="../../assets/svg/All/linear/notification.svg"
-              class="w-5 h-5"
-            />
+            <img src="@/assets/svg/All/linear/notification.svg" class="w-5 h-5" />
           </template>
           Outlined
         </AppButton>
 
         <AppButton variant="primary-white" disabled>
           <template #icon>
-            <img
-              src="../../assets/svg/All/linear/notification.svg"
-              class="w-5 h-5"
-            />
+            <img src="@/assets/svg/All/linear/notification.svg" class="w-5 h-5" />
           </template>
           Disabled
         </AppButton>
 
         <AppButton variant="primary-white" loading>
           <template #icon>
-            <img
-              src="../../assets/svg/All/linear/notification.svg"
-              class="w-5 h-5"
-            />
+            <img src="@/assets/svg/All/linear/notification.svg" class="w-5 h-5" />
           </template>
           Loading
         </AppButton>
@@ -132,28 +111,28 @@
       <div class="flex flex-wrap gap-4">
         <AppButton variant="text">
           <template #icon>
-            <img src="../../assets/svg/All/linear/user.svg" class="w-5 h-5" />
+            <img src="@/assets/svg/All/linear/user.svg" class="w-5 h-5" />
           </template>
           Normal
         </AppButton>
 
         <AppButton variant="text" outlined>
           <template #icon>
-            <img src="../../assets/svg/All/linear/user.svg" class="w-5 h-5" />
+            <img src="@/assets/svg/All/linear/user.svg" class="w-5 h-5" />
           </template>
           Outlined
         </AppButton>
 
         <AppButton variant="text" disabled>
           <template #icon>
-            <img src="../../assets/svg/All/linear/user.svg" class="w-5 h-5" />
+            <img src="@/assets/svg/All/linear/user.svg" class="w-5 h-5" />
           </template>
           Disabled
         </AppButton>
 
         <AppButton variant="text" loading>
           <template #icon>
-            <img src="../../assets/svg/All/linear/user.svg" class="w-5 h-5" />
+            <img src="@/assets/svg/All/linear/user.svg" class="w-5 h-5" />
           </template>
           Loading
         </AppButton>

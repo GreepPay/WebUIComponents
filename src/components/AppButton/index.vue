@@ -41,7 +41,7 @@
   >
     <div v-if="loading" class="absolute left-1/2 -translate-x-1/2">
       <img 
-        src="../../assets/svg/All/linear/refresh-2.svg" 
+        src="@/assets/svg/All/linear/refresh-2.svg" 
         class="w-5 h-5 animate-spin"
         :class="{'opacity-40': disabled}"
       />
