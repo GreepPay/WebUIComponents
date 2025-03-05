@@ -33,7 +33,7 @@
           placeholder="Search..."
         >
           <template #inner-prefix>
-            <img src="../../../assets/svg/All/linear/search-normal.svg" class="w-5 h-5" />
+            <img src="@/assets/svg/All/linear/search-normal.svg" class="w-5 h-5" />
           </template>
         </AppTextField>
 
@@ -46,7 +46,7 @@
           <template #inner-suffix>
             <img 
               v-if="clearableText"
-              src="../../../assets/svg/All/linear/close-circle.svg" 
+              src="@/assets/svg/All/linear/close-circle.svg" 
               class="w-5 h-5 cursor-pointer"
               @click="clearableText = ''"
             />

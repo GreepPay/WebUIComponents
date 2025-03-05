@@ -76,12 +76,12 @@
     >
       <img 
         v-if="errorMessage"
-        src="../../assets/svg/All/linear/info-circle.svg" 
+        src="@/assets/svg/All/linear/info-circle.svg" 
         class="w-4 h-4"
       />
       <img 
         v-if="successMessage && !errorMessage"
-        src="../../assets/svg/All/linear/tick-circle.svg" 
+        src="@/assets/svg/All/linear/tick-circle.svg" 
         class="w-4 h-4"
       />
       <app-normal-text 
