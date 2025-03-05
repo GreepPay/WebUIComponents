@@ -1,12 +1,5 @@
 <template>
   <div class="flex w-full flex-col relative">
-    <app-normal-text v-if="hasTitle" customClass="pb-2!">
-      <!--
-        @slot title
-        Use this slot to display the title of the text field.
-      -->
-      <slot name="title" />
-    </app-normal-text>
     <div
       class="w-full flex flex-row items-center"
       :tabindex="tabIndex"
@@ -18,10 +11,24 @@
         Use this slot to add content before the input field container.
       -->
       <slot name="outer-prefix" />
+      <label
+        class="absolute left-4 px-1 text-base top-[19px] bg-white transition-all duration-300"
+        :class="{
+          '!top-[-14px] text-[#999999] font-medium':
+            isFocused || placeholder || content,
+          'text-red': errorMessage,
+          'text-green': successMessage && !errorMessage,
+        }"
+        >{{ label }}</label
+      >
       <div
-        :class="`flew-grow w-full space-x-1 flex-row flex items-center justify-between ${padding} ${customClass} border-gray-300 border-[1px]  bg-white rounded-md ${
-          isFocused ? 'border-primary ' : ''
-        } ${validationStatus == false ? 'border-red-500 border-[1px]!' : ''}`"
+        class="flew-grow w-full [box-shadow:0_0_0_1.5px_#E0E2E4] text-base space-x-1 flex-row flex items-center justify-between px-5 py-5 bg-white rounded-[12px]"
+        :class="{
+          '[box-shadow:0_0_0_2px_#999999]': isFocused && !errorMessage && !successMessage,
+          '[box-shadow:0_0_0_2px_theme(colors.red)]': errorMessage,
+          '[box-shadow:0_0_0_2px_theme(colors.green)]': successMessage && !errorMessage,
+          customClass,
+        }"
       >
         <!--
           @slot inner-prefix
@@ -64,11 +71,24 @@
       <slot name="outer-suffix" />
     </div>
     <div
-      v-if="!validationStatus"
-      class="w-full flex flex-row pt-1 justify-start"
+      v-if="errorMessage || successMessage"
+      class="w-full flex flex-row pt-1 justify-start items-center gap-1"
     >
-      <app-normal-text :customClass="' text-left'" :color="`text-red-500`">
-        {{ errorMessage }}
+      <img 
+        v-if="errorMessage"
+        src="../../assets/svg/All/linear/info-circle.svg" 
+        class="w-4 h-4"
+      />
+      <img 
+        v-if="successMessage && !errorMessage"
+        src="../../assets/svg/All/linear/tick-circle.svg" 
+        class="w-4 h-4"
+      />
+      <app-normal-text 
+        :customClass="'text-left'" 
+        :color="errorMessage ? 'text-red' : 'text-green'"
+      >
+        {{ errorMessage || successMessage }}
       </app-normal-text>
     </div>
   </div>
@@ -92,17 +112,17 @@ export default defineComponent({
   },
   props: {
     /**
-     *  Padding inside the input field container.
-     */
-    padding: {
-      type: String,
-      default: "py-3 px-3",
-      required: false,
-    },
-    /**
      * Placeholder text for the input field.
      */
     placeholder: {
+      type: String,
+      default: "",
+      required: false,
+    },
+    /**
+     * label text for the input field.
+     */
+    label: {
       type: String,
       default: "",
       required: false,
@@ -113,14 +133,6 @@ export default defineComponent({
     customClass: {
       type: String,
       default: "",
-      required: false,
-    },
-    /**
-     *  Determines whether to display the title slot.
-     */
-    hasTitle: {
-      type: Boolean,
-      default: false,
       required: false,
     },
     /**
@@ -175,6 +187,22 @@ export default defineComponent({
     isFormatted: {
       type: Boolean,
       default: false,
+      required: false,
+    },
+    /**
+     * Error message to display below the input field.
+     */
+    errorMessage: {
+      type: String,
+      default: "",
+      required: false,
+    },
+    /**
+     * Success message to display below the input field.
+     */
+    successMessage: {
+      type: String,
+      default: "",
       required: false,
     },
   },

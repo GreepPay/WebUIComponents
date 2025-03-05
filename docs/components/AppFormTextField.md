@@ -2,6 +2,12 @@
 
 > AppTextField Component
 
+:::preview title || A reusable input component with validation and customizable slots.
+
+demo-preview=../../src/previews/AppForm/TextField/default.vue
+
+:::
+
 A reusable text field component with validation and customizable slots.
 
 ## Props
