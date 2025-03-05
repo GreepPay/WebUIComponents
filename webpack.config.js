@@ -52,7 +52,8 @@ export default {
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.vue'],
     alias: {
-      '@': path.resolve(__dirname, 'src')
+      '@': path.resolve(__dirname, 'src'),
+      'logic': path.resolve(__dirname, 'logic')
     }
   },
   plugins: [
