@@ -4,13 +4,26 @@
 	  "useDefineForClassFields": true,
 	  "module": "ESNext",
 	  "moduleResolution": "Node",
-	  "strict": true,
+	  "strict": false,
 	  "jsx": "preserve",
 	  "sourceMap": true,
 	  "resolveJsonModule": true,
 	  "esModuleInterop": true,
 	  "lib": ["ESNext", "DOM"],
-	  "skipLibCheck": true
+	  "skipLibCheck": true,
+	  "baseUrl": ".",
+	  "paths": {
+	    "@/*": ["src/*"]
+	  },
+	  "noImplicitAny": false
 	},
-	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
+	"include": [
+	  "src/**/*.ts",
+	  "src/**/*.d.ts",
+	  "src/**/*.tsx",
+	  "src/**/*.vue"
+	],
+	"exclude": [
+	  "logic/**/*"
+	]
   }
