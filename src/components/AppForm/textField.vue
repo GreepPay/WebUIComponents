@@ -74,7 +74,7 @@
       v-if="errorMessage || successMessage"
       class="w-full flex flex-row pt-1 justify-start items-center gap-1"
     >
-      <img 
+      <!-- <img 
         v-if="errorMessage"
         src="@/assets/svg/All/linear/info-circle.svg" 
         class="w-4 h-4"
@@ -83,7 +83,7 @@
         v-if="successMessage && !errorMessage"
         src="@/assets/svg/All/linear/tick-circle.svg" 
         class="w-4 h-4"
-      />
+      /> -->
       <app-normal-text 
         :customClass="'text-left'" 
         :color="errorMessage ? 'text-red' : 'text-green'"
