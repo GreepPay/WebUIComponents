@@ -19,7 +19,7 @@ defineComponent({
      */
     name: {
       type: String,
-      required: true,
+      required: 'icon',
     },
     /**
      *  Custom CSS classes to apply to the `<img>` element.  Useful for styling the icon's size, color, etc.
@@ -29,6 +29,6 @@ defineComponent({
       type: String,
       default: "w-5 h-5",
     },
-  }),
+  })
 });
 </script>
