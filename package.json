@@ -19,7 +19,7 @@
     "build:lib": "rimraf dist && webpack --mode=production --node-env=production && npm run build:style",
     "publish:lib": "npm run build:lib && npm publish",
     "watch": "webpack --watch",
-    "build": "npm run build:lib",
+    "build": "npm run build:lib --output dist",
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production --node-env=production && npm run build:style",
     "serve": "webpack serve",
