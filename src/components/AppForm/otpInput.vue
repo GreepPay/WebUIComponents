@@ -1,11 +1,11 @@
 <template>
-  <div class="flex flex-row items-center justify-around space-x-1 z-40">
+  <div class="flex flex-row items-center gap-4 space-x-1 z-40">
     <span v-for="index in numberOfInput" :key="index + '' + uniqueKey">
       <input
         :id="'' + uniqueKey + index"
         v-model="otps[index - 1]"
         type="tel"
-        class="md:w-[53px]! md:h-[53px]! w-[40px] h-[40px] text-lg text-center focus:outline-hidden bg-lightGrayVaraint! custom-border"
+        class="md:w-[64px]! [box-shadow:0_0_0_1.5px_#E0E2E4] rounded-[12px] md:h-[64px]! w-[64px] h-[64px] text-lg text-center focus:outline-hidden bg-lightGrayVaraint! custom-border"
         :disabled="isDisabled"
         @keypress="onKeyPress"
         @keyup.right="focusInputByRef('' + uniqueKey + (index + 1))"
@@ -74,25 +74,6 @@ export default defineComponent({
       default: 4,
     },
     /**
-     * Custom styles to apply to each OTP input field.
-     */
-    otpInputStyle: {
-      type: Object,
-      required: false,
-      default: function () {
-        return {
-          width: "40px",
-          height: "40px",
-          "margin-right": "10px",
-          "text-align": "center",
-          "font-size": "20px",
-          appearance: "none",
-          "-webkit-appearance": "none",
-          "border-radius": "2px",
-        };
-      },
-    },
-    /**
      * Styles to apply when the OTP input is in an error state.
      */
     error: {
@@ -134,14 +115,9 @@ export default defineComponent({
     const inputStyle = computed(() => {
       if (props.isError) {
         return {
-          ...props.otpInputStyle,
           ...props.error,
         };
       }
-
-      return {
-        ...props.otpInputStyle,
-      };
     });
 
     const resetOTPInput = () => {
