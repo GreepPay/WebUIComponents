@@ -1,95 +1,40 @@
 # Button Component
 
-> AppButton Component
+The Button component is a versatile and customizable button that supports different variants, states, and icons.
 
-:::preview Default Button || A versatile button component that supports various styles, colors, and sizes.
-demo-preview=../../src/previews/AppButton/default.vue
-:::
+## Import
 
-A reusable button component with customizable styles and colors.
-
-## Colors
-
-:::preview Button Colors || Different color variants for the button component
-demo-preview=../../src/previews/AppButton/colors.vue
-:::
-
-## Sizes
-
-:::preview Button Sizes || Different size variants using padding classes
-demo-preview=../../src/previews/AppButton/sizes.vue
-:::
-
-## Custom Styles
-
-:::preview Custom Buttons || Examples of custom styled buttons including outlined, text, and gradient variants
-demo-preview=../../src/previews/AppButton/custom.vue
-:::
+```js
+import { AppButton } from '@greeppay/ui-components';
+```
 
 ## Props
 
-| Prop | Type | Default | Description |
+| Name | Type | Default | Description |
 |------|------|---------|-------------|
-| bgColor | String | 'bg-black' | Background color using TailwindCSS classes |
-| textColor | String | 'text-white' | Text color using TailwindCSS classes |
-| padding | String | 'py-2 px-4' | Padding using TailwindCSS classes |
-| customClass | String | '' | Additional custom classes |
-| icon | String | '' | Icon name from Iconsax library (without the isax- prefix) |
-| iconClass | String | 'text-current' | Additional classes for the icon |
+| variant | `'primary'` \| `'secondary'` \| `'primary-white'` \| `'text'` | `'primary'` | The variant style to apply to the button |
+| outlined | `boolean` | `false` | Whether to show the button in outlined style |
+| disabled | `boolean` | `false` | Whether the button is disabled |
+| loading | `boolean` | `false` | Whether to show a loading spinner |
+| customClass | `string` | `''` | Custom CSS classes to apply to the button |
 
-## Usage Examples
+## Slots
 
-### Basic Button with Icon
-```vue
-<AppButton icon="add">Add Item</AppButton>
-<AppButton icon="notification">Notifications</AppButton>
-<AppButton icon="wallet">Wallet</AppButton>
-```
+| Name | Description |
+|------|-------------|
+| default | The button's label content |
+| icon | Optional icon to show before the label |
 
-### Color Variants
-```vue
-<AppButton bgColor="bg-primary">Primary (#10BB76)</AppButton>
-<AppButton bgColor="bg-darkGreen">Dark Green (#1F8F69)</AppButton>
-<AppButton bgColor="bg-blue-green">Blue Green (#00A0B4)</AppButton>
-<AppButton bgColor="bg-blue">Blue (#009DE3)</AppButton>
-<AppButton bgColor="bg-red">Red (#FA1919)</AppButton>
-<AppButton bgColor="bg-purple">Purple (#8E3BE0)</AppButton>
-<AppButton bgColor="bg-orange">Orange (#FFAA1F)</AppButton>
-```
+## Examples
 
-### Size Variants
-```vue
-<AppButton padding="py-1 px-2">Small</AppButton>
-<AppButton padding="py-2 px-4">Medium</AppButton>
-<AppButton padding="py-3 px-6">Large</AppButton>
-```
+### Default Button
+
+:::preview
+demo-preview=../../src/previews/AppButton/default.vue
+:::
 
 ### Custom Styles
-```vue
-<!-- Outlined Button with Icon -->
-<AppButton 
-  bgColor="bg-white" 
-  textColor="text-primary"
-  customClass="border border-primary"
-  icon="edit"
->
-  Edit
-</AppButton>
 
-<!-- Light Button with Icon -->
-<AppButton 
-  bgColor="bg-light-gray-one"
-  textColor="text-black"
-  icon="setting-2"
->
-  Settings
-</AppButton>
-
-<!-- Gradient Button with Icon -->
-<AppButton 
-  bgColor="bg-gradient-to-r from-primary to-blue"
-  customClass="shadow-lg"
-  icon="arrow-right"
->
-  Continue
-</AppButton>
+:::preview
+demo-preview=../../src/previews/AppButton/custom.vue
+:::

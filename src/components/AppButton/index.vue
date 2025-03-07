@@ -1,41 +1,33 @@
 <template>
   <button
     :class="[
-      'focus:outline-none focus:ring-2 focus:ring-offset-2 transition-all duration-200',
-      'flex flex-row items-center justify-center gap-2',
-      variant === 'text' ? 'px-[2px]' : 'rounded-[999px] px-4 py-2',
-      outlined ? 'border-2' : '',
-      disabled ? 'cursor-not-allowed' : '',
-      {
-        // Primary variant
-        'bg-[#0A141E] text-white hover:bg-[#0A141E]/90 active:bg-[#0A141E]/80 disabled:opacity-40 focus:ring-[#0A141E]/30':
-          variant === 'primary' && !outlined,
-        'border-[#0A141E] bg-transparent text-[#0A141E] hover:bg-[#0A141E]/10 active:bg-[#0A141E]/20 disabled:opacity-40 focus:ring-[#0A141E]/30':
-          variant === 'primary' && outlined,
-
-        // Secondary variant
-        'bg-[#1F8F69] text-white hover:bg-[#1F8F69]/90 active:bg-[#1F8F69]/80 disabled:opacity-40 focus:ring-[#1F8F69]/30':
-          variant === 'secondary' && !outlined,
-        'border-[#1F8F69] bg-transparent text-[#1F8F69] hover:bg-[#1F8F69]/10 active:bg-[#1F8F69]/20 disabled:opacity-40 focus:ring-[#1F8F69]/30':
-          variant === 'secondary' && outlined,
-
-        // Primary White variant
-        'bg-white text-[#0A141E] hover:bg-white/90 active:bg-white/80 disabled:opacity-40 focus:ring-white/30':
-          variant === 'primary-white' && !outlined,
-        'border-white bg-transparent text-white hover:bg-white/10 active:bg-white/20 disabled:opacity-40 focus:ring-white/30':
-          variant === 'primary-white' && outlined,
-
-        // Text variant
-        'bg-transparent text-[#0A141E] hover:underline active:text-[#0A141E]/80 disabled:opacity-40 disabled:no-underline focus:ring-[#0A141E]/30':
-          variant === 'text' && !outlined,
-        'border-[#0A141E] bg-transparent text-[#0A141E] hover:bg-[#0A141E]/10 active:bg-[#0A141E]/20 disabled:opacity-40 focus:ring-[#0A141E]/30':
-          variant === 'text' && outlined,
-
-        // Loading state
-        'relative !cursor-wait': loading,
-        'before:absolute before:inset-0 before:rounded-[999px] before:bg-current before:opacity-10': loading && variant !== 'text',
-      },
-      customClass
+      'relative flex items-center justify-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 ease-in-out',
+      outlined
+        ? 'bg-transparent border'
+        : variant === 'primary'
+        ? 'bg-primary text-white border border-primary'
+        : variant === 'secondary'
+        ? 'bg-secondary text-white border border-secondary'
+        : variant === 'primary-white'
+        ? 'bg-white text-primary border border-white'
+        : 'bg-transparent text-primary',
+      outlined && variant === 'primary'
+        ? 'border-primary text-primary hover:bg-primary/10'
+        : outlined && variant === 'secondary'
+        ? 'border-secondary text-secondary hover:bg-secondary/10'
+        : outlined && variant === 'primary-white'
+        ? 'border-white text-white hover:bg-white/10'
+        : outlined && variant === 'text'
+        ? 'border-primary text-primary hover:bg-primary/10'
+        : variant === 'primary'
+        ? 'hover:bg-primary/90'
+        : variant === 'secondary'
+        ? 'hover:bg-secondary/90'
+        : variant === 'primary-white'
+        ? 'hover:bg-white/90'
+        : 'hover:bg-primary/10',
+      disabled ? 'opacity-40 cursor-not-allowed' : 'cursor-pointer',
+      customClass,
     ]"
     :disabled="disabled || loading"
   >
@@ -48,48 +40,55 @@
     </div>
     <div :class="{'invisible': loading}">
       <slot name="icon" />
-    </div>
-    <div :class="{'invisible': loading}">
       <slot />
     </div>
   </button>
 </template>
 
-<script setup lang="ts">
+<script setup>
 /**
  *  Button Component
  *
  *  This component is a reusable button with customizable styling.
  */
-interface Props {
+
+defineProps({
   /**
-   * Button variant
-   * @values 'primary', 'secondary', 'primary-white', 'text'
+   * The variant style to apply to the button.
+   * @values 'primary' | 'secondary' | 'primary-white' | 'text'
    */
-  variant?: 'primary' | 'secondary' | 'primary-white' | 'text';
+  variant: {
+    type: String,
+    default: 'primary',
+    validator: (value) => ['primary', 'secondary', 'primary-white', 'text'].includes(value),
+  },
   /**
-   * Whether the button is outlined
+   * Whether to show the button in outlined style
    */
-  outlined?: boolean;
+  outlined: {
+    type: Boolean,
+    default: false,
+  },
   /**
    * Whether the button is disabled
    */
-  disabled?: boolean;
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
   /**
-   * Whether the button is in loading state
+   * Whether to show a loading spinner
    */
-  loading?: boolean;
+  loading: {
+    type: Boolean,
+    default: false,
+  },
   /**
-   * Additional custom classes
+   * Custom CSS classes to apply to the button
    */
-  customClass?: string;
-}
-
-withDefaults(defineProps<Props>(), {
-  variant: 'primary',
-  outlined: false,
-  disabled: false,
-  loading: false,
-  customClass: '',
+  customClass: {
+    type: String,
+    default: '',
+  },
 });
 </script>
