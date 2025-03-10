@@ -1,40 +1,20 @@
-# Button Component
-
-The Button component is a versatile and customizable button that supports different variants, states, and icons.
-
-## Import
-
-```js
-import { AppButton } from '@greeppay/ui-components';
-```
+# AppButton
 
 ## Props
 
-| Name | Type | Default | Description |
-|------|------|---------|-------------|
-| variant | `'primary'` \| `'secondary'` \| `'primary-white'` \| `'text'` | `'primary'` | The variant style to apply to the button |
-| outlined | `boolean` | `false` | Whether to show the button in outlined style |
-| disabled | `boolean` | `false` | Whether the button is disabled |
-| loading | `boolean` | `false` | Whether to show a loading spinner |
-| customClass | `string` | `''` | Custom CSS classes to apply to the button |
+| Prop name   | Description                                  | Type    | Values                                                  | Default   |
+| ----------- | -------------------------------------------- | ------- | ------------------------------------------------------- | --------- |
+| variant     | The variant style to apply to the button.    | string  | `'primary' \| 'secondary' \| 'primary-white' \| 'text'` | 'primary' |
+| outlined    | Whether to show the button in outlined style | boolean | -                                                       | false     |
+| disabled    | Whether the button is disabled               | boolean | -                                                       | false     |
+| loading     | Whether to show a loading spinner            | boolean | -                                                       | false     |
+| customClass | Custom CSS classes to apply to the button    | string  | -                                                       | ''        |
 
 ## Slots
 
-| Name | Description |
-|------|-------------|
-| default | The button's label content |
-| icon | Optional icon to show before the label |
+| Name    | Description | Bindings |
+| ------- | ----------- | -------- |
+| icon    |             |          |
+| default |             |          |
 
-## Examples
-
-### Default Button
-
-:::preview
-demo-preview=../../src/previews/AppButton/default.vue
-:::
-
-### Custom Styles
-
-:::preview
-demo-preview=../../src/previews/AppButton/custom.vue
-:::
+---
