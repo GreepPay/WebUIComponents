@@ -2,17 +2,7 @@
   "name": "@greep/mobile-ui-components",
   "version": "0.0.1",
   "description": "UI Components for Greep Mobile Apps",
-  "type": "module",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    },
-    "./style.css": "./dist/library.min.css"
-  },
+  "main": "src/index.ts",
   "scripts": {
     "build:style": "npx tailwindcss -i ./src/styles/index.css -o dist/library.css && cleancss -o dist/library.min.css dist/library.css",
     "build:style:watch": "npx tailwindcss -i ./src/styles/index.css -o dist/library.min.css --watch",
