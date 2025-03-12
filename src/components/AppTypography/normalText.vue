@@ -1,6 +1,6 @@
 <template>
   <span
-    :class="` flex flex-row items-center
+    :class="`items-center
   ${customClass} ${color}
   ${size == 'base' ? 'lg:text-sm mdlg:text-[12px] text-xs' : ''}
   ${size == 'small' ? ' text-xs' : ''}`"

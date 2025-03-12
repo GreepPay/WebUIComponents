@@ -8,6 +8,7 @@ import AppAvatar from "./AppAvatar";
 import AppChip from "./AppChip";
 import AppCard from "./AppCard";
 import AppSwiper from "./AppSwiper";
+import AppInfoBox from "./AppInfoBox";
 import { AppHeaderText, AppNormalText } from "./AppTypography";
 import {
   AppSelect,
@@ -43,4 +44,5 @@ export {
   AppCard,
   AppSwiper,
   AppOnboardingLayout,
+  AppInfoBox,
 };

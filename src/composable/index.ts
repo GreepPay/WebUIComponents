@@ -1,5 +1,5 @@
 // @ts-ignore
-import { Logic as BaseLogic } from "../../logic/logic";
+import { Logic as BaseLogic } from "@greep/logic";
 
 export let Logic: typeof BaseLogic = BaseLogic;
 

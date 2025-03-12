@@ -45,7 +45,7 @@
 
     <!-- Bottom section -->
     <div
-      class="w-full grid-cols-12 grid gap-3 px-4 fixed z-50 bottom-0 left-0 pt-4"
+      class="w-full grid-cols-12 grid gap-3 px-4 fixed z-50 bottom-0 left-0 pt-4 bg-white"
       style="padding-bottom: calc(env(safe-area-inset-bottom) + 16px)"
     >
       <!-- Back btn -->

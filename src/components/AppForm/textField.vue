@@ -1,5 +1,9 @@
 <template>
-  <div class="flex w-full flex-col relative">
+  <div class="flex w-full flex-col relative space-y-[2px]">
+    <!-- <div
+      v-if="useFloatingLabel && content.length > 0"
+      class="h-[10px] w-full"
+    ></div> -->
     <div
       class="w-full flex flex-row items-center"
       :tabindex="tabIndex"
@@ -12,6 +16,7 @@
       -->
       <slot name="outer-prefix" />
       <label
+        v-if="label"
         class="absolute left-4 px-1 text-base top-[19px] bg-white transition-all duration-300"
         :class="{
           '!top-[-14px] text-[#999999] font-medium':
@@ -21,12 +26,15 @@
         }"
         >{{ label }}</label
       >
+
       <div
-        class="flew-grow w-full [box-shadow:0_0_0_1.5px_#E0E2E4] text-base space-x-1 flex-row flex items-center justify-between px-5 py-5 bg-white rounded-[12px]"
+        class="flew-grow w-full [box-shadow:0_0_0_1.5px_#E0E2E4] space-x-1 flex-row flex items-center justify-between px-4 py-4 bg-white rounded-[10px] relative"
         :class="{
-          '[box-shadow:0_0_0_2px_#999999]': isFocused && !errorMessage && !successMessage,
+          '[box-shadow:0_0_0_2px_#999999]':
+            isFocused && !errorMessage && !successMessage,
           '[box-shadow:0_0_0_2px_theme(colors.red)]': errorMessage,
-          '[box-shadow:0_0_0_2px_theme(colors.green)]': successMessage && !errorMessage,
+          '[box-shadow:0_0_0_2px_theme(colors.green)]':
+            successMessage && !errorMessage,
           customClass,
         }"
       >
@@ -35,6 +43,14 @@
           Use this slot to add content before the input field.
         -->
         <slot name="inner-prefix" />
+        <!-- Floating label -->
+        <template v-if="useFloatingLabel && content.length > 0">
+          <app-normal-text
+            class="absolute left-4 top-[-24%] px-1 py-[2px] bg-white !text-veryLightGray z-10"
+          >
+            {{ placeholder }}
+          </app-normal-text>
+        </template>
         <input
           v-model="content"
           :placeholder="placeholder"
@@ -74,18 +90,18 @@
       v-if="errorMessage || successMessage"
       class="w-full flex flex-row pt-1 justify-start items-center gap-1"
     >
-      <!-- <img 
+      <!-- <img
         v-if="errorMessage"
-        src="@/assets/svg/All/linear/info-circle.svg" 
+        src="@/assets/svg/All/linear/info-circle.svg"
         class="w-4 h-4"
       />
-      <img 
+      <img
         v-if="successMessage && !errorMessage"
-        src="@/assets/svg/All/linear/tick-circle.svg" 
+        src="@/assets/svg/All/linear/tick-circle.svg"
         class="w-4 h-4"
       /> -->
-      <app-normal-text 
-        :customClass="'text-left'" 
+      <app-normal-text
+        :customClass="'text-left'"
         :color="errorMessage ? 'text-red' : 'text-green'"
       >
         {{ errorMessage || successMessage }}
@@ -95,7 +111,7 @@
 </template>
 <script lang="ts">
 import AppNormalText from "../AppTypography/normalText.vue";
-import { defineComponent, onMounted, ref, watch } from "vue";
+import { defineComponent, onMounted, ref, toRef, watch } from "vue";
 import { Logic } from "../../composable";
 import { FormRule } from "../../types";
 import AppIcon from "../AppIcon";
@@ -205,6 +221,14 @@ export default defineComponent({
       default: "",
       required: false,
     },
+    /**
+     * Determines whether the input is floating label.
+     */
+    useFloatingLabel: {
+      type: Boolean,
+      default: false,
+      required: false,
+    },
   },
   name: "AppTextField",
   emits: ["update:modelValue"],
@@ -212,6 +236,10 @@ export default defineComponent({
     const content = ref("");
 
     const fieldType = ref("text");
+
+    const updateValueRef = toRef(props, "updateValue");
+
+    const ShowCalendarModal = ref(false);
 
     watch(content, () => {
       context.emit("update:modelValue", content.value);
@@ -221,6 +249,10 @@ export default defineComponent({
     });
 
     onMounted(() => {
+      if (props.updateValue) {
+        content.value = props.updateValue;
+      }
+
       if (props.modelValue) {
         content.value = props.modelValue;
       }
@@ -241,116 +273,258 @@ export default defineComponent({
 
     const isRequired = () => {
       if (content.value) {
-        validationStatus.value = true;
+        errorMessage.value = "";
+        return {
+          status: true,
+          message: "",
+        };
       } else {
-        validationStatus.value = false;
-        errorMessage.value = `${props.name} is required`;
+        return {
+          status: false,
+          message: !errorMessage.value
+            ? `${props.name} is required`
+            : errorMessage.value,
+        };
       }
     };
 
     const isGreaterThan = (count: number) => {
       if (content.value.length > count) {
-        validationStatus.value = true;
+        errorMessage.value = "";
+        return {
+          status: true,
+          message: "",
+        };
       } else {
-        validationStatus.value = false;
-        errorMessage.value = `${props.name} must be more than ${count} characters`;
+        return {
+          status: false,
+          message: !errorMessage.value
+            ? `${props.name} must be more than ${count} characters`
+            : errorMessage.value,
+        };
       }
     };
 
     const isLessThan = (count: number) => {
       if (content.value.length < count) {
-        validationStatus.value = true;
+        errorMessage.value = "";
+        return {
+          status: true,
+          message: "",
+        };
       } else {
-        validationStatus.value = false;
-        errorMessage.value = `${props.name} must be less than ${count} characters`;
+        return {
+          status: false,
+          message: !errorMessage.value
+            ? `${props.name} must be less than ${count} characters`
+            : errorMessage.value,
+        };
       }
     };
 
     const isEqualsTo = (count: number) => {
       if (content.value.length == count) {
-        validationStatus.value = true;
+        errorMessage.value = "";
+        return {
+          status: true,
+          message: "",
+        };
       } else {
-        validationStatus.value = false;
-        errorMessage.value = `${props.name} must be ${count} characters`;
+        return {
+          status: false,
+          message: !errorMessage.value
+            ? `${props.name} must be ${count} characters`
+            : errorMessage.value,
+        };
       }
     };
 
-    const isCondition = (condition: any, errMsg: string) => {
+    const isCondition = (condition: any, errMsg: any) => {
       if (condition) {
-        validationStatus.value = true;
+        errorMessage.value = "";
+        return {
+          status: true,
+          message: "",
+        };
       } else {
-        validationStatus.value = false;
-        errorMessage.value = errMsg;
+        return {
+          status: false,
+          message: !errorMessage.value ? errMsg : errorMessage.value,
+        };
       }
     };
 
     const isGreaterThanOrEqualsTo = (count: number) => {
       if (content.value.length >= count) {
-        validationStatus.value = true;
+        errorMessage.value = "";
+        return {
+          status: true,
+          message: "",
+        };
       } else {
-        validationStatus.value = false;
-        errorMessage.value = `${props.name} must be more than ${
-          count - 1
-        } characters`;
+        return {
+          status: false,
+          message: !errorMessage.value
+            ? `${props.name} must be more than ${count - 1} characters`
+            : errorMessage.value,
+        };
       }
     };
 
     const isLessThanOrEqualsTo = (count: number) => {
       if (content.value.length <= count) {
-        validationStatus.value = true;
+        errorMessage.value = "";
+        return {
+          status: true,
+          message: "",
+        };
       } else {
-        validationStatus.value = false;
-        errorMessage.value = `${props.name} must be less than ${
-          count + 1
-        } characters`;
+        return {
+          status: false,
+          message: !errorMessage.value
+            ? `${props.name} must be less than ${count + 1} characters`
+            : errorMessage.value,
+        };
       }
     };
 
-    const isRegex = (regex: any, errMsg: string) => {
+    const isRegex = (regex: any, errMsg: any) => {
       if (content.value.match(regex)) {
-        validationStatus.value = true;
+        errorMessage.value = "";
+        return {
+          status: true,
+          message: "",
+        };
       } else {
-        validationStatus.value = false;
-        errorMessage.value = errMsg;
+        return {
+          status: false,
+          message: !errorMessage.value ? errMsg : errorMessage.value,
+        };
+      }
+    };
+
+    const contentCharacterStop = ref(0);
+
+    const applyContentRule = (evt: any) => {
+      if (props.contentRule) {
+        evt = evt ? evt : window.event;
+        var charCode = evt.which ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode != 8) {
+          if (content.value.length >= props.contentRule.max) {
+            evt.preventDefault();
+            return;
+          }
+
+          if (
+            content.value.length != 0 &&
+            content.value.length % props.contentRule.addAfterCount ==
+              contentCharacterStop.value
+          ) {
+            content.value += props.contentRule.characterToAdd;
+            if (
+              contentCharacterStop.value >=
+              props.contentRule.addAfterCount - 1
+            ) {
+              contentCharacterStop.value = 0;
+            } else {
+              contentCharacterStop.value++;
+            }
+          }
+        }
+      }
+
+      return true;
+    };
+
+    const handlePasteAction = (event: any) => {
+      if (props.contentRule) {
+        event.preventDefault();
+        // Getting copy text
+        const clipboardData =
+          event.clipboardData || event.originalEvent.clipboardData;
+        const pastedData = clipboardData.getData("Text");
+        const arrayOfNumbers = pastedData.split("");
+
+        // set the length to the max
+        if (arrayOfNumbers.length > props.contentRule.max)
+          arrayOfNumbers.slice(0, props.contentRule.max);
+
+        if (props.contentRule.addAfterCount > 0) {
+          // group content array
+          const contentGroup: any = [];
+
+          const chunkSize = props.contentRule.addAfterCount;
+          for (let i = 0; i < arrayOfNumbers.length; i += chunkSize) {
+            const chunk = arrayOfNumbers.slice(i, i + chunkSize);
+            contentGroup.push(chunk);
+          }
+
+          const contentString = contentGroup.map((eachGroup: any) => {
+            return eachGroup.join("");
+          });
+
+          content.value = contentString.join(props.contentRule.characterToAdd);
+        } else {
+          content.value = pastedData;
+        }
       }
     };
 
     const checkValidation = () => {
       if (props.rules) {
+        const allValidationStates: {
+          status: boolean;
+          message: string;
+        }[] = [];
         for (let index = 0; index < props.rules.length; index++) {
           const rule = props.rules[index];
           if (rule.type == "isRequired") {
-            isRequired();
+            const status = isRequired();
+            allValidationStates.push(status);
           }
 
           if (rule.type == "isGreaterThan") {
-            isGreaterThan(rule.value);
+            const status = isGreaterThan(rule.value);
+            allValidationStates.push(status);
           }
 
           if (rule.type == "isLessThan") {
-            isLessThan(rule.value);
+            const status = isLessThan(rule.value);
+            allValidationStates.push(status);
           }
 
           if (rule.type == "isEqualsTo") {
-            isEqualsTo(rule.value);
+            const status = isEqualsTo(rule.value);
+            allValidationStates.push(status);
           }
 
           if (rule.type == "isGreaterThanOrEqualsTo") {
-            isGreaterThanOrEqualsTo(rule.value);
+            const status = isGreaterThanOrEqualsTo(rule.value);
+            allValidationStates.push(status);
           }
 
           if (rule.type == "isLessThanOrEqualsTo") {
-            isLessThanOrEqualsTo(rule.value);
+            const status = isLessThanOrEqualsTo(rule.value);
+            allValidationStates.push(status);
           }
 
           if (rule.type == "isRegex") {
-            isRegex(rule.value, rule.errorMessage);
+            const status = isRegex(rule.value, rule.errorMessage);
+            allValidationStates.push(status);
           }
 
           if (rule.type == "isCondition") {
-            isCondition(rule.value, rule.errorMessage);
+            const status = isCondition(rule.value, rule.errorMessage);
+            allValidationStates.push(status);
           }
         }
+
+        validationStatus.value = allValidationStates.every(
+          (status) => status.status === true
+        );
+        errorMessage.value = allValidationStates.filter(
+          (status) => status.status === false
+        )[0]?.message;
       }
     };
 
@@ -367,13 +541,19 @@ export default defineComponent({
     });
 
     watch(props, () => {
-      if (props.updateValue) {
+      if (props.updateValue && props.watchUpdates) {
+        content.value = props.updateValue;
+      }
+    });
+
+    watch(updateValueRef, () => {
+      if (props.watchUpdates) {
         content.value = props.updateValue;
       }
     });
 
     const isNumber = (evt: any) => {
-      if (props.type != "tel") return true;
+      if (props.type != "tel" && props.type != "number") return true;
 
       evt = evt ? evt : window.event;
       var charCode = evt.which ? evt.which : evt.keyCode;
@@ -399,14 +579,19 @@ export default defineComponent({
 
     return {
       content,
-      checkValidation,
-      isNumber,
       errorMessage,
       validationStatus,
-      showError,
+      console,
       isFocused,
       tabIndex,
       fieldType,
+      ShowCalendarModal,
+      Logic,
+      applyContentRule,
+      handlePasteAction,
+      checkValidation,
+      isNumber,
+      showError,
     };
   },
 });

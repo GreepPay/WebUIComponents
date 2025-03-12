@@ -14,6 +14,7 @@ export default {
         black: "#0A141E",
         white: "#ffffff",
         darkGreen: "#1F8F69",
+        veryLightGray: "#999999",
         "gray-one": "#1F8F69",
         "gray-two": "#616161",
         "light-gray-one": "#F0F3F6",

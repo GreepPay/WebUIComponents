@@ -7,7 +7,7 @@
   </form>
 </template>
 <script lang="ts">
-import { defineComponent, ref, watch } from "vue";
+import { defineComponent, PropType, ref, watch } from "vue";
 
 /**
  * AppFormWrapper Component
@@ -24,7 +24,7 @@ export default defineComponent({
      * be the component instance itself. This is a required property.
      */
     parentRefs: {
-      type: Object,
+      type: Object as () => any,
       required: true,
     },
   },
