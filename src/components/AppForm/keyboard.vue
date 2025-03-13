@@ -13,11 +13,11 @@
               canAddNumber ? (content += `${key + 1}`) : null
             )
           "
-          class="w-[43px] h-[43px] rounded-full border-[1px] border-transparent hover:!bg-gray-100 flex flex-row items-center justify-center transition-colors duration-200"
+          class="w-[43px] h-[43px] xs:w-[38px] xs:h-[38px] rounded-full border-[1px] border-transparent hover:!bg-gray-100 flex flex-row items-center justify-center transition-colors duration-200"
           :class="{ 'bg-gray-200': activeKey === `key-${index}` }"
           :data-key-id="`key-${index}`"
         >
-          <app-normal-text class="!text-2xl">
+          <app-normal-text class="!text-xl font-semibold">
             {{ key + 1 }}
           </app-normal-text>
         </span>
@@ -29,33 +29,35 @@
               content.includes('.') ? null : (content += '.')
             )
           "
-          class="w-[43px] h-[43px] rounded-full border-[1px] border-transparent hover:!bg-gray-100 flex flex-row items-center justify-center transition-colors duration-200"
+          class="w-[43px] h-[43px] xs:w-[38px] xs:h-[38px] rounded-full border-[1px] border-transparent hover:!bg-gray-100 flex flex-row items-center justify-center transition-colors duration-200"
           :class="{ 'bg-gray-200': activeKey === 'key-dot' }"
           data-key-id="key-dot"
         >
-          <app-normal-text class="!text-2xl font-semibold"> . </app-normal-text>
+          <app-normal-text
+            class="!text-xl !font-semibold xs:text-sm text-center"
+          >
+            .
+          </app-normal-text>
         </span>
       </div>
       <div class="col-span-4 flex flex-row items-center justify-center">
         <span
           @click="handleClick($event, () => (content += '0'))"
-          class="w-[43px] h-[43px] rounded-full border-[1px] border-transparent hover:!bg-gray-100 flex flex-row items-center justify-center transition-colors duration-200"
+          class="w-[43px] h-[43px] xs:w-[38px] xs:h-[38px] rounded-full border-[1px] border-transparent hover:!bg-gray-100 flex flex-row items-center justify-center transition-colors duration-200"
           :class="{ 'bg-gray-200': activeKey === 'key-zero' }"
           data-key-id="key-zero"
         >
-          <app-normal-text class="!text-2xl"> 0 </app-normal-text>
+          <app-normal-text class="!text-xl !font-semibold"> 0 </app-normal-text>
         </span>
       </div>
       <div class="col-span-4 flex flex-row items-center justify-center">
         <span
           @click="handleClick($event, () => (content = content.slice(0, -1)))"
-          class="w-[43px] h-[43px] rounded-full border-[1px] border-transparent hover:!bg-gray-100 flex flex-row items-center justify-center transition-colors duration-200"
+          class="w-[43px] h-[43px] xs:w-[38px] xs:h-[38px] rounded-full border-[1px] border-transparent hover:!bg-gray-100 flex flex-row items-center justify-center transition-colors duration-200"
           :class="{ 'bg-gray-200': activeKey === 'key-backspace' }"
           data-key-id="key-backspace"
         >
-          <app-normal-text class="!text-2xl !text-red-500 font-semibold">
-            <
-          </app-normal-text>
+          <app-icon name="delete-number" custom-class="!h-[13px]" />
         </span>
       </div>
     </div>
