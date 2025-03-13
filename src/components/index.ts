@@ -13,6 +13,7 @@ import AppPaymentMethod from "./AppPaymentMethod"
 import AppCountdownTimer from "./AppCountdownTimer"
 import AppDetails from "./AppDetails"
 import AppSwiper from "./AppSwiper"
+import AppTabs from "./AppTabs"
 import AppInfoBox from "./AppInfoBox"
 import { AppHeaderText, AppNormalText } from "./AppTypography"
 import {
@@ -24,8 +25,9 @@ import {
   AppRadio,
   AppFormWrapper,
   AppFileAttachment,
+  AppSearch,
 } from "./AppForm"
-import { HorizontalUserList } from "./AppList"
+import { HorizontalUserList, BeneficiaryList } from "./AppList"
 import { AppOnboardingLayout, DefaultPageLayout } from "./AppLayouts"
 
 export {
@@ -40,6 +42,7 @@ export {
   AppRadio,
   AppFormWrapper,
   AppFileAttachment,
+  AppSearch,
   AppIcon,
   AppImageLoader,
   AppTransaction,
@@ -58,4 +61,6 @@ export {
   AppOnboardingLayout,
   AppInfoBox,
   DefaultPageLayout,
+  BeneficiaryList,
+  AppTabs,
 }

@@ -29,14 +29,14 @@
         disabled
         :class="` text-gray-900 grow bg-transparent placeholder-gray-500 focus input w-full focus:outline-hidden  focus:border-primary`"
       />
-      <app-icon
+      <!-- <app-icon
         @click="
           showOption = true;
           isFocused = true;
         "
         name="show-more"
         custom-class="md:h-[7px] h-[6px] cursor-pointer"
-      />
+      /> -->
     </div>
   </div>
   <app-modal
@@ -51,7 +51,7 @@
   >
     <div
       @click.stop="true"
-      class="rounded-t-2xl flex flex-col space-y-2 bg-white w-full absolute overflow-y-auto h-[50%] bottom-0 left-0 pb-3 px-3 lg:text-sm! mdlg:text-[12px]! text-xs"
+      class="rounded-t-2xl flex flex-col space-y-2 bg-white w-full absolute overflow-y-auto h-[100%] bottom-0 left-0 pb-3 px-3 lg:text-sm! mdlg:text-[12px]! text-xs"
     >
       <div
         class="flex items-center justify-center sticky top-0 bg-white w-full pt-3"
