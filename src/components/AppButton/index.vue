@@ -1,9 +1,13 @@
 <template>
   <button
     :class="[
+<<<<<<< HEAD
       'relative flex items-center justify-center gap-2 px-4 py-2 transition-all duration-300 ease-in-out',
       iconOnly ? 'rounded-full p-2 w-10 h-10' : 'rounded-[40px]',
 
+=======
+      'relative flex items-center justify-center gap-2 px-4 py-2   transition-all duration-300 ease-in-out rounded-[999px]',
+>>>>>>> 55fa3fdaee33d77af0075be1ef3296f1d6edfdb1
       outlined
         ? 'bg-transparent border'
         : variant === 'primary'
@@ -33,30 +37,41 @@
     ]"
     :disabled="disabled || loading"
   >
-    <div v-if="loading" class="absolute left-1/2 -translate-x-1/2"></div>
-    <div :class="{ invisible: loading, iconOnly: 'flex justify-center items-center' }">
+    <div v-if="loading" class="absolute left-1/2 -translate-x-1/2">
+      <!-- <img
+        src="@/assets/svg/All/linear/refresh-2.svg"
+        class="w-5 h-5 animate-spin"
+        :class="{'opacity-40': disabled}"
+      /> -->
+    </div>
+    <div :class="{ invisible: loading }">
       <slot name="icon" />
       <slot v-if="!iconOnly" />
     </div>
   </button>
 </template>
 
-<script setup>
-  /**
-   *  Button Component
-   *
-   *  This component is a reusable button with customizable styling.
-   */
+<script lang="ts">
+import { defineComponent, PropType } from "vue";
 
-  defineProps({
+/**
+ *  Button Component
+ *
+ *  This component is a reusable button with customizable styling.
+ */
+
+export default defineComponent({
+  props: {
     /**
      * The variant style to apply to the button.
      * @values 'primary' | 'secondary' | 'primary-white' | 'text'
      */
     variant: {
-      type: String,
+      type: String as PropType<
+        "primary" | "secondary" | "primary-white" | "text"
+      >,
       default: "primary",
-      validator: (value) =>
+      validator: (value: string) =>
         ["primary", "secondary", "primary-white", "text"].includes(value),
     },
     /**

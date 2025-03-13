@@ -62,7 +62,8 @@
     "vue-styleguidist": "^4.72.4",
     "webpack": "^5.98.0",
     "webpack-cli": "^5.0.1",
-    "webpack-dev-server": "^4.11.1"
+    "webpack-dev-server": "^4.11.1",
+    "@greep/logic": "file:../logic"
   },
   "dependencies": {
     "@awesome-cordova-plugins/core": "^6.3.0",

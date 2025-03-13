@@ -39,7 +39,7 @@ import { Swiper } from "swiper/vue";
 import "swiper/css";
 
 // import required modules
-import { Autoplay } from "swiper/modules";
+import { Autoplay } from "swiper";
 import {
   defineComponent,
   onBeforeUnmount,
