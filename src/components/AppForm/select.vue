@@ -8,7 +8,9 @@
       <slot name="title" />
     </app-normal-text>
     <div
-      :class="`flex relative flex-row items-center space-x-1 justify-between w-full rounded-md ${customClass} bg-white ${paddings}`"
+      :class="`flew-grow w-full [box-shadow:0_0_0_1.5px_#E0E2E4] space-x-1 flex-row flex items-center justify-between bg-white rounded-[10px] relative ${
+        isFocused ? 'border-primary' : ''
+      } ${customClass} ${paddings}`"
       :id="'container' + tabIndex"
       @focus="
         showOption = true;
@@ -22,12 +24,20 @@
       :tabindex="tabIndex"
       @click="ShowSelectModal = true"
     >
+      <!-- Floating label -->
+      <template v-if="useFloatingLabel && valueData.length > 0">
+        <app-normal-text
+          class="absolute left-4 top-[-24%] px-1 py-[2px] bg-white !text-veryLightGray z-10"
+        >
+          {{ placeholder }}
+        </app-normal-text>
+      </template>
       <input
         ref="select"
         :value="withKey ? valueData : textValue"
         :placeholder="placeholder"
         disabled
-        :class="` text-gray-900 grow bg-transparent placeholder-gray-500 focus input w-full focus:outline-hidden  focus:border-primary`"
+        :class="` text-gray-900 grow bg-transparent placeholder-veryLightGray focus input w-full focus:outline-hidden  focus:border-primary`"
       />
       <!-- <app-icon
         @click="
@@ -51,7 +61,7 @@
   >
     <div
       @click.stop="true"
-      class="rounded-t-2xl flex flex-col space-y-2 bg-white w-full absolute overflow-y-auto h-[100%] bottom-0 left-0 pb-3 px-3 lg:text-sm! mdlg:text-[12px]! text-xs"
+      class="rounded-t-2xl flex flex-col space-y-2 bg-white w-full absolute overflow-y-auto h-[400px] bottom-0 left-0 pb-3 px-3 lg:text-sm! mdlg:text-[12px]! text-xs"
     >
       <div
         class="flex items-center justify-center sticky top-0 bg-white w-full pt-3"
@@ -74,7 +84,7 @@
 <script lang="ts">
 import { Logic } from "../../composable";
 import { SelectOption } from "../../types";
-import { capitalize, defineComponent, onMounted, ref, watch } from "vue";
+import { capitalize, defineComponent, onMounted, ref, toRef, watch } from "vue";
 import AppIcon from "../AppIcon/index.vue";
 import AppModal from "../AppModal";
 import AppNormalText from "../AppTypography/normalText.vue";
@@ -118,13 +128,6 @@ export default defineComponent({
      * Custom padding for the select container.
      */
     paddings: {
-      type: String,
-      default: "py-4 px-3",
-    },
-    /**
-     *  @deprecated Use `paddings` instead.
-     */
-    padding: {
       type: String,
       default: "py-4 px-3",
     },
@@ -176,6 +179,14 @@ export default defineComponent({
     autoComplete: {
       type: Boolean,
       default: false,
+    },
+    /**
+     * Determines whether the input is floating label.
+     */
+    useFloatingLabel: {
+      type: Boolean,
+      default: false,
+      required: false,
     },
   },
   emits: [

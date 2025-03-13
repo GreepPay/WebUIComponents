@@ -21,7 +21,7 @@
         </app-header-text>
 
         <div
-          class="border border-black rounded-full h-9 w-9 rounded-full flex justify-center items-center border-black"
+          class="border border-black rounded-full h-9 w-9 flex justify-center items-center"
         >
           <app-icon name="bell" custom-class="h-6" />
         </div>
@@ -34,30 +34,30 @@
 </template>
 
 <script lang="ts">
-  import { AppHeaderText } from "../AppTypography"
-  import AppImageLoader from "../AppImageLoader"
-  import AppIcon from "../AppIcon"
-  import { ref, defineComponent } from "vue"
+import { AppHeaderText } from "../AppTypography";
+import AppImageLoader from "../AppImageLoader";
+import AppIcon from "../AppIcon";
+import { ref, defineComponent } from "vue";
 
-  export default defineComponent({
-    components: {
-      AppHeaderText,
-      AppIcon,
-      AppImageLoader,
+export default defineComponent({
+  components: {
+    AppHeaderText,
+    AppIcon,
+    AppImageLoader,
+  },
+  props: {
+    title: {
+      type: String,
+      default: "",
     },
-    props: {
-      title: {
-        type: String,
-        default: "",
-      },
-      useTopPadding: {
-        type: Boolean,
-        default: false,
-      },
+    useTopPadding: {
+      type: Boolean,
+      default: false,
     },
-    name: "DefaultIndexLayout",
-    setup() {
-      return {}
-    },
-  })
+  },
+  name: "DefaultIndexLayout",
+  setup() {
+    return {};
+  },
+});
 </script>

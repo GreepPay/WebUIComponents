@@ -1,9 +1,9 @@
 <template>
   <div class="flex w-full flex-col relative space-y-[2px]">
-    <!-- <div
+    <div
       v-if="useFloatingLabel && content.length > 0"
       class="h-[10px] w-full"
-    ></div> -->
+    ></div>
     <div
       class="w-full flex flex-row items-center"
       :tabindex="tabIndex"
