@@ -1,3 +1,4 @@
-import AppOnboardingLayout from "./onboarding.vue";
+import AppOnboardingLayout from "./onboarding.vue"
+import DefaultPageLayout from "./DefaultPage.vue"
 
-export { AppOnboardingLayout };
+export { AppOnboardingLayout, DefaultPageLayout }

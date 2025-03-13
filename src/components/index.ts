@@ -26,7 +26,7 @@ import {
   AppFileAttachment,
 } from "./AppForm"
 import { HorizontalUserList } from "./AppList"
-import { AppOnboardingLayout } from "./AppLayouts"
+import { AppOnboardingLayout, DefaultPageLayout } from "./AppLayouts"
 
 export {
   AppButton,
@@ -57,4 +57,5 @@ export {
   AppSwiper,
   AppOnboardingLayout,
   AppInfoBox,
+  DefaultPageLayout,
 }
