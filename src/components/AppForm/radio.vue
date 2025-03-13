@@ -11,9 +11,7 @@
           <span class="h-full flex items-start justify-center">
             <span
               :class="`h-[11px] w-[11px] rounded-full ${
-                selectedOption == option.key
-                  ? 'bg-primaryOrange'
-                  : 'bg-[#D9D9D9]'
+                selectedOption == option.key ? 'bg-primary' : 'bg-[#D9D9D9]'
               }`"
             >
             </span>
@@ -25,7 +23,7 @@
         <template v-if="option.isImage != true">
           <app-normal-text
             custom-class="font-semibold!"
-            color="text-primaryOrange!"
+            color="text-primary!"
             v-if="!option.hasIcon"
           >
             {{ option.extras }}
