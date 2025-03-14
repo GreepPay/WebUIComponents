@@ -66,7 +66,7 @@
         }`"
         @click="nextPage"
       >
-        Next
+        {{ currentPage.action_btn.label }}
       </app-button>
     </div>
   </div>
