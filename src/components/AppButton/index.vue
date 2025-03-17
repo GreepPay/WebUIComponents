@@ -40,10 +40,10 @@
         :class="{'opacity-40': disabled}"
       /> -->
     </div>
-    <div :class="{ invisible: loading }">
+    <template v-if="!loading">
       <slot name="icon" />
       <slot v-if="!iconOnly" />
-    </div>
+    </template>
   </button>
 </template>
 
@@ -66,7 +66,7 @@
         type: String as PropType<
           "primary" | "secondary" | "primary-white" | "text"
         >,
-        default: "secondary",
+        default: "primary",
         validator: (value: string) =>
           ["primary", "secondary", "primary-white", "text"].includes(value),
       },

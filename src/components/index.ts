@@ -15,6 +15,7 @@ import AppDetails from "./AppDetails"
 import AppSwiper from "./AppSwiper"
 import AppTabs from "./AppTabs"
 import AppInfoBox from "./AppInfoBox"
+import AppCurrencySwitch from "./AppCurrencySwitch"
 import { AppHeaderText, AppNormalText } from "./AppTypography"
 import {
   AppSelect,
@@ -63,4 +64,5 @@ export {
   DefaultPageLayout,
   BeneficiaryList,
   AppTabs,
+  AppCurrencySwitch,
 }

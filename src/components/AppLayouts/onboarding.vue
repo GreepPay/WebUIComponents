@@ -73,10 +73,11 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, reactive } from "vue"
-  import AppImageLoader from "../AppImageLoader/index"
-  import { AppNormalText, AppHeaderText } from "../AppTypography"
-  import AppButton from "../AppButton"
+import { computed, defineComponent, reactive } from "vue";
+import AppImageLoader from "../AppImageLoader/index";
+import { AppNormalText, AppHeaderText } from "../AppTypography";
+import AppButton from "../AppButton";
+import { Logic } from "../../composable";
 
   /**
    *  Onboarding layout component to create multi-step onboarding flows.
@@ -183,17 +184,18 @@
         }
       }
 
-      /**
-       * Navigates to the previous page in the onboarding flow by emitting an `update:modelValue` event
-       * with the key of the previous page.
-       */
-      const prevPage = () => {
-        if (currentPageIndex.value > 0) {
-          context.emit(
-            "update:modelValue",
-            props.pageSetting.pages[currentPageIndex.value - 1].key
-          )
-        }
+    /**
+     * Navigates to the previous page in the onboarding flow by emitting an `update:modelValue` event
+     * with the key of the previous page.
+     */
+    const prevPage = () => {
+      if (currentPageIndex.value > 0) {
+        context.emit(
+          "update:modelValue",
+          props.pageSetting.pages[currentPageIndex.value - 1].key
+        );
+      } else {
+        Logic.Common.goBack();
       }
 
       return {
