@@ -14,7 +14,7 @@
 
       <p
         v-if="index !== Object.keys(details).length - 1"
-        class="h-[1px] bg-[#F0F3F6]"
+        class="h-[1px] bg-light-gray-one"
       />
     </template>
   </div>

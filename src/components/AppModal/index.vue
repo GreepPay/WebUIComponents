@@ -44,68 +44,68 @@
   </component>
 </template>
 <script lang="ts">
-import { Teleport as teleport_, TeleportProps, VNodeProps } from "vue";
+  import { Teleport as teleport_, TeleportProps, VNodeProps } from "vue"
 
-const Teleport = teleport_ as {
-  new (): {
-    $props: VNodeProps & TeleportProps;
-  };
-};
+  const Teleport = teleport_ as {
+    new (): {
+      $props: VNodeProps & TeleportProps
+    }
+  }
 
-import { AppHeaderText } from "../AppTypography";
-import AppIcon from "../AppIcon";
+  import { AppHeaderText } from "../AppTypography"
+  import AppIcon from "../AppIcon"
 
-/**
- *  Modal component that displays content in an overlay.
- */
-export default {
-  components: {
-    AppHeaderText,
-    AppIcon,
-  },
-  name: "AppModal",
-  props: {
-    /**
-     * Determines whether the modal can be closed by clicking outside or pressing the close icon.
-     */
-    canClose: {
-      type: Boolean,
-      default: true,
+  /**
+   *  Modal component that displays content in an overlay.
+   */
+  export default {
+    components: {
+      AppHeaderText,
+      AppIcon,
     },
-    /**
-     * Function to execute when the modal is closed.
-     * @required
-     */
-    close: {
-      type: Function,
-      required: true,
+    name: "AppModal",
+    props: {
+      /**
+       * Determines whether the modal can be closed by clicking outside or pressing the close icon.
+       */
+      canClose: {
+        type: Boolean,
+        default: true,
+      },
+      /**
+       * Function to execute when the modal is closed.
+       * @required
+       */
+      close: {
+        type: Function,
+        required: true,
+      },
+      /**
+       * Custom CSS classes to apply to the modal container.
+       */
+      customClass: {
+        type: String,
+        default: "",
+      },
+      /**
+       * Title of the modal, displayed in the header.
+       */
+      title: {
+        type: String,
+        default: "",
+      },
     },
-    /**
-     * Custom CSS classes to apply to the modal container.
-     */
-    customClass: {
-      type: String,
-      default: "",
-    },
-    /**
-     * Title of the modal, displayed in the header.
-     */
-    title: {
-      type: String,
-      default: "",
-    },
-  },
-  setup(props: any) {
-    const closeModal = () => {
-      if (props.canClose) {
-        props.close();
+    setup(props: any) {
+      const closeModal = () => {
+        if (props.canClose) {
+          props.close()
+        }
       }
-    };
 
-    return {
-      closeModal,
-      Teleport,
-    };
-  },
-};
+      return {
+        closeModal,
+        Teleport,
+      }
+    },
+  }
 </script>

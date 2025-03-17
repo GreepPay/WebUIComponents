@@ -1,9 +1,8 @@
 <template>
   <button
     :class="[
-      'relative flex items-center justify-center gap-2 px-4 py-2 transition-all duration-300 ease-in-out',
+      'relative flex items-center justify-center gap-2 px-4 py-2 transition-all duration-300 ease-in-out font-medium text-base',
       iconOnly ? 'rounded-full p-2 w-10 h-10' : 'rounded-[40px]',
-
       outlined
         ? 'bg-transparent border'
         : variant === 'primary'
@@ -29,6 +28,7 @@
         ? 'hover:bg-white/90'
         : 'hover:bg-primary/10',
       disabled ? 'opacity-40 cursor-not-allowed' : 'cursor-pointer',
+
       customClass,
     ]"
     :disabled="disabled || loading"
@@ -66,7 +66,7 @@
         type: String as PropType<
           "primary" | "secondary" | "primary-white" | "text"
         >,
-        default: "primary",
+        default: "secondary",
         validator: (value: string) =>
           ["primary", "secondary", "primary-white", "text"].includes(value),
       },

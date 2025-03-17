@@ -17,10 +17,12 @@
         />
 
         <div class="flex flex-col py-0.5">
-          <app-header-text customClass="text-base leading-6 !text-gray-two">
+          <app-header-text
+            customClass="text-base leading-6 !font-medium !text-black"
+          >
             {{ beneficiary.name }}
           </app-header-text>
-          <app-normal-text customClass="!text-sm !text-[#616161]">
+          <app-normal-text customClass="!text-sm !text-gray-two">
             {{ beneficiary.description }}
           </app-normal-text>
         </div>
