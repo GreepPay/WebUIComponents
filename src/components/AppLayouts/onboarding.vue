@@ -77,6 +77,7 @@ import { computed, defineComponent, reactive } from "vue";
 import AppImageLoader from "../AppImageLoader/index";
 import { AppNormalText, AppHeaderText } from "../AppTypography";
 import AppButton from "../AppButton";
+import { Logic } from "../../composable";
 
 /**
  *  Onboarding layout component to create multi-step onboarding flows.
@@ -193,6 +194,8 @@ export default defineComponent({
           "update:modelValue",
           props.pageSetting.pages[currentPageIndex.value - 1].key
         );
+      } else {
+        Logic.Common.goBack();
       }
     };
 

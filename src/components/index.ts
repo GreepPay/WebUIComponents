@@ -1,20 +1,21 @@
-import AppButton from "./AppButton"
-import AppIcon from "./AppIcon"
-import AppImageLoader from "./AppImageLoader"
-import AppTransaction from "./AppTransaction"
-import AppModal from "./AppModal"
-import AppQrCode from "./AppQrCode"
-import AppAvatar from "./AppAvatar"
-import AppChip from "./AppChip"
-import AppCard from "./AppCard"
-import AppTitleCardContainer from "./AppTitleCardContainer"
-import AppDropdownSelect from "./AppDropdownSelect"
-import AppPaymentMethod from "./AppPaymentMethod"
-import AppCountdownTimer from "./AppCountdownTimer"
-import AppDetails from "./AppDetails"
-import AppSwiper from "./AppSwiper"
-import AppInfoBox from "./AppInfoBox"
-import { AppHeaderText, AppNormalText } from "./AppTypography"
+import AppButton from "./AppButton";
+import AppIcon from "./AppIcon";
+import AppImageLoader from "./AppImageLoader";
+import AppTransaction from "./AppTransaction";
+import AppModal from "./AppModal";
+import AppQrCode from "./AppQrCode";
+import AppAvatar from "./AppAvatar";
+import AppChip from "./AppChip";
+import AppCard from "./AppCard";
+import AppTitleCardContainer from "./AppTitleCardContainer";
+import AppDropdownSelect from "./AppDropdownSelect";
+import AppPaymentMethod from "./AppPaymentMethod";
+import AppCountdownTimer from "./AppCountdownTimer";
+import AppDetails from "./AppDetails";
+import AppSwiper from "./AppSwiper";
+import AppInfoBox from "./AppInfoBox";
+import AppCurrencySwitch from "./AppCurrencySwitch";
+import { AppHeaderText, AppNormalText } from "./AppTypography";
 import {
   AppSelect,
   AppTextField,
@@ -24,9 +25,9 @@ import {
   AppRadio,
   AppFormWrapper,
   AppFileAttachment,
-} from "./AppForm"
-import { HorizontalUserList } from "./AppList"
-import { AppOnboardingLayout, DefaultPageLayout } from "./AppLayouts"
+} from "./AppForm";
+import { HorizontalUserList } from "./AppList";
+import { AppOnboardingLayout, DefaultPageLayout } from "./AppLayouts";
 
 export {
   AppButton,
@@ -58,4 +59,5 @@ export {
   AppOnboardingLayout,
   AppInfoBox,
   DefaultPageLayout,
-}
+  AppCurrencySwitch,
+};
