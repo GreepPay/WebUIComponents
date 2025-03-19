@@ -1,5 +1,7 @@
 <template>
-  <div class="w-full flex justify-between items-center py-2">
+  <div
+    class="w-full flex justify-between items-center py-2 pb-3 border-b-[1px] border-[#F0F3F6]"
+  >
     <div class="flex items-center space-x-2">
       <div
         class="h-12 w-12 rounded-full flex justify-center items-center"
@@ -10,7 +12,7 @@
 
       <div class="flex flex-col space-y-[1px]">
         <app-normal-text
-          class="!text-left !line-clamp-1 !text-black !font-semibold !text-sm"
+          class="!text-left !line-clamp-1 !text-black !font-[500] !text-sm"
         >
           {{ data.title }}
         </app-normal-text>
@@ -82,7 +84,7 @@ export default defineComponent({
       return "text-gray-500";
     };
 
-    const getBgColor = (type) => {
+    const getBgColor = (type: string) => {
       if (type === "sent") return "!bg-[#00A0B4]";
       if (type === "received") return "!bg-[#10BB76]";
       if (type === "added") return "!bg-[#8E3BE0]";

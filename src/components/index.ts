@@ -25,6 +25,7 @@ import {
   AppRadio,
   AppFormWrapper,
   AppFileAttachment,
+  AppContentEditable,
 } from "./AppForm";
 import { HorizontalUserList } from "./AppList";
 import { AppOnboardingLayout, DefaultPageLayout } from "./AppLayouts";
@@ -60,4 +61,5 @@ export {
   AppInfoBox,
   DefaultPageLayout,
   AppCurrencySwitch,
+  AppContentEditable,
 };

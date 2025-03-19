@@ -1,53 +1,60 @@
 <template>
   <div :class="`flex flex-col space-y-2 ${defaultSize} `">
-    <app-normal-text v-if="hasTitle">
-      <!--
-        @slot title
-        Slot for the title of the select component.
-      -->
-      <slot name="title" />
-    </app-normal-text>
-    <div
-      :class="`flew-grow w-full [box-shadow:0_0_0_1.5px_#E0E2E4] space-x-1 flex-row flex items-center justify-between bg-white rounded-[10px] relative ${
-        isFocused ? 'border-primary' : ''
-      } ${customClass} ${paddings}`"
-      :id="'container' + tabIndex"
-      @focus="
-        showOption = true;
-        isFocused = true;
-        ShowSelectModal = true;
-      "
-      @blur="
-        isFocused = false;
-        showOption = false;
-      "
-      :tabindex="tabIndex"
-      @click="ShowSelectModal = true"
-    >
-      <!-- Floating label -->
-      <template v-if="useFloatingLabel && valueData.length > 0">
-        <app-normal-text
-          class="absolute left-4 top-[-24%] px-1 py-[2px] bg-white !text-veryLightGray z-10"
-        >
-          {{ placeholder }}
-        </app-normal-text>
-      </template>
-      <input
-        ref="select"
-        :value="withKey ? valueData : textValue"
-        :placeholder="placeholder"
-        disabled
-        :class="` text-gray-900 grow bg-transparent placeholder-veryLightGray focus input w-full focus:outline-hidden  focus:border-primary`"
-      />
-      <app-icon
-        @click="
+    <template v-if="isWrapper">
+      <div class="w-full flex flex-col" @click="ShowSelectModal = true">
+        <slot />
+      </div>
+    </template>
+    <template v-else>
+      <app-normal-text v-if="hasTitle">
+        <!--
+      @slot title
+      Slot for the title of the select component.
+    -->
+        <slot name="title" />
+      </app-normal-text>
+      <div
+        :class="`flew-grow w-full [box-shadow:0_0_0_1.5px_#E0E2E4] space-x-1 flex-row flex items-center justify-between bg-white rounded-[10px] relative ${
+          isFocused ? 'border-primary' : ''
+        } ${customClass} ${paddings}`"
+        :id="'container' + tabIndex"
+        @focus="
           showOption = true;
           isFocused = true;
+          ShowSelectModal = true;
         "
-        name="show-more"
-        custom-class="md:h-[7px] h-[6px] cursor-pointer"
-      />
-    </div>
+        @blur="
+          isFocused = false;
+          showOption = false;
+        "
+        :tabindex="tabIndex"
+        @click="ShowSelectModal = true"
+      >
+        <!-- Floating label -->
+        <template v-if="useFloatingLabel && valueData.length > 0">
+          <app-normal-text
+            class="absolute left-4 top-[-24%] px-1 py-[2px] bg-white !text-veryLightGray z-10"
+          >
+            {{ placeholder }}
+          </app-normal-text>
+        </template>
+        <input
+          ref="select"
+          :value="withKey ? valueData : textValue"
+          :placeholder="placeholder"
+          disabled
+          :class="` text-gray-900 grow bg-transparent placeholder-veryLightGray focus input w-full focus:outline-hidden  focus:border-primary`"
+        />
+        <app-icon
+          @click="
+            showOption = true;
+            isFocused = true;
+          "
+          name="show-more"
+          custom-class="md:h-[7px] h-[6px] cursor-pointer"
+        />
+      </div>
+    </template>
   </div>
   <app-modal
     :canClose="true"
@@ -188,6 +195,13 @@ export default defineComponent({
       default: false,
       required: false,
     },
+    /**
+     * Determines whether the input is wrapped.
+     */
+    isWrapper: {
+      type: Boolean,
+      default: false,
+    },
   },
   emits: [
     /**
@@ -291,7 +305,7 @@ export default defineComponent({
 
     const selectValue = (option: any) => {
       if (props.autoComplete) {
-        context.emit("OnOptionSelected", option.key);
+        context.emit("OnOptionSelected", option);
 
         isFocused.value = false;
         showOption.value = false;
@@ -318,10 +332,10 @@ export default defineComponent({
         }
         selectedItems.value.push(option.key);
         context.emit("update:modelValue", selectedItems.value);
-        context.emit("OnOptionSelected", option.key);
+        context.emit("OnOptionSelected", option);
       } else {
         context.emit("update:modelValue", option.key);
-        context.emit("OnOptionSelected", option.key);
+        context.emit("OnOptionSelected", option);
         if (props.withKey) {
           valueData.value = option.key;
         } else {
