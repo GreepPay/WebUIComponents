@@ -65,7 +65,7 @@
           @keypress="isNumber"
           :disabled="fieldType == 'date' ? true : disabled"
           :type="fieldType == 'date' ? 'text' : fieldType"
-          :class="` text-black grow bg-transparent placeholder-gray-400 focus input w-full focus:outline-hidden  `"
+          :class="` text-black grow bg-transparent placeholder-gray-400 focus input w-full focus:outline-hidden ${inputStyle} `"
           @click.stop="
             action
               ? action()
@@ -326,6 +326,14 @@ export default defineComponent({
     action: {
       type: Function,
       required: false,
+    },
+
+    /**
+     * Input style
+     */
+    inputStyle: {
+      type: String,
+      default: "",
     },
   },
   name: "AppTextField",

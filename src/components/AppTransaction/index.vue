@@ -18,13 +18,13 @@
         </app-normal-text>
 
         <span class="flex flex-row space-x-1 items-center">
-          <app-normal-text class="!text-[11px] capitalize text-gray-500">
+          <app-normal-text class="!text-[12px] capitalize text-gray-500">
             {{ data.type }}
           </app-normal-text>
 
           <span class="h-[3px] w-[3px] bg-gray-400 rounded-full"> </span>
 
-          <app-normal-text class="!text-[11px] text-gray-500">
+          <app-normal-text class="!text-[12px] text-gray-500">
             {{ data.date }}
           </app-normal-text>
         </span>

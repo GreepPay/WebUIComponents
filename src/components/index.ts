@@ -15,6 +15,8 @@ import AppDetails from "./AppDetails";
 import AppSwiper from "./AppSwiper";
 import AppInfoBox from "./AppInfoBox";
 import AppCurrencySwitch from "./AppCurrencySwitch";
+import AppPointTransaction from "./AppPointTransaction";
+import AppNotification from "./AppNotification";
 import { AppHeaderText, AppNormalText } from "./AppTypography";
 import {
   AppSelect,
@@ -62,4 +64,6 @@ export {
   DefaultPageLayout,
   AppCurrencySwitch,
   AppContentEditable,
+  AppPointTransaction,
+  AppNotification,
 };
