@@ -1,7 +1,7 @@
 import AppButton from "./AppButton"
 import AppIcon from "./AppIcon"
 import AppImageLoader from "./AppImageLoader"
-import AppTransaction from "./AppTransaction"
+import AppTransactions from "./AppTransactions"
 import AppModal from "./AppModal"
 import AppQrCode from "./AppQrCode"
 import AppAvatar from "./AppAvatar"
@@ -15,6 +15,7 @@ import AppDetails from "./AppDetails"
 import AppSwiper from "./AppSwiper"
 import AppTabs from "./AppTabs"
 import AppInfoBox from "./AppInfoBox"
+import AppNotifications from "./AppNotifications"
 import AppCurrencySwitch from "./AppCurrencySwitch"
 import { AppHeaderText, AppNormalText } from "./AppTypography"
 import {
@@ -46,7 +47,7 @@ export {
   AppSearch,
   AppIcon,
   AppImageLoader,
-  AppTransaction,
+  AppTransactions,
   AppModal,
   AppQrCode,
   AppAvatar,
@@ -65,4 +66,5 @@ export {
   BeneficiaryList,
   AppTabs,
   AppCurrencySwitch,
+  AppNotifications,
 }

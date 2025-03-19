@@ -73,11 +73,11 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive } from "vue";
-import AppImageLoader from "../AppImageLoader/index";
-import { AppNormalText, AppHeaderText } from "../AppTypography";
-import AppButton from "../AppButton";
-import { Logic } from "../../composable";
+  import { computed, defineComponent, reactive } from "vue"
+  import AppImageLoader from "../AppImageLoader/index"
+  import { AppNormalText, AppHeaderText } from "../AppTypography"
+  import AppButton from "../AppButton"
+  import { Logic } from "../../composable"
 
   /**
    *  Onboarding layout component to create multi-step onboarding flows.
@@ -179,23 +179,24 @@ import { Logic } from "../../composable";
       const nextPage = () => {
         if (currentPageIndex.value < props.pageSetting.pages.length - 1) {
           if (!currentPage.value.action_btn?.is_disabled) {
-            currentPage.value.action_btn.handler()
+            currentPage.value?.action_btn?.handler?.()
           }
         }
       }
 
-    /**
-     * Navigates to the previous page in the onboarding flow by emitting an `update:modelValue` event
-     * with the key of the previous page.
-     */
-    const prevPage = () => {
-      if (currentPageIndex.value > 0) {
-        context.emit(
-          "update:modelValue",
-          props.pageSetting.pages[currentPageIndex.value - 1].key
-        );
-      } else {
-        Logic.Common.goBack();
+      /**
+       * Navigates to the previous page in the onboarding flow by emitting an `update:modelValue` event
+       * with the key of the previous page.
+       */
+      const prevPage = () => {
+        if (currentPageIndex.value > 0) {
+          context.emit(
+            "update:modelValue",
+            props.pageSetting.pages[currentPageIndex.value - 1].key
+          )
+        } else {
+          Logic.Common.goBack()
+        }
       }
 
       return {

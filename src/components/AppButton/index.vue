@@ -2,20 +2,24 @@
   <button
     :class="[
       'relative flex items-center justify-center gap-2 px-4 py-2 transition-all duration-300 ease-in-out font-medium text-base',
-      iconOnly ? 'rounded-full p-2 w-10 h-10' : 'rounded-[40px]',
+      iconOnly ? 'rounded-full  !p-0  w-12 h-12' : 'rounded-[40px]',
       outlined
         ? 'bg-transparent border'
         : variant === 'primary'
         ? 'bg-primary text-white border border-primary'
         : variant === 'secondary'
         ? 'bg-secondary text-white border border-secondary'
+        : variant === 'danger'
+        ? 'bg-red text-white border border-red'
         : variant === 'primary-white'
         ? 'bg-white text-primary border border-white'
         : 'bg-transparent text-primary',
       outlined && variant === 'primary'
         ? 'border-primary text-primary hover:bg-primary/10'
         : outlined && variant === 'secondary'
-        ? 'border-secondary text-secondary hover:bg-secondary/10'
+        ? '!border-secondary text-secondary hover:bg-secondary/10'
+        : outlined && variant === 'danger'
+        ? '!border-red text-red hover:bg-red/10'
         : outlined && variant === 'primary-white'
         ? 'border-white text-white hover:bg-white/10'
         : outlined && variant === 'text'
@@ -40,6 +44,7 @@
         :class="{'opacity-40': disabled}"
       /> -->
     </div>
+
     <template v-if="!loading">
       <slot name="icon" />
       <slot v-if="!iconOnly" />
@@ -64,9 +69,9 @@
        */
       variant: {
         type: String as PropType<
-          "primary" | "secondary" | "primary-white" | "text"
+          "primary" | "secondary" | "danger" | "primary-white" | "text"
         >,
-        default: "primary",
+        default: "secondary",
         validator: (value: string) =>
           ["primary", "secondary", "primary-white", "text"].includes(value),
       },

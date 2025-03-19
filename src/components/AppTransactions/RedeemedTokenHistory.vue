@@ -62,7 +62,7 @@
       AppIcon,
       AppNormalText,
     },
-    name: "AppTransaction",
+    name: "RedeemedToken",
     props: {
       /**
        * The transaction data.

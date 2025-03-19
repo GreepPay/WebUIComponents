@@ -7,37 +7,13 @@
         @click="closeModal()"
       >
         <div
-          class="relative w-full flex flex-col mdlg:justify-center! justify-end items-center mdlg:h-[85%]! h-full overflow-y-auto"
+          class="w-full bg-white rounded-t-[20px] p-6 min-h-[100px] relative"
+          @click.stop="null"
         >
-          <div
-            class="w-full flex flex-col h-full mdlg:justify-center! justify-end items-center"
-          >
-            <div
-              class="w-full bg-white rounded-t-[20px] min-h-[100px] flex flex-col relative"
-              @click.stop="null"
-            >
-              <!-- Top section -->
-              <div
-                class="w-full flex flex-row items-center justify-between px-4 py-4 sticky top-0 bg-white rounded-t-[20px]"
-              >
-                <app-header-text class="!text-lg !text-left">
-                  {{ title }}
-                </app-header-text>
-
-                <app-icon
-                  name="close"
-                  customClass="!h-[20px]"
-                  @click="closeModal()"
-                />
-              </div>
-
-              <!-- Content -->
-              <slot />
-              <!--
+          <!--
                * @slot -  Content to be displayed within the modal.
                -->
-            </div>
-          </div>
+          <slot />
         </div>
       </div>
     </transition>
