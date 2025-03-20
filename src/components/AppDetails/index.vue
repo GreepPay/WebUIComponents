@@ -11,7 +11,7 @@
         <app-normal-text class="!text-[#616161] capitalize">
           {{ item.title }}
         </app-normal-text>
-        <app-normal-text class="!text-[#0A141E] !font-semibold !text-sm">
+        <app-normal-text class="!text-[#0A141E] !font-[500] !text-sm">
           {{ item.content }}
         </app-normal-text>
       </div>

@@ -28,7 +28,7 @@
       >
 
       <div
-        :class="`flew-grow w-full space-x-1 flex-row flex items-center justify-between px-4 py-4 bg-white rounded-[10px] relative
+        :class="`flew-grow w-full space-x-1 flex-row flex items-center justify-between px-4 py-4 bg-white rounded-[10px] border-[1.5px] border-[#E0E2E4] relative
 
           ${errorMessage ? '!border-red' : ''}
 

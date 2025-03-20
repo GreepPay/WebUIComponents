@@ -17,6 +17,7 @@ import AppInfoBox from "./AppInfoBox";
 import AppCurrencySwitch from "./AppCurrencySwitch";
 import AppPointTransaction from "./AppPointTransaction";
 import AppNotification from "./AppNotification";
+import AppSwitch from "./AppSwitch";
 import { AppHeaderText, AppNormalText } from "./AppTypography";
 import {
   AppSelect,
@@ -66,4 +67,5 @@ export {
   AppContentEditable,
   AppPointTransaction,
   AppNotification,
+  AppSwitch,
 };
