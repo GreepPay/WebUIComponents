@@ -178,9 +178,13 @@
        */
       const nextPage = () => {
         if (currentPageIndex.value < props.pageSetting.pages.length - 1) {
+          console.log("test ")
+
           if (!currentPage.value.action_btn?.is_disabled) {
             currentPage.value?.action_btn?.handler?.()
           }
+        } else {
+          currentPage.value?.action_btn?.handler?.()
         }
       }
 

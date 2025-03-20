@@ -5,6 +5,7 @@
         class="w-full flex flex-col"
         v-for="transaction in transactions"
         :key="transaction.id"
+        @click="Logic.Common.GoToRoute(`/transactions/1`)"
       >
         <div class="w-full flex justify-between py-3">
           <div class="flex items-center space-x-2">
@@ -74,6 +75,7 @@
   import AppIcon from "../AppIcon"
   import AppButton from "../AppButton"
   import { AppNormalText, AppHeaderText } from "../AppTypography"
+  import { Logic } from "../../composable"
 
   enum TransactionType {
     Sent = "sent",
@@ -162,9 +164,7 @@
         if (type === "redeemed") return "grp-black"
       }
 
-      return {
-        getIcon,
-      }
+      return { Logic, getIcon }
     },
   })
 </script>
