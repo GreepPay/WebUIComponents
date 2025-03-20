@@ -7,7 +7,7 @@
         <app-icon :name="notification.logo" customClass="!h-[48px]" />
       </div>
       <div class="w-full flex flex-col space-y-[2px] justify-start">
-        <app-normal-text class="!text-black !font-semibold text-left !text-sm">
+        <app-normal-text class="!text-black !font-[500] text-left !text-sm">
           {{ notification.title }}
         </app-normal-text>
         <div class="flex flex-row items-center">
@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="flex flex-row justify-end">
-      <app-normal-text class="!text-gray-two !text-right">
+      <app-normal-text class="!text-gray-two !text-right !whitespace-nowrap">
         {{ notification.date }}
       </app-normal-text>
     </div>

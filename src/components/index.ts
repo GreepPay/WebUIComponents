@@ -1,6 +1,3 @@
-import AppTransactions from "./AppTransactions"
-import AppTabs from "./AppTabs"
-import AppNotifications from "./AppNotifications"
 import AppButton from "./AppButton"
 import AppIcon from "./AppIcon"
 import AppImageLoader from "./AppImageLoader"
@@ -20,6 +17,10 @@ import AppInfoBox from "./AppInfoBox"
 import AppCurrencySwitch from "./AppCurrencySwitch"
 import AppPointTransaction from "./AppPointTransaction"
 import AppNotification from "./AppNotification"
+import AppSwitch from "./AppSwitch"
+import AppTransactions from "./AppTransactions"
+import AppTabs from "./AppTabs"
+import AppNotifications from "./AppNotifications"
 import { AppHeaderText, AppNormalText } from "./AppTypography"
 import {
   AppSelect,
@@ -75,4 +76,5 @@ export {
   AppContentEditable,
   AppPointTransaction,
   AppNotification,
+  AppSwitch,
 }
