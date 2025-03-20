@@ -56,9 +56,7 @@
     >
       <app-icon name="bulk-receipt-add" custom-class="size-14" />
 
-      <div
-        class="w-full flex flex-col pt-4   px-5 items-center justify-center"
-      >
+      <div class="w-full flex flex-col pt-4 px-5 items-center justify-center">
         <app-header-text class="text-center w-full !text-xl">
           {{ noDataText }}
         </app-header-text>
@@ -161,7 +159,7 @@
         if (type === "sent") return "success-sent"
         if (type === "received") return "success-received"
         if (type === "added") return "success-added"
-        if (type === "redeemed") return "success-redeemed"
+        if (type === "redeemed") return "grp-black"
       }
 
       return {

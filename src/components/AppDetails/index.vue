@@ -6,7 +6,7 @@
       <div
         :class="`flex py-4 px-1 w-full  ${
           isVertical
-            ? 'flex-cols space-y-1'
+            ? 'flex-col space-y-1'
             : 'items-center justify-between space-x-3'
         } ${index !== 0 && 'border-t border-[#F0F3F6]'}`"
       >

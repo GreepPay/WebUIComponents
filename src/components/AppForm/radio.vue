@@ -1,10 +1,10 @@
 <template>
-  <div class="flex w-full flex-col space-y-2">
+  <div class="flex w-full flex-col">
     <div
       v-for="(option, index) in options"
       :key="index"
       @click.stop="selectedOption = option.key"
-      class="flex w-full flex-row items-center justify-between cursor-pointer py-3 border-b-[1px] border-gray-300"
+      class="flex w-full flex-row items-center justify-between cursor-pointer py-3 border-b-[1px] border-gray-300 mb-2"
     >
       <div class="flex flex-row space-x-2 items-center justify-between w-full">
         <div class="flex flex-row space-x-2 items-center justify-start">

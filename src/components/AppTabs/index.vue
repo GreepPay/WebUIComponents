@@ -1,12 +1,12 @@
 <template>
   <div :class="['w-full overflow-x-auto scrollbar-hide', customClass]">
-    <div class="inline-flex items-center space-x-2 h-fit">
+    <div class="inline-flex items-center h-fit">
       <app-normal-text
         v-for="(tab, index) in tabs"
         :key="index"
         @click="selectTab(tab.key)"
         :class="[
-          'p-2 !text-lg cursor-pointer hover:text-black whitespace-nowrap',
+          'px-4 py-2 !text-lg cursor-pointer hover:text-black whitespace-nowrap',
           activeTab === tab.key
             ? 'font-bold !text-[#0A141E]'
             : '!text-[#999999] ',

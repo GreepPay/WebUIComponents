@@ -13,7 +13,7 @@
         ? 'bg-red text-white border border-red'
         : variant === 'primary-white'
         ? 'bg-white text-primary border border-white'
-        : 'bg-transparent text-primary',
+        : '!bg-transparent text-primary',
       outlined && variant === 'primary'
         ? 'border-primary text-primary hover:bg-primary/10'
         : outlined && variant === 'secondary'

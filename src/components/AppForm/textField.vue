@@ -28,15 +28,18 @@
       >
 
       <div
-        class="flew-grow w-full [box-shadow:0_0_0_1.5px_#E0E2E4] space-x-1 flex-row flex items-center justify-between px-4 py-4 bg-white rounded-[10px] relative"
-        :class="{
-          '[box-shadow:0_0_0_2px_#999999]':
-            isFocused && !errorMessage && !successMessage,
-          '[box-shadow:0_0_0_2px_theme(colors.red)]': errorMessage,
-          '[box-shadow:0_0_0_2px_theme(colors.green)]':
-            successMessage && !errorMessage,
-          customClass,
-        }"
+        :class="`flew-grow w-full space-x-1 flex-row flex items-center justify-between px-4 py-4 bg-white rounded-[10px] relative
+
+          ${errorMessage ? '!border-red' : ''}
+
+          ${customClass}`"
+        @click.stop="
+          action
+            ? action()
+            : fieldType == 'date'
+            ? (ShowCalendarModal = true)
+            : ''
+        "
       >
         <!--
           @slot inner-prefix
@@ -60,9 +63,16 @@
             checkValidation();
           "
           @keypress="isNumber"
-          :disabled="disabled"
-          :type="fieldType"
-          :class="` text-black grow bg-transparent placeholder-gray-400 focus input w-full focus:outline-hidden  `"
+          :disabled="fieldType == 'date' ? true : disabled"
+          :type="fieldType == 'date' ? 'text' : fieldType"
+          :class="` text-black grow bg-transparent placeholder-gray-400 focus input w-full focus:outline-hidden ${inputStyle} `"
+          @click.stop="
+            action
+              ? action()
+              : fieldType == 'date'
+              ? (ShowCalendarModal = true)
+              : ''
+          "
         />
         <!--
           @slot inner-suffix
@@ -107,6 +117,70 @@
         {{ errorMessage || successMessage }}
       </app-normal-text>
     </div>
+
+    <Teleport to="body">
+      <div
+        v-if="ShowCalendarModal"
+        class="fixed top-0 left-0 z-[99999999999999999] bg-black !bg-opacity-30 dark:!bg-opacity-50 flex w-full h-full flex-row items-end justify-end mdlg:!items-center mdlg:!justify-center md:!justify-center md:!items-center"
+        @click="ShowCalendarModal = false"
+      >
+        <div
+          class="w-full mdlg:!w-[60%] md:!w-[80%] grid grid-cols-12 h-full relative"
+          id="modalContent"
+        >
+          <!-- Left side -->
+          <div
+            class="hidden col-span-3 md:!col-span-2 mdlg:!col-span-3 mdlg:!flex md:!flex flex-col sticky top-0"
+          ></div>
+
+          <!-- Main section -->
+          <div
+            class="col-span-12 mdlg:!col-span-6 md:!col-span-8 relative h-full flex flex-col items-end justify-end mdlg:!items-center mdlg:!justify-center md:!justify-center md:!items-center"
+          >
+            <div
+              @click.stop="true"
+              class="rounded-t-2xl mdlg:!rounded-[10px] md:!rounded-[10px] flex flex-col space-y-2 !bg-white dark:border-[1px] dark:border-gray-100 w-full absolute mdlg:!relative md:!relative overflow-y-auto h-auto max-h-auto bottom-0 left-0 pb-3 px-3 mdlg:!pb-4 md:!pb-4 lg:!text-sm mdlg:!text-[12px] text-xs"
+            >
+              <div
+                class="flex items-center justify-center sticky top-0 !bg-white w-full pt-3"
+              >
+                <span
+                  class="bg-gray-500 dark:bg-gray-200 rounded-full w-[30px] h-[4px]"
+                ></span>
+              </div>
+
+              <div
+                class="flex items-center justify-center sticky top-0 flex-col bg-white w-full"
+              >
+                <app-normal-text
+                  custom-class="!text-xs font-semibold w-full text-left py-2"
+                >
+                  {{ placeholder }}
+                </app-normal-text>
+              </div>
+              <app-calendar
+                v-model="content"
+                :closeModal="
+                  () => {
+                    ShowCalendarModal = false;
+                  }
+                "
+                :defaultDate="content"
+                :preventBackDate="preventBackDate"
+                :miminumDate="miminumDate"
+              />
+
+              <div class="pt-2 sticky bottom-0 bg-white w-full"></div>
+            </div>
+          </div>
+
+          <!-- Right side -->
+          <div
+            class="hidden col-span-3 md:!col-span-2 mdlg:!col-span-3 mdlg:!flex md:!flex flex-col sticky top-0"
+          ></div>
+        </div>
+      </div>
+    </Teleport>
   </div>
 </template>
 <script lang="ts">
@@ -115,6 +189,7 @@ import { defineComponent, onMounted, ref, toRef, watch } from "vue";
 import { Logic } from "../../composable";
 import { FormRule } from "../../types";
 import AppIcon from "../AppIcon";
+import AppCalendar from "./calendar.vue";
 
 /**
  * AppTextField Component
@@ -125,6 +200,7 @@ export default defineComponent({
   components: {
     AppNormalText,
     AppIcon,
+    AppCalendar,
   },
   props: {
     /**
@@ -228,6 +304,36 @@ export default defineComponent({
       type: Boolean,
       default: false,
       required: false,
+    },
+    /**
+     * Determines whether to prevent back date
+     */
+    preventBackDate: {
+      type: Boolean,
+      default: false,
+    },
+    /**
+     * Determines the minimum date
+     */
+    miminumDate: {
+      type: String,
+      default: "",
+    },
+
+    /**
+     * An action to perform on click
+     */
+    action: {
+      type: Function,
+      required: false,
+    },
+
+    /**
+     * Input style
+     */
+    inputStyle: {
+      type: String,
+      default: "",
     },
   },
   name: "AppTextField",
@@ -596,3 +702,20 @@ export default defineComponent({
   },
 });
 </script>
+<style scoped>
+input:disabled::placeholder,
+textarea:disabled::placeholder {
+  -webkit-text-fill-color: var(--placeholder-color);
+  -webkit-opacity: 1;
+  opacity: 1;
+  color: var(--placeholder-color);
+}
+
+input:disabled,
+textarea:disabled {
+  -webkit-text-fill-color: var(--text-color);
+  -webkit-opacity: 1;
+  opacity: 1;
+  color: var(--text-color);
+}
+</style>

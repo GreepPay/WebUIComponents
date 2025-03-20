@@ -5,7 +5,7 @@
         v-for="beneficiary in dataItems"
         :key="beneficiary.id"
         @click="selectBeneficiary(beneficiary)"
-        class="flex items-center space-x-3 py-3 px-4 cursor-pointer rounded-md"
+        class="flex items-center  py-3 px-4 cursor-pointer rounded-md"
         :class="{
           'bg-gray-100': selectedBeneficiary?.id === beneficiary.id,
         }"
@@ -16,7 +16,7 @@
           :size="imageSize"
         />
 
-        <div class="flex flex-col py-0.5">
+        <div class="flex flex-col py-0.5 pl-3">
           <app-header-text
             customClass="text-base leading-6 !font-medium !text-black"
           >
@@ -32,8 +32,10 @@
     <!-- No Data Found Message -->
     <template v-else>
       <div class="flex items-center justify-center py-6 text-gray-500">
-        <app-normal-text customClass="!text-sm">
-          No data found.
+        <app-normal-text
+          class="!text-lg !text-center !text-gray-two !leading-6"
+        >
+          {{ noDataText }}
         </app-normal-text>
       </div>
     </template>
@@ -84,6 +86,13 @@
       modelValue: {
         type: Object as PropType<Beneficiary | null>,
         default: null,
+      },
+      /**
+       * Text for no data for beneficiary list
+       * @default string
+       */ noDataText: {
+        type: String,
+        default: "You have no beneficiary",
       },
     },
     emits: ["update:modelValue"],
