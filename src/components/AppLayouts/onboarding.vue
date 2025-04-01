@@ -64,6 +64,8 @@
         :class="`!py-4 col-span-8 !border-secondary ${
           currentPage.action_btn.is_disabled ? '!bg-opacity-30' : ''
         }`"
+         :disabled="disableBtn"
+          :loading="isBtnLoading"
         @click="nextPage"
       >
         {{ currentPage.action_btn.label }}
@@ -93,6 +95,14 @@
     },
     emits: ["update:modelValue"],
     props: {
+        isBtnLoading: {
+        default: Boolean,
+        default: false,
+      },
+        disableBtn: {
+        default: Boolean,
+        default: false,
+      },
       /**
        *  Current page key.  Used to determine which page of the onboarding flow is currently displayed.
        */
