@@ -4,7 +4,7 @@
   >
     <!-- Top section -->
     <app-image-loader
-      class="w-full flex flex-col sticky top-0 left-0 pb-5 px-4 space-y-2"
+      class="w-full flex flex-col sticky top-0 left-0 pb-5 px-4 space-y-2 z-50"
       custom-style="padding-top: calc(env(safe-area-inset-top) + 16px);"
       photo-url="/images/green-bg.png"
     >
@@ -65,6 +65,7 @@
           currentPage.action_btn.is_disabled ? '!bg-opacity-30' : ''
         }`"
         @click="nextPage"
+        :loading="currentPage.action_btn.loading"
       >
         Next
       </app-button>
@@ -121,6 +122,7 @@ export default defineComponent({
             label: string;
             handler: () => void;
             is_disabled?: boolean;
+            loading?: boolean;
           };
         }[];
       },
