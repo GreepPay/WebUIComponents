@@ -183,6 +183,8 @@ export default defineComponent({
         if (!currentPage.value.action_btn?.is_disabled) {
           currentPage.value.action_btn.handler();
         }
+      } else {
+        currentPage.value?.action_btn?.handler?.();
       }
     };
 

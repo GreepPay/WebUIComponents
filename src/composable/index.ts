@@ -1,4 +1,4 @@
-// @ts-ignore
+// @ts-ignore 
 import { Logic as BaseLogic } from "@greep/logic";
 
 export let Logic: typeof BaseLogic = BaseLogic;

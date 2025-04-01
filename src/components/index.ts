@@ -19,6 +19,9 @@ import AppPointTransaction from "./AppPointTransaction";
 import AppNotification from "./AppNotification";
 import AppSwitch from "./AppSwitch";
 import AppAlert from "./AppAlert";
+import AppNotifications from "./AppNotifications";
+import AppTransactions from "./AppTransactions";
+import AppTabs from "./AppTabs";
 import { AppHeaderText, AppNormalText } from "./AppTypography";
 import {
   AppSelect,
@@ -29,9 +32,10 @@ import {
   AppRadio,
   AppFormWrapper,
   AppFileAttachment,
+  AppSearch,
   AppContentEditable,
 } from "./AppForm";
-import { HorizontalUserList } from "./AppList";
+import { HorizontalUserList, BeneficiaryList } from "./AppList";
 import { AppOnboardingLayout, DefaultPageLayout } from "./AppLayouts";
 
 export {
@@ -46,9 +50,11 @@ export {
   AppRadio,
   AppFormWrapper,
   AppFileAttachment,
+  AppSearch,
   AppIcon,
   AppImageLoader,
   AppTransaction,
+  AppTransactions,
   AppModal,
   AppQrCode,
   AppAvatar,
@@ -64,7 +70,10 @@ export {
   AppOnboardingLayout,
   AppInfoBox,
   DefaultPageLayout,
+  BeneficiaryList,
+  AppTabs,
   AppCurrencySwitch,
+  AppNotifications,
   AppContentEditable,
   AppPointTransaction,
   AppNotification,
