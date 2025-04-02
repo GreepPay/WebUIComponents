@@ -21,6 +21,7 @@ import AppSwitch from "./AppSwitch";
 import AppAlert from "./AppAlert";
 import AppNotifications from "./AppNotifications";
 import AppTransactions from "./AppTransactions";
+import AppLoader from "./AppLoader";
 import AppTabs from "./AppTabs";
 import { AppHeaderText, AppNormalText } from "./AppTypography";
 import {
@@ -79,4 +80,5 @@ export {
   AppNotification,
   AppSwitch,
   AppAlert,
+  AppLoader,
 };
