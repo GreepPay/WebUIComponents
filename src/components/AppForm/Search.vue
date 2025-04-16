@@ -1,9 +1,9 @@
 <template>
   <div :class="['flex items-center w-full space-x-3 rounded', customClass]">
     <div
-      class="relative w-full flex items-center space-x-3 bg-white border border-gray-300 rounded-3xl px-4 py-2 focus-within:ring-[1.5px] focus-within:ring-green-500"
+      class="relative w-full flex items-center space-x-3 bg-white rounded-3xl px-4 py-2"
     >
-      <app-icon name="search-normal" class="text-gray-500" />
+      <app-icon name="search" custom-class="h-5" />
 
       <input
         v-model="searchQuery"
@@ -24,10 +24,10 @@
 
 <script lang="ts">
   import { defineComponent, ref, watch } from "vue"
-  import AppIcon from "../AppIcon/index.vue"
+  import AppIcon from "../AppIcon"
 
   export default defineComponent({
-    name: "SearchComponent",
+    name: "AppSearch",
     components: { AppIcon },
     props: {
       placeholder: {

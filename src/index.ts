@@ -1,6 +1,7 @@
-import { App } from 'vue'
+import { App } from "vue"
+import "./styles/index.css"
 
-import * as components from './components'
+import * as components from "./components"
 
 const AppUI = {
   install(app: App) {
@@ -14,7 +15,7 @@ const AppUI = {
 export default AppUI
 
 // export all components as vue plugin
-export * from './components'
+export * from "./components"
 
 // export all composables
-export * from './composable'
+export * from "./composable"

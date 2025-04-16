@@ -1,30 +1,28 @@
 <template>
   <div :class="['w-full overflow-x-auto scrollbar-hide', customClass]">
-    <div class="inline-flex items-center h-fit">
-      <app-normal-text
+    <div class="inline-flex items-center space-x-2">
+      <span
         v-for="(tab, index) in tabs"
         :key="index"
         @click="selectTab(tab.key)"
-        :class="[
-          'px-4 py-2 !text-lg cursor-pointer hover:text-black whitespace-nowrap',
+        class="px-4 py-1.5 text-sm cursor-pointer whitespace-nowrap font-medium slect-none rounded-full"
+        :class="
           activeTab === tab.key
-            ? 'font-bold !text-[#0A141E]'
-            : '!text-[#999999] ',
-        ]"
+            ? 'text-white bg-black'
+            : 'text-very-light-gray border'
+        "
       >
         {{ tab.label }}
-      </app-normal-text>
+      </span>
     </div>
   </div>
 </template>
 
 <script lang="ts">
   import { defineComponent, ref } from "vue"
-  import { AppNormalText } from "../AppTypography"
 
   export default defineComponent({
     name: "AppTabs",
-    components: { AppNormalText },
     props: {
       tabs: {
         type: Array as () => { key: string; label: string }[],

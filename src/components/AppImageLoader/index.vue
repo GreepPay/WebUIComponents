@@ -11,74 +11,71 @@
       imageUrl ? `background-image:url(${imageUrl});` : ''
     }  ${customStyle}`"
   >
-    <!--
-     * @slot -  Optional content to be displayed within the image loader.
-     -->
     <slot />
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, onMounted, watch } from "vue";
+  import { defineComponent, ref, onMounted, watch } from "vue"
 
-/**
- * Component that loads and displays an image with a fade-in effect.
- */
-export default defineComponent({
-  name: "AppImageLoader",
-  props: {
-    /**
-     * URL of the image to load.
-     * @requires
-     */
-    photoUrl: {
-      type: String,
-      required: true,
+  /**
+   * Component that loads and displays an image with a fade-in effect.
+   */
+  export default defineComponent({
+    name: "AppImageLoader",
+    props: {
+      /**
+       * URL of the image to load.
+       * @requires
+       */
+      photoUrl: {
+        type: String,
+        required: true,
+      },
+      /**
+       * Custom CSS classes to apply to the container `<div>` element.
+       */
+      customClass: {
+        type: String,
+        default: "",
+      },
+      /**
+       * Custom inline styles to apply to the container `<div>` element.
+       */
+      customStyle: {
+        type: String,
+        default: "",
+      },
     },
-    /**
-     * Custom CSS classes to apply to the container `<div>` element.
-     */
-    customClass: {
-      type: String,
-      default: "",
+    setup(props) {
+      const image = ref("")
+      const imageUrl = ref("")
+
+      const setImage = () => {
+        imageUrl.value = props.photoUrl || ""
+
+        const highResImage = new Image()
+
+        highResImage.onload = function () {
+          image.value = imageUrl.value
+        }
+
+        highResImage.src = imageUrl.value
+      }
+
+      watch(props, () => {
+        setImage()
+      })
+
+      onMounted(() => {
+        setImage()
+      })
+
+      return {
+        image,
+        imageUrl,
+      }
     },
-    /**
-     * Custom inline styles to apply to the container `<div>` element.
-     */
-    customStyle: {
-      type: String,
-      default: "",
-    },
-  },
-  setup(props) {
-    const image = ref("");
-    const imageUrl = ref("");
-
-    const setImage = () => {
-      imageUrl.value = props.photoUrl || "";
-
-      const highResImage = new Image();
-
-      highResImage.onload = function () {
-        image.value = imageUrl.value;
-      };
-
-      highResImage.src = imageUrl.value;
-    };
-
-    watch(props, () => {
-      setImage();
-    });
-
-    onMounted(() => {
-      setImage();
-    });
-
-    return {
-      image,
-      imageUrl,
-    };
-  },
-});
+  })
 </script>
 <!-- <style scoped>
 .blend-in {

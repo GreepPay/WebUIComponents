@@ -1,48 +1,114 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
+/* @plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:is(.dark *)); */
+
+@theme {
+  --breakpoint-*: initial;
   --breakpoint-sm: 640px;
   --breakpoint-md: 768px;
   --breakpoint-mdlg: 1000px;
-  --breakpoint-lg: 1024px;
+  --breakpoint-lg: 1580px;
   --breakpoint-xl: 1280px;
   --breakpoint-2xl: 1536px;
 
-  /* Colors */
-  --color-primary: #10bb76;
-  --color-secondary: #001726;
+  --text-*: initial;
+  --text-xs: 0.73rem;
+  --text-sm: 0.85rem;
+  --text-tiny: 0.83rem;
+  --text-base: 0.9rem;
+  --text-lg: 1rem;
+  --text-xl: 1.11rem;
+  --text-2xl: 1.2rem;
+  --text-3xl: 1.5rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 4rem;
+  --text-7xl: 5rem;
 
-  /* Fonts */
+  --color-black: #0a141e;
+  --color-light-black: #616161;
+  --color-green: #10bb76;
+  --color-very-light-gray: #999999;
+  --color-red: #fa1919;
+  --color-white: #ffffff;
+  --color-dark-green: #1f8f69;
+  --color-gray-one: #1f8f69;
+  --color-gray-two-40: #f0f3f640;
+  --color-gray-two: #616161;
+  --color-light-gray-one: #f0f3f6;
+  --color-light-gray-two: #e0e2e4;
+  --color-blue-green: #00a0b4;
+  --color-blue: #009de3;
+  --color-purple: #8e3be0;
+  --color-orange: #ffaa1f;
+
   --font-poppins: "Poppins", sans-serif;
+  --font-inter: "Poppins", sans-serif;
 }
 
 /*
- * Loader animation
- */
-@keyframes loader-animation {
-  0% {
-    width: 0%;
-  }
-  50% {
-    width: 100%;
-  }
-  100% {
-    width: 0%;
+  The default shadow behavior changed in Tailwind CSS v4,
+  so we're adding this compatibility layer to restore a soft default shadow
+  across elements that previously relied on Tailwind CSS v3's base shadow style.
+
+  If we want to remove these styles later, we should explicitly apply shadow utilities.
+*/
+@layer base {
+  .border,
+  .border-r,
+  .border-t,
+  .border-l,
+  .border-b,
+  .border-x,
+  .border-y,
+  ::before,
+  ::after,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-light-gray-two);
   }
 }
 
-.loader {
-  width: 100%;
-  position: absolute;
-  height: 3px;
-  background-color: #e7692b;
-  animation-name: loader-animation;
-  animation-duration: 3s;
-  animation-iteration-count: infinite;
+/*
+  The default shadow behavior changed in Tailwind CSS v4,
+  so we're adding this compatibility layer to restore a soft default shadow
+  across elements that previously relied on Tailwind CSS v3's base shadow style.
+
+  If we want to remove these styles later, we should explicitly apply shadow utilities.
+*/
+@layer base {
+  .box-shadow,
+  ::before,
+  ::after,
+  ::backdrop,
+  ::file-selector-button {
+    box-shadow: var(--tw-shadow, 0px 0px 16px 0px #99b4c81a);
+    --tw-shadow: 0px 0px 16px 0px #99b4c81a;
+    --tw-shadow-colored: 0px 0px 16px 0px var(--tw-shadow-color);
+  }
 }
 
-@layer components {
-  /* Add your component styles here */
+/* Custom scrollbar styles for WebKit browsers (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-light-gray-two);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background-clip: content-box;
+}
+
+/* Scrollbar styles for Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f0f0f0;
 }
