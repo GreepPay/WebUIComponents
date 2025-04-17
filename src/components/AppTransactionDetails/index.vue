@@ -1,21 +1,19 @@
 <template>
-  <div
-    class="w-full flex flex-col px-4 rounded-[16px] border-[1.5px] !border-[#F0F3F6]"
-  >
+  <div class="w-full flex flex-col px-4 rounded-[16px] border-[1.5px]">
     <template v-for="(item, index) in details" :key="index">
       <div
         :class="`flex py-4 px-1 w-full  ${
           isVertical
             ? 'flex-col space-y-1'
             : 'items-center justify-between space-x-3'
-        } ${index !== 0 && 'border-t border-[#F0F3F6]'}`"
+        } ${index !== 0 && 'border-t'}`"
       >
-        <app-normal-text class="!text-[#616161] capitalize">
+        <span class="!text-[#616161] capitalize">
           {{ item.title }}
-        </app-normal-text>
-        <app-normal-text class="!text-[#0A141E] !font-[500] !text-sm">
+        </span>
+        <span class="!text-black !font-medium !text-sm">
           {{ item.content }}
-        </app-normal-text>
+        </span>
       </div>
     </template>
   </div>
@@ -51,7 +49,7 @@
       },
       isVertical: {
         type: Boolean,
-        default: true,
+        default: false,
       },
     },
   })

@@ -8,6 +8,7 @@ import AppTabs from "./AppTabs"
 import AppPagination from "./AppPagination"
 import AppTransactionDetails from "./AppTransactionDetails"
 import AppAvatar from "./AppAvatar"
+import AppInfoBox from "./AppInfoBox"
 import { AppStatCard } from "./AppStat"
 import { AppHeaderText, AppNormalText } from "./AppTypography"
 import {
@@ -57,4 +58,5 @@ export {
   AppWithdrawalTable,
   AppVerificationTable,
   AppTransactionTable,
+  AppInfoBox,
 }
