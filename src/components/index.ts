@@ -5,6 +5,7 @@ import AppModal from "./AppModal"
 import AppCountdownTimer from "./AppCountdownTimer"
 import AppAlert from "./AppAlert"
 import AppTabs from "./AppTabs"
+import AppInfoBox from "./AppInfoBox"
 import AppPagination from "./AppPagination"
 import AppTransactionDetails from "./AppTransactionDetails"
 import AppAvatar from "./AppAvatar"
@@ -57,4 +58,5 @@ export {
   AppWithdrawalTable,
   AppVerificationTable,
   AppTransactionTable,
+  AppInfoBox,
 }
