@@ -1,5 +1,4 @@
 import { App } from "vue"
-import "./styles/index.css"
 
 import * as components from "./components"
 
