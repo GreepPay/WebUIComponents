@@ -77,11 +77,11 @@
     },
   })
 </script>
-<!-- <style scoped>
-.blend-in {
-  animation: fadein 0.15s;
-  -moz-animation: fadein 0.15s; /* Firefox */
-  -webkit-animation: fadein 0.15s; /* Safari and Chrome */
-  -o-animation: fadein 0.15s; /* Opera */
-}
-</style> -->
+<style scoped>
+  .blend-in {
+    animation: fadein 0.15s;
+    -moz-animation: fadein 0.15s; /* Firefox */
+    -webkit-animation: fadein 0.15s; /* Safari and Chrome */
+    -o-animation: fadein 0.15s; /* Opera */
+  }
+</style>

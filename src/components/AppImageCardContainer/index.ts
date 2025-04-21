@@ -1,3 +1,3 @@
-import RoofImageLoader from './index.vue'
+import AppImageCardContainer from './index.vue'
 
-export default RoofImageLoader
+export default AppImageCardContainer

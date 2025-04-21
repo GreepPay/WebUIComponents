@@ -32,8 +32,8 @@
         <tr v-for="user in 7" :key="user" @click="$emit('view')">
           <td class="px-6 py-4 whitespace-nowrap">
             <div class="flex items-center space-x-3">
-              <!-- <app-icon name="customer-received" /> -->
-              <svg
+              <app-icon name="customer-received" />
+              <!-- <svg
                 width="32"
                 height="32"
                 viewBox="0 0 32 32"
@@ -101,7 +101,7 @@
                     />
                   </filter>
                 </defs>
-              </svg>
+              </svg> -->
 
               <h3>
                 To
@@ -141,7 +141,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed } from "vue"
+  import { defineComponent } from "vue"
   import type { PropType } from "vue"
   import AppIcon from "../AppIcon"
 
@@ -156,10 +156,10 @@
   }
 
   export default defineComponent({
-    name: "AppMerchantTable",
-    componets: { AppIcon },
+    name: "AppTransactionTable",
+    components: { AppIcon },
     props: {
-      users: {
+      transactions: {
         type: Array as PropType<WalletUser[]>,
         required: true,
       },
