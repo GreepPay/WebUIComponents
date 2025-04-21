@@ -8,10 +8,10 @@
             : 'items-center justify-between space-x-3'
         } ${index !== 0 && 'border-t'}`"
       >
-        <span class="!text-[#616161] capitalize">
+        <span class="!text-very-light-gray font-normal text-sm capitalize">
           {{ item.title }}
         </span>
-        <span class="!text-black !font-medium !text-sm">
+        <span class="!text-black !font-medium !text-base">
           {{ item.content }}
         </span>
       </div>

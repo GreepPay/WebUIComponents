@@ -59,7 +59,7 @@
                 See History
               </span>
 
-              <p class="inline-block w-1 h-5 bg-red"></p>
+              <p class="inline-block w-[1px] h-5 bg-light-gray-two"></p>
 
               <span
                 role="button"

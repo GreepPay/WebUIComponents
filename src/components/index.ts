@@ -10,6 +10,8 @@ import AppPagination from "./AppPagination"
 import AppTransactionDetails from "./AppTransactionDetails"
 import AppAvatar from "./AppAvatar"
 import AppInfoBox from "./AppInfoBox"
+import AppDivider from "./AppDivider"
+import AppImageCardContainer from "./AppImageCardContainer"
 import { AppStatCard } from "./AppStat"
 import { AppHeaderText, AppNormalText } from "./AppTypography"
 import {
@@ -29,6 +31,7 @@ import {
   AppWithdrawalTable,
   AppVerificationTable,
   AppTransactionTable,
+  AppAdminTable,
 } from "./AppTable"
 
 export {
@@ -50,6 +53,7 @@ export {
   AppMerchantTable,
   AppWalletTable,
   AppCustomerTable,
+  AppAdminTable,
   AppTableHeader,
   AppStatCard,
   AppTableContainer,
@@ -60,5 +64,7 @@ export {
   AppVerificationTable,
   AppTransactionTable,
   AppInfoBox,
-  AppPdfViewer
+  AppPdfViewer,
+  AppDivider,
+  AppImageCardContainer,
 }

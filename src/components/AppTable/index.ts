@@ -7,6 +7,7 @@ import AppVerificationTable from "./Verification.vue"
 import AppWalletHistoryTable from "./WalletHistory.vue"
 import AppWithdrawalTable from "./Withdrawal.vue"
 import AppTransactionTable from "./Transaction.vue"
+import AppAdminTable from "./Admin.vue"
 
 export {
   AppMerchantTable,
@@ -17,5 +18,5 @@ export {
   AppWalletHistoryTable,
   AppWithdrawalTable,
   AppVerificationTable,
-  AppTransactionTable,
+  AppTransactionTable,AppAdminTable
 }

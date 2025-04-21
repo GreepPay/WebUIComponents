@@ -53,6 +53,8 @@
                 Approve
               </span>
 
+              <p class="inline-block w-[1px] h-5 bg-light-gray-two"></p>
+
               <span
                 role="button"
                 @click="$emit('Reject', withdrawal.id)"
