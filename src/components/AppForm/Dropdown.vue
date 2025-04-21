@@ -2,15 +2,15 @@
   <div class="relative px-4 h-fit">
     <span
       role="button"
-      :class="[
-        'cursor-pointer bg-white select-none py-1.5 pr-2 pl-3 flex items-center space-x-3 sm:text-sm/6',
-      ]"
+      class="cursor-pointer bg-white select-none py-1.5 pr-2 pl-3 flex items-center space-x-2 sm:text-sm/6'"
       @click="toggleDropdown"
       aria-haspopup="listbox"
       aria-expanded="true"
       aria-labelledby="listbox-label"
     >
-      <span> {{ selectedOption?.label || placeholder }} </span>
+      <span :class="!selectedOption && '!bg-red-500'">
+        {{ selectedOption?.label || placeholder }}
+      </span>
       <app-icon name="arrow-down" custom-class="h-4" />
     </span>
 

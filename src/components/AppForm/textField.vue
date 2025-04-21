@@ -19,14 +19,75 @@
         v-if="label"
         class="absolute left-4 px-1 text-base top-[19px] bg-white transition-all duration-300"
         :class="{
-          '!top-[-14px] text-[#999999] font-medium':
+          '!top-[-14px] text-very-light-gray font-medium':
             isFocused || placeholder || content,
           'text-red': errorMessage,
           'text-green': successMessage && !errorMessage,
         }"
-        >{{ label }}</label
       >
+        {{ label }}
+      </label>
 
+      <div
+        :class="`flew-grow w-full space-x-1 flex-row flex items-center justify-between px-4 py-4 bg-white rounded-[10px] border-[1.5px] border-[#E0E2E4] relative
+
+          ${errorMessage ? '!border-red' : ''}
+
+          ${customClass}`"
+        @click.stop="
+          action
+            ? action()
+            : fieldType == 'date'
+            ? (ShowCalendarModal = true)
+            : ''
+        "
+      >
+        <!--
+          @slot inner-prefix
+          Use this slot to add content before the input field.
+        -->
+        <slot name="inner-prefix" />
+        <!-- Floating label -->
+        <template v-if="useFloatingLabel && content.length > 0">
+          <app-normal-text
+            class="absolute left-4 top-[-24%] px-1 py-[2px] bg-white !text-very-light-gray z-10"
+          >
+            {{ placeholder }}
+          </app-normal-text>
+        </template>
+        <input
+          v-model="content"
+          :placeholder="placeholder"
+          @focus="isFocused = true"
+          @blur=";(isFocused = false), checkValidation()"
+          @keypress="isNumber"
+          :disabled="fieldType == 'date' ? true : disabled"
+          :type="fieldType == 'date' ? 'text' : fieldType"
+          :class="` text-black grow bg-transparent placeholder-gray-400 focus input w-full focus:outline-none ${inputStyle} `"
+          @click.stop="
+            action
+              ? action()
+              : fieldType == 'date'
+              ? (ShowCalendarModal = true)
+              : ''
+          "
+        />
+        <!--
+          @slot inner-suffix
+          Use this slot to add content after the input field.
+        -->
+        <slot name="inner-suffix" />
+        <app-icon
+          :name="`${fieldType == 'password' ? 'eye' : 'eye-slash'}`"
+          :customClass="`${fieldType == 'password' ? 'h-[12px]' : 'h-[14px]'}`"
+          v-if="type == 'password'"
+          @click.stop="
+            fieldType == 'password'
+              ? (fieldType = 'text')
+              : (fieldType = 'password')
+          "
+        />
+      </div>
       <!--
         @slot outer-suffix
         Use this slot to add content after the input field container.
@@ -34,7 +95,7 @@
       <slot name="outer-suffix" />
     </div>
     <div
-      v-if="errorMessage || successMessage"
+      v-if="showValidationMessage && (errorMessage || successMessage)"
       class="w-full flex flex-row pt-1 justify-start items-center gap-1"
     >
       <!-- <img
@@ -90,7 +151,7 @@
                 class="flex items-center justify-center sticky top-0 flex-col bg-white w-full"
               >
                 <app-normal-text
-                  custom-class="!text-xs font-semibold w-full text-left py-2"
+                  custom-class="!text-xs font-normal w-full text-left py-2"
                 >
                   {{ placeholder }}
                 </app-normal-text>
@@ -126,6 +187,7 @@
   import { Logic } from "../../composable"
   import { FormRule } from "../../types"
   import AppIcon from "../AppIcon"
+  import AppCalendar from "./calendar.vue"
 
   /**
    * AppTextField Component
@@ -136,6 +198,7 @@
     components: {
       AppNormalText,
       AppIcon,
+      AppCalendar,
     },
     props: {
       /**
@@ -239,6 +302,14 @@
         type: Boolean,
         default: false,
         required: false,
+      },
+
+      /**
+       * Determines whether the input is floating label.
+       */
+      showValidationMessage: {
+        type: Boolean,
+        default: true,
       },
       /**
        * Determines whether to prevent back date

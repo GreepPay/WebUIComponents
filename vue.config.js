@@ -1,7 +1,10 @@
 const path = require("path");
 module.exports = {
   runtimeCompiler: true,
-
+  worker: {
+    format: 'es',
+    plugins: [],
+  },
   css: {
     loaderOptions: {
       sass: {

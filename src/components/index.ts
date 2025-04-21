@@ -5,10 +5,11 @@ import AppModal from "./AppModal"
 import AppCountdownTimer from "./AppCountdownTimer"
 import AppAlert from "./AppAlert"
 import AppTabs from "./AppTabs"
-import AppInfoBox from "./AppInfoBox"
+import AppPdfViewer from "./AppPdfViewer"
 import AppPagination from "./AppPagination"
 import AppTransactionDetails from "./AppTransactionDetails"
 import AppAvatar from "./AppAvatar"
+import AppInfoBox from "./AppInfoBox"
 import { AppStatCard } from "./AppStat"
 import { AppHeaderText, AppNormalText } from "./AppTypography"
 import {
@@ -59,4 +60,5 @@ export {
   AppVerificationTable,
   AppTransactionTable,
   AppInfoBox,
+  AppPdfViewer
 }

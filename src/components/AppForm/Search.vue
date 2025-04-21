@@ -8,13 +8,13 @@
       <input
         v-model="searchQuery"
         :placeholder="placeholder"
-        class="w-full text-gray-700 text-sm py-2 border-none outline-none"
+        class="w-full text-very-light-gray text-sm py-2 border-none outline-none"
       />
 
       <button
         v-if="searchQuery"
         @click="clearSearch"
-        class="text-gray-500 hover:text-gray-700"
+        class="text-gray-500 hover:text-very-light-gray"
       >
         ✕
       </button>
