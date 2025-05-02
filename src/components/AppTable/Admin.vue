@@ -29,21 +29,24 @@
         <tr v-for="admin in admins" :key="admin.id">
           <td class="px-6 py-3 whitespace-nowrap">
             <div class="flex items-center space-x-3">
-              <img
-                :src="admin.avatar"
+              <app-avatar
+                :src="admin?.user?.profile?.profile_picture || ''"
                 class="w-10 h-10 rounded-full"
                 alt="Admin avatar"
               />
-              <div class="font-medium text-black">{{ admin.name }}</div>
+              <div class="font-medium text-black">
+                {{ `${admin?.user?.first_name} ${admin?.user?.last_name}` }}
+              </div>
             </div>
           </td>
 
           <td class="px-6 py-3 whitespace-nowrap text-light-black">
-            {{ matchRole(admin.role) }}
+            {{ admin?.user?.role?.name }}
           </td>
 
           <td class="px-6 py-3 whitespace-nowrap text-light-black">
-            {{ admin.joinedDate }} • {{ admin.joinedTime }}
+            {{ admin.updated_at.split(" ")[0] }}
+            • {{ admin.updated_at.split(" ")[1] }}
           </td>
 
           <td
@@ -99,6 +102,7 @@
   import { defineComponent, PropType, ref } from "vue"
   import AppButton from "../AppButton"
   import { AppDropdown } from "../AppForm"
+  import AppAvatar from "../AppAvatar"
 
   type AdminRole = "super-admin" | "admin" | "moderator" | "user" | null
 
@@ -117,7 +121,7 @@
 
   export default defineComponent({
     name: "AppAdminTable",
-    components: { AppButton, AppDropdown },
+    components: { AppButton, AppDropdown, AppAvatar },
     props: {
       admins: {
         type: Array as PropType<Admin[]>,

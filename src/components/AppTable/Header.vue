@@ -1,9 +1,16 @@
 <template>
   <div class="relative flex items-center border-b h-fit">
-    <div class="text-lg py-4 px-6 font-medium border-r" :class="titleClass">
+    <div
+      class="text-lg py-4 px-6 font-medium border-r flex items-center justify-between"
+      :class="titleClass"
+    >
       <slot name="title">
         {{ title }}
       </slot>
+
+      <!-- <span @click="toggleValueVisibility">
+        <app-icon name="eye" />
+      </span> -->
     </div>
 
     <!-- Right-side slot -->
