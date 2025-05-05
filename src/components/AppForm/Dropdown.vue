@@ -16,7 +16,7 @@
 
     <ul
       v-if="isOpen"
-      class="absolute right-0 z-5 -mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base box-shadow ring-1 ring-black/5 sm:text-sm"
+      class="absolute right-0 z-[11] -mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base box-shadow ring-1 ring-black/5 sm:text-sm"
       tabindex="-1"
       role="listbox"
       aria-labelledby="listbox-label"

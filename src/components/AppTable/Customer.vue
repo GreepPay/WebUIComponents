@@ -26,29 +26,35 @@
         </tr>
       </thead>
 
+      <!-- <app-list-wrapper :items="customers.length" class="!w-full block"> -->
       <tbody class="bg-white divide-y divide-gray-200">
         <tr v-for="merchant in customers" :key="merchant.id">
           <td class="px-6 py-4 whitespace-nowrap">
             <div class="flex items-center space-x-3">
-              <img
-                :src="merchant.avatar"
+              <app-avatar
+                :src="merchant?.user?.profile?.profile_picture || ''"
                 class="w-10 h-10 rounded-full"
-                alt="Customer avatar"
+                alt="Admin avatar"
               />
               <div class="flex items-center space-x-2">
-                <div class="font-medium text-black">{{ merchant.name }}</div>
-                <div
+                <div class="font-medium text-black">
+                  {{
+                    `${merchant?.user?.first_name} ${merchant?.user?.last_name}`
+                  }}
+                </div>
+                <!-- <div
                   v-if="merchant.status === 'suspended'"
                   class="text-very-light-gray"
                 >
                   (Suspended)
-                </div>
+                </div> -->
               </div>
             </div>
           </td>
 
           <td class="px-6 py-4 whitespace-nowrap text-very-light-gray">
-            {{ merchant.joinedDate }} • {{ merchant.joinedTime }}
+            {{ merchant.updated_at.split(" ")[0] }}
+            • {{ merchant.updated_at.split(" ")[1] }}
           </td>
 
           <td class="px-6 py-4 whitespace-nowrap text-right text-sm">
@@ -80,12 +86,15 @@
           </td>
         </tr>
       </tbody>
+      <!-- </app-list-wrapper> -->
     </table>
   </div>
 </template>
 
 <script lang="ts">
   import { defineComponent } from "vue"
+  import AppAvatar from "../AppAvatar"
+  import { AppListWrapper } from "../AppList"
   import type { PropType } from "vue"
 
   interface Customer {
@@ -99,6 +108,7 @@
 
   export default defineComponent({
     name: "AppCustomerTable",
+    components: { AppAvatar, AppListWrapper },
     props: {
       customers: {
         type: Array as PropType<Customer[]>,

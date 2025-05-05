@@ -32,12 +32,16 @@
         <tr v-for="verificiation in verifications" :key="verificiation.id">
           <td class="px-6 py-4 whitespace-nowrap">
             <div class="flex items-center space-x-3">
-              <img
-                :src="verificiation.avatar"
+              <app-avatar
+                :src="verificiation?.user?.profile?.profile_picture || ''"
                 class="w-10 h-10 rounded-full"
-                alt="Withdrawal avatar"
+                alt="Admin avatar"
               />
-              <div class="font-medium text-black">{{ verificiation.name }}</div>
+              <div class="font-medium text-black">
+                {{
+                  `${verificiation?.user?.first_name} ${verificiation?.user?.last_name}`
+                }}
+              </div>
             </div>
           </td>
 
@@ -83,6 +87,7 @@
 <script lang="ts">
   import { defineComponent, computed } from "vue"
   import type { PropType } from "vue"
+  import AppAvatar from "../AppAvatar"
   import AppIcon from "../AppIcon"
 
   interface Withdrawal {
@@ -94,8 +99,8 @@
   }
 
   export default defineComponent({
-    name: "AppwithdrawalTable",
-    components: { AppIcon },
+    name: "AppVerificationTable",
+    components: { AppIcon, AppAvatar },
     props: {
       verifications: {
         type: Array as PropType<Withdrawal[]>,

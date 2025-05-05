@@ -1,6 +1,6 @@
 <template>
   <div
-    id="user-table"
+    id="wallet-table"
     :class="`${customClass} blend-in overflow-x-auto bg-white box-shadow`"
     style="
       background-size: cover;
@@ -29,31 +29,33 @@
       </thead>
 
       <tbody class="bg-white divide-y divide-gray-200">
-        <tr v-for="user in users" :key="user.id">
+        <tr v-for="wallet in wallets" :key="wallet.id">
           <td class="px-6 py-4 whitespace-nowrap">
-            <div class="flex items-center space-x-3">
-              <img
-                :src="user.avatar"
+            <div class="flex items-center space-x-2">
+              <app-avatar
+                :src="wallet?.user?.profile?.profile_picture || ''"
                 class="w-10 h-10 rounded-full"
-                alt="User avatar"
+                alt="Wallet avatar"
               />
-              <h3 class="font-medium text-black">{{ user.name }}</h3>
+              <h3 class="font-medium text-black">
+                {{ `${wallet?.user?.first_name} ${wallet?.user?.last_name}` }}
+              </h3>
             </div>
           </td>
 
           <td class="px-6 py-4 whitespace-nowrap text-very-light-gray">
-            {{ user.type }}
+            {{ wallet.user.role.name }}
           </td>
 
           <td class="px-6 py-4 whitespace-nowrap text-black font-semibold">
-            {{ user.balance }}
+            {{ `${wallet.total_balance} ${wallet.currency}` }}
           </td>
 
           <td class="px-6 py-4 whitespace-nowrap text-right text-sm">
             <div class="flex justify-end space-x-3">
               <span
                 role="button"
-                @click="$emit('see-history', user.id)"
+                @click="$emit('see-history', wallet.id)"
                 class="text-green hover:opacity-80 cursor-pointer"
               >
                 See History
@@ -63,7 +65,7 @@
 
               <span
                 role="button"
-                @click="$emit('freeze', user.id)"
+                @click="$emit('freeze', wallet.id)"
                 class="text-red hover:opacity-80 cursor-pointer"
               >
                 Freeze Account
@@ -77,7 +79,8 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed } from "vue"
+  import { defineComponent } from "vue"
+  import AppAvatar from "../AppAvatar"
   import type { PropType } from "vue"
 
   type UserType = "Merchant" | "Customer"
@@ -91,9 +94,10 @@
   }
 
   export default defineComponent({
-    name: "AppMerchantTable",
+    name: "AppWalletTable",
+    components: { AppAvatar },
     props: {
-      users: {
+      wallets: {
         type: Array as PropType<WalletUser[]>,
         required: true,
       },

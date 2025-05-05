@@ -27,28 +27,33 @@
       </thead>
 
       <tbody class="bg-white divide-y divide-gray-200">
-        <tr v-for="merchant in merchants" :key="merchant.id" >
+        <tr v-for="merchant in merchants" :key="merchant.id">
           <td class="px-6 py-4 whitespace-nowrap">
             <div class="flex items-center space-x-3">
-              <img
-                :src="merchant.avatar"
+              <app-avatar
+                :src="merchant?.user?.profile?.profile_picture || ''"
                 class="w-10 h-10 rounded-full"
-                alt="Merchant avatar"
+                alt="Admin avatar"
               />
               <div class="flex items-center space-x-2">
-                <div class="font-medium text-black">{{ merchant.name }}</div>
-                <div
+                <div class="font-medium text-black">
+                  {{
+                    `${merchant?.user?.first_name} ${merchant?.user?.last_name}`
+                  }}
+                </div>
+                <!-- <div
                   v-if="merchant.status === 'suspended'"
                   class="text-very-light-gray"
                 >
                   (Suspended)
-                </div>
+                </div> -->
               </div>
             </div>
           </td>
 
           <td class="px-6 py-4 whitespace-nowrap text-very-light-gray">
-            {{ merchant.joinedDate }} • {{ merchant.joinedTime }}
+            {{ merchant.updated_at.split(" ")[0] }}
+            • {{ merchant.updated_at.split(" ")[1] }}
           </td>
 
           <td class="px-6 py-4 whitespace-nowrap text-right text-sm">
@@ -87,6 +92,7 @@
 <script lang="ts">
   import { defineComponent, computed } from "vue"
   import type { PropType } from "vue"
+  import AppAvatar from "../AppAvatar"
 
   interface Merchant {
     id: number
@@ -99,6 +105,8 @@
 
   export default defineComponent({
     name: "AppMerchantTable",
+    components: { AppAvatar },
+
     props: {
       merchants: {
         type: Array as PropType<Merchant[]>,

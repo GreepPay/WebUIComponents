@@ -1,6 +1,6 @@
 <template>
+  <!-- v-if="pagination.total > 0" -->
   <div
-    v-if="totalItems > 0"
     :class="[
       'flex items-center h-full space-x-3 gap-1 overflow-hidden',
       customClass,
@@ -9,24 +9,38 @@
     <p
       class="flex items-center space-x-2 whitespace-nowrap text-sm text-very-light-gray leading-6"
     >
-      {{ startItem }} - {{ endItem }} of {{ totalItems }}
+      {{ pagination.firstItem }} - {{ pagination.lastItem }} of
+      {{ pagination.total }}
+
+      <!-- {{ startItem }} - {{ endItem }} of {{ totalItems }} -->
     </p>
 
     <div class="flex items-center space-x-3">
       <span
         @click="handlePrevious"
-        :disabled="currentPage === 1"
-        class="flex items-center justify-center cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+        :class="[
+          'flex items-center justify-center',
+          {
+            'cursor-pointer': pagination.currentPage > 1,
+            'opacity-50 cursor-not-allowed': pagination.currentPage === 1,
+          },
+        ]"
         title="Previous page"
       >
+        <!-- :disabled="currentPage === 1"
+        class="flex items-center justify-center cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed" -->
         <app-icon name="arrow-left" custom-class="h-5" />
       </span>
 
       <span
         @click="handleNext"
-        :disabled="currentPage >= totalPages"
-        class="flex items-center justify-center cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-        aria-label="Next page"
+        :class="[
+          'flex items-center justify-center',
+          {
+            'cursor-pointer': pagination.hasMorePages,
+            'opacity-50 cursor-not-allowed': !pagination.hasMorePages,
+          },
+        ]"
       >
         <app-icon name="arrow-right" custom-class="h-5" />
       </span>
@@ -44,17 +58,27 @@
       AppIcon,
     },
     props: {
-      currentPage: {
-        type: Number,
+      pagination: {
+        type: Object as () => {
+          currentPage: number
+          firstItem: number
+          hasMorePages: boolean
+          lastItem: number
+          lastPage: number
+          perPage: number
+          total: number
+        },
         required: true,
-      },
-      itemsPerPage: {
-        type: Number,
-        required: true,
-      },
-      totalItems: {
-        type: Number,
-        required: true,
+        default: () => ({
+          count: 0,
+          currentPage: 1,
+          firstItem: 0,
+          hasMorePages: false,
+          lastItem: 0,
+          lastPage: 1,
+          perPage: 10,
+          total: 0,
+        }),
       },
       customClass: {
         type: String,
@@ -63,34 +87,22 @@
     },
     emits: ["update:page"],
     setup(props, { emit }) {
-      const totalPages = computed(() =>
-        Math.ceil(props.totalItems / props.itemsPerPage)
-      )
-
-      const startItem = computed(
-        () => (props.currentPage - 1) * props.itemsPerPage + 1
-      )
-
-      const endItem = computed(() =>
-        Math.min(props.currentPage * props.itemsPerPage, props.totalItems)
-      )
-
       const handlePrevious = () => {
-        if (props.currentPage > 1) {
-          emit("update:page", props.currentPage - 1)
+        if (props.pagination.currentPage > 1) {
+          emit("update:page", props.pagination.currentPage - 1)
         }
       }
 
       const handleNext = () => {
-        if (props.currentPage < totalPages.value) {
-          emit("update:page", props.currentPage + 1)
+        if (props.pagination.hasMorePages) {
+          emit("update:page", props.pagination.currentPage + 1)
         }
       }
 
       return {
-        totalPages,
-        startItem,
-        endItem,
+        // totalPages,
+        // startItem,
+        // endItem,
         handlePrevious,
         handleNext,
       }
