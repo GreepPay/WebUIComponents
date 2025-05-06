@@ -51,26 +51,26 @@
 
           <td
             class="!py-0 text-right text-sm"
-            v-if="admin.role !== 'super-admin'"
+            v-if="admin.user?.role?.name !== 'SuperAdmin'"
           >
             <div
               class="flex justify-end space-x-4 px-6"
-              v-if="editingAdminId !== admin.id"
+              v-if="editingAdminId !== admin.user?.uuid"
             >
               <span
                 role="button"
                 class="text-green cursor-pointer select-none"
-                @click="startEditing(admin.id, admin.role)"
+                @click="startEditing(admin?.user?.uuid, admin.user?.role?.name)"
               >
                 Change Role
               </span>
-              <span
+              <!-- <span
                 role="button"
                 class="text-red cursor-pointer select-none"
                 @click="$emit('remove', admin)"
               >
                 Remove
-              </span>
+              </span> -->
             </div>
 
             <!-- Role change UI -->
@@ -87,6 +87,7 @@
                 variant="primary"
                 customClass="!py-4.5 !w-fit !rounded-none"
                 @click="confirmRoleChange(admin)"
+                :disabled="selectedRole === admin.user?.role?.name"
               >
                 Change Role
               </AppButton>
@@ -104,7 +105,7 @@
   import { AppDropdown } from "../AppForm"
   import AppAvatar from "../AppAvatar"
 
-  type AdminRole = "super-admin" | "admin" | "moderator" | "user" | null
+  type AdminRole = "SuperAdmin" | "Admin"
 
   interface Admin {
     id: number
@@ -137,16 +138,13 @@
       },
     },
     emits: ["change-role", "remove"],
-
     setup(_, { emit }) {
       const editingAdminId = ref<number | null>(2)
       const selectedRole = ref<AdminRole>(null)
 
       const roleOptions: RoleOption[] = [
-        { label: "Super Admin", value: "super-admin" },
-        { label: "Admin", value: "admin" },
-        { label: "Moderator", value: "moderator" },
-        { label: "User", value: "user" },
+        { label: "Super Admin", value: "SuperAdmin" },
+        { label: "Admin", value: "Admin" },
       ]
 
       const matchRole = (role_id: AdminRole): string => {
@@ -159,10 +157,12 @@
         selectedRole.value = currentRole
       }
 
-      const confirmRoleChange = (admin: Admin) => {
-        if (selectedRole.value && selectedRole.value !== admin.role) {
-          emit("change-role", { ...admin, newRole: selectedRole.value })
-        }
+      const confirmRoleChange = (admin: any) => {
+        emit("change-role", {
+          uuid: admin?.user?.uuid,
+          role: selectedRole.value,
+        })
+
         editingAdminId.value = null
       }
 

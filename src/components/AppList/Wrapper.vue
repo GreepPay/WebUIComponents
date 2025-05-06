@@ -36,7 +36,7 @@
       },
       emptyDescription: {
         type: String,
-        default: "Search for data ",
+        default: "Search for data",
       },
       customClass: {
         type: String,
