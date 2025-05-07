@@ -27,7 +27,11 @@
       </thead>
 
       <tbody class="bg-white divide-y divide-gray-200">
-        <tr v-for="withdrawal in withdrawals" :key="withdrawal.id">
+        <tr
+          v-if="withdrawals && withdrawals.length"
+          v-for="withdrawal in withdrawals"
+          :key="withdrawal.id"
+        >
           <td class="px-6 py-4 whitespace-nowrap">
             <div class="flex items-center space-x-3">
               <img
@@ -65,13 +69,26 @@
             </div>
           </td>
         </tr>
+
+        <tr v-else>
+          <td
+            colspan="3"
+            class="px-6 py-4 text-black text-center font-semibold"
+          >
+            <app-empty-state
+              title="No withdrawals"
+              description="No withdrawals available "
+            />
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed } from "vue"
+  import { defineComponent } from "vue"
+  import AppEmptyState from "../AppEmptyState"
   import type { PropType } from "vue"
 
   interface Withdrawal {
@@ -84,6 +101,7 @@
 
   export default defineComponent({
     name: "AppwithdrawalTable",
+    components: { AppEmptyState },
     props: {
       withdrawals: {
         type: Array as PropType<Withdrawal[]>,

@@ -26,7 +26,11 @@
       </thead>
 
       <tbody class="bg-white divide-y divide-gray-200">
-        <tr v-for="admin in admins" :key="admin.id">
+        <tr
+          v-if="admins && admins.length"
+          v-for="admin in admins"
+          :key="admin.id"
+        >
           <td class="px-6 py-3 whitespace-nowrap">
             <div class="flex items-center space-x-3">
               <app-avatar
@@ -94,6 +98,18 @@
             </div>
           </td>
         </tr>
+
+        <tr v-else>
+          <td
+            colspan="3"
+            class="px-6 py-4 text-black text-center font-semibold"
+          >
+            <app-empty-state
+              title="No admins"
+              description="No admins available "
+            />
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -104,6 +120,7 @@
   import AppButton from "../AppButton"
   import { AppDropdown } from "../AppForm"
   import AppAvatar from "../AppAvatar"
+  import AppEmptyState from "../AppEmptyState"
 
   type AdminRole = "SuperAdmin" | "Admin"
 
@@ -122,7 +139,7 @@
 
   export default defineComponent({
     name: "AppAdminTable",
-    components: { AppButton, AppDropdown, AppAvatar },
+    components: { AppButton, AppDropdown, AppAvatar, AppEmptyState },
     props: {
       admins: {
         type: Array as PropType<Admin[]>,

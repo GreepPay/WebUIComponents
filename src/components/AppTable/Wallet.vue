@@ -29,7 +29,11 @@
       </thead>
 
       <tbody class="bg-white divide-y divide-gray-200">
-        <tr v-for="wallet in wallets" :key="wallet.id">
+        <tr
+          v-if="wallets && wallets.length"
+          v-for="wallet in wallets"
+          :key="wallet.id"
+        >
           <td class="px-6 py-4 whitespace-nowrap">
             <div class="flex items-center space-x-2">
               <app-avatar
@@ -44,11 +48,11 @@
           </td>
 
           <td class="px-6 py-4 whitespace-nowrap text-very-light-gray">
-            {{ wallet.user.role.name }}
+            {{ wallet?.user?.role?.name }}
           </td>
 
           <td class="px-6 py-4 whitespace-nowrap text-black font-semibold">
-            {{ `${wallet.total_balance} ${wallet.currency}` }}
+            {{ `${wallet?.total_balance} ${wallet?.currency}` }}
           </td>
 
           <td class="px-6 py-4 whitespace-nowrap text-right text-sm">
@@ -73,6 +77,18 @@
             </div>
           </td>
         </tr>
+
+        <tr v-else>
+          <td
+            colspan="3"
+            class="px-6 py-4 text-black text-center font-semibold"
+          >
+            <app-empty-state
+              title="No wallets"
+              description="No  wallets available "
+            />
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -81,6 +97,7 @@
 <script lang="ts">
   import { defineComponent } from "vue"
   import AppAvatar from "../AppAvatar"
+  import AppEmptyState from "../AppEmptyState"
   import type { PropType } from "vue"
 
   type UserType = "Merchant" | "Customer"
@@ -95,7 +112,7 @@
 
   export default defineComponent({
     name: "AppWalletTable",
-    components: { AppAvatar },
+    components: { AppAvatar, AppEmptyState },
     props: {
       wallets: {
         type: Array as PropType<WalletUser[]>,

@@ -11,6 +11,7 @@ import AppTransactionDetails from "./AppTransactionDetails"
 import AppAvatar from "./AppAvatar"
 import AppInfoBox from "./AppInfoBox"
 import AppDivider from "./AppDivider"
+import AppLoader from "./AppLoader"
 import AppImageCardContainer from "./AppImageCardContainer"
 import { AppStatCard } from "./AppStat"
 import { AppHeaderText, AppNormalText } from "./AppTypography"
@@ -67,4 +68,5 @@ export {
   AppPdfViewer,
   AppDivider,
   AppImageCardContainer,
+  AppLoader,
 }

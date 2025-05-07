@@ -26,9 +26,12 @@
         </tr>
       </thead>
 
-      <!-- <app-list-wrapper :items="customers.length" class="!w-full block"> -->
       <tbody class="bg-white divide-y divide-gray-200">
-        <tr v-for="merchant in customers" :key="merchant.id">
+        <tr
+          v-if="customers && customers.length"
+          v-for="merchant in customers"
+          :key="merchant.id"
+        >
           <td class="px-6 py-4 whitespace-nowrap">
             <div class="flex items-center space-x-3">
               <app-avatar
@@ -85,8 +88,19 @@
             </div>
           </td>
         </tr>
+
+        <tr v-else>
+          <td
+            colspan="3"
+            class="px-6 py-4 text-black text-center font-semibold"
+          >
+            <app-empty-state
+              title="No customers"
+              description="No customers available "
+            />
+          </td>
+        </tr>
       </tbody>
-      <!-- </app-list-wrapper> -->
     </table>
   </div>
 </template>
@@ -94,7 +108,7 @@
 <script lang="ts">
   import { defineComponent } from "vue"
   import AppAvatar from "../AppAvatar"
-  import { AppListWrapper } from "../AppList"
+  import AppEmptyState from "../AppEmptyState"
   import type { PropType } from "vue"
 
   interface Customer {
@@ -108,7 +122,7 @@
 
   export default defineComponent({
     name: "AppCustomerTable",
-    components: { AppAvatar, AppListWrapper },
+    components: { AppAvatar, AppEmptyState },
     props: {
       customers: {
         type: Array as PropType<Customer[]>,

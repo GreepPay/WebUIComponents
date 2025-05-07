@@ -27,7 +27,11 @@
       </thead>
 
       <tbody class="bg-white divide-y divide-gray-200">
-        <tr v-for="merchant in merchants" :key="merchant.id">
+        <tr
+          v-if="merchants && merchants.length"
+          v-for="merchant in merchants"
+          :key="merchant.id"
+        >
           <td class="px-6 py-4 whitespace-nowrap">
             <div class="flex items-center space-x-3">
               <app-avatar
@@ -84,6 +88,18 @@
             </div>
           </td>
         </tr>
+
+        <tr v-else>
+          <td
+            colspan="3"
+            class="px-6 py-4 text-black text-center font-semibold"
+          >
+            <app-empty-state
+              title="No merchants"
+              description="No merchants available "
+            />
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -93,6 +109,7 @@
   import { defineComponent, computed } from "vue"
   import type { PropType } from "vue"
   import AppAvatar from "../AppAvatar"
+  import AppEmptyState from "../AppEmptyState"
 
   interface Merchant {
     id: number
@@ -105,8 +122,7 @@
 
   export default defineComponent({
     name: "AppMerchantTable",
-    components: { AppAvatar },
-
+    components: { AppAvatar, AppEmptyState },
     props: {
       merchants: {
         type: Array as PropType<Merchant[]>,

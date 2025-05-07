@@ -27,7 +27,7 @@
       </thead>
 
       <tbody class="bg-white divide-y divide-gray-200">
-        <tr v-for="user in users" :key="user.id">
+        <tr v-if="users && users.length" v-for="user in users" :key="user.id">
           <td class="px-6 py-4 whitespace-nowrap">
             <div class="flex items-center space-x-3">
               <!-- <app-icon name="customer-received" /> -->
@@ -124,6 +124,18 @@
             $22.00
           </td>
         </tr>
+
+        <tr v-else>
+          <td
+            colspan="3"
+            class="px-6 py-4 text-black text-center font-semibold"
+          >
+            <app-empty-state
+              title="No transactions"
+              description="No transactions available "
+            />
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -132,6 +144,7 @@
 <script lang="ts">
   import { defineComponent, computed } from "vue"
   import type { PropType } from "vue"
+  import AppEmptyState from "../AppEmptyState"
   import AppIcon from "../AppIcon"
 
   type UserType = "Merchant" | "Customer"
@@ -146,7 +159,7 @@
 
   export default defineComponent({
     name: "AppMerchantTable",
-    componets: { AppIcon },
+    componets: { AppIcon, AppEmptyState },
     props: {
       users: {
         type: Array as PropType<WalletUser[]>,

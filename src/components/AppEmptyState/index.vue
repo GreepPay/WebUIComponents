@@ -1,15 +1,15 @@
 <template>
   <div
-    class="!w-full flex flex-col min-h-[210px] border h-fit py-8 px-4 justify-center items-center"
+    class="!w-full flex flex-col min-h-40 h-fit py-8 px-4 justify-center items-center"
   >
-    <!-- <app-icon :name="icon" custom-class="!h-[54px]" /> -->
+    <app-icon :name="icon" custom-class="!h-[54px]" />
 
     <div class="flex flex-col items-center justify-center px-5 pt-3">
-      <app-normal-text class="!text-[#0A141E] !font-[500] !text-sm">
+      <app-normal-text class="!text-black !font-medium !text-base">
         {{ title }}
       </app-normal-text>
       <app-normal-text
-        class="!text-[#616161] !text-center pt-[4px] px-4 leading-5"
+        class="!text-very-light-gray !text-center pt-[4px] px-4 leading-5"
       >
         {{ description }}
       </app-normal-text>
@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent } from "vue"
+  import { defineComponent } from "vue"
   import AppIcon from "../AppIcon"
   import { AppNormalText } from "../AppTypography"
   /**
@@ -35,7 +35,7 @@
     props: {
       icon: {
         type: String,
-        default: "no-transaction",
+        default: "no-data",
       },
       title: {
         type: String,
