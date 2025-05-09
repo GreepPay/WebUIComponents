@@ -4,6 +4,7 @@
     class="relative z-10"
     @click.self="$emit('close')"
     aria-labelledby="modal-title"
+    :class="customClass"
   >
     <!-- overlay -->
     <div

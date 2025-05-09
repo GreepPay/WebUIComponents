@@ -25,16 +25,20 @@
         </tr>
       </thead>
 
-      <tbody class="bg-white divide-y divide-gray-200">
+      <tbody class="bg- white divide-y divide-gray-200">
         <tr
           v-if="admins && admins.length"
-          v-for="admin in admins"
-          :key="admin.id"
+          v-for="(admin, index) in admins"
+          :key="admin.auth_user_id"
+          :class="
+            index % 2 !== 0 ? 'bg-light-gray-one bg-opacity-[25%]' : 'bg-white'
+          "
         >
-          <td class="px-6 py-3 whitespace-nowrap">
+          <td class="px-6 py-3 whitespace-nowrap bg-">
             <div class="flex items-center space-x-3">
               <app-avatar
                 :src="admin?.user?.profile?.profile_picture || ''"
+                :name="`${admin?.user?.first_name} ${admin?.user?.last_name}`"
                 class="w-10 h-10 rounded-full"
                 alt="Admin avatar"
               />
@@ -53,48 +57,49 @@
             • {{ admin.updated_at.split(" ")[1] }}
           </td>
 
-          <td
-            class="!py-0 text-right text-sm"
-            v-if="admin.user?.role?.name !== 'SuperAdmin'"
-          >
-            <div
-              class="flex justify-end space-x-4 px-6"
-              v-if="editingAdminId !== admin.user?.uuid"
-            >
-              <span
-                role="button"
-                class="text-green cursor-pointer select-none"
-                @click="startEditing(admin?.user?.uuid, admin.user?.role?.name)"
+          <td class="!py-0 text-right text-sm">
+            <div v-if="admin.user?.role?.name !== 'SuperAdmin'">
+              <div
+                class="flex justify-end space-x-4 px-6"
+                v-if="editingAdminId !== admin.user?.uuid"
               >
-                Change Role
-              </span>
-              <!-- <span
+                <span
+                  role="button"
+                  class="text-green cursor-pointer select-none"
+                  @click="
+                    startEditing(admin?.user?.uuid, admin.user?.role?.name)
+                  "
+                >
+                  Change Role
+                </span>
+                <!-- <span
                 role="button"
                 class="text-red cursor-pointer select-none"
                 @click="$emit('remove', admin)"
               >
                 Remove
               </span> -->
-            </div>
+              </div>
 
-            <!-- Role change UI -->
-            <div
-              v-else
-              class="flex-1 flex items-center justify-end gap-2 !h-full"
-            >
-              <AppDropdown
-                v-model="selectedRole"
-                :options="roleOptions"
-                placeholder="Assign role"
-              />
-              <AppButton
-                variant="primary"
-                customClass="!py-4.5 !w-fit !rounded-none"
-                @click="confirmRoleChange(admin)"
-                :disabled="selectedRole === admin.user?.role?.name"
+              <!-- Role change UI -->
+              <div
+                v-else
+                class="flex-1 flex items-center justify-end gap-2 !h-full"
               >
-                Change Role
-              </AppButton>
+                <AppDropdown
+                  v-model="selectedRole"
+                  :options="roleOptions"
+                  placeholder="Assign role"
+                />
+                <AppButton
+                  variant="primary"
+                  customClass="!py-4.5 !w-fit !rounded-none"
+                  @click="confirmRoleChange(admin)"
+                  :disabled="selectedRole === admin.user?.role?.name"
+                >
+                  Change Role
+                </AppButton>
+              </div>
             </div>
           </td>
         </tr>
@@ -118,23 +123,14 @@
 <script lang="ts">
   import { defineComponent, PropType, ref } from "vue"
   import AppButton from "../AppButton"
-  import { AppDropdown } from "../AppForm"
   import AppAvatar from "../AppAvatar"
   import AppEmptyState from "../AppEmptyState"
+  import { AppDropdown } from "../AppForm"
+  import { Profile } from "@greep/logic/src/gql/graphql"
 
-  type AdminRole = "SuperAdmin" | "Admin"
-
-  interface Admin {
-    id: number
-    name: string
-    avatar: string
-    role: AdminRole
-    joinedDate: string
-    joinedTime: string
-  }
   interface RoleOption {
     label: string
-    value: AdminRole
+    value: string
   }
 
   export default defineComponent({
@@ -142,7 +138,7 @@
     components: { AppButton, AppDropdown, AppAvatar, AppEmptyState },
     props: {
       admins: {
-        type: Array as PropType<Admin[]>,
+        type: Array as PropType<Profile[]>,
         required: true,
       },
       customClass: {
@@ -156,20 +152,20 @@
     },
     emits: ["change-role", "remove"],
     setup(_, { emit }) {
-      const editingAdminId = ref<number | null>(2)
-      const selectedRole = ref<AdminRole>(null)
+      const editingAdminId = ref<string | null>("")
+      const selectedRole = ref<string>(null)
 
       const roleOptions: RoleOption[] = [
         { label: "Super Admin", value: "SuperAdmin" },
         { label: "Admin", value: "Admin" },
       ]
 
-      const matchRole = (role_id: AdminRole): string => {
+      const matchRole = (role_id: string): string => {
         const match = roleOptions.find((option) => option.value === role_id)
         return match?.label || ""
       }
 
-      const startEditing = (adminId: number, currentRole: AdminRole) => {
+      const startEditing = (adminId: string, currentRole: string) => {
         editingAdminId.value = adminId
         selectedRole.value = currentRole
       }

@@ -1,6 +1,6 @@
 <template>
   <div
-    id="withdrawal-table"
+    id="transaction-table"
     :class="`${customClass} blend-in overflow-x-auto bg-white box-shadow`"
     style="
       background-size: cover;
@@ -28,30 +28,39 @@
 
       <tbody class="bg-white divide-y divide-gray-200">
         <tr
-          v-if="withdrawals && withdrawals.length"
-          v-for="withdrawal in withdrawals"
-          :key="withdrawal.id"
+          v-if="transactions && transactions.length"
+          v-for="(transaction, index) in transactions"
+          :key="transaction.wallet_id"
+          :class="
+            index % 2 !== 0 ? 'bg-light-gray-one bg-opacity-[25%]' : 'bg-white'
+          "
         >
           <td class="px-6 py-4 whitespace-nowrap">
             <div class="flex items-center space-x-3">
-              <img
-                :src="withdrawal.avatar"
+              <app-avatar
+                :name="`${transaction?.user?.first_name} ${transaction?.user?.last_name}`"
+                :src="transaction?.user?.profile?.profile_picture || ''"
                 class="w-10 h-10 rounded-full"
-                alt="Withdrawal avatar"
+                alt="Admin avatar"
               />
-              <div class="font-medium text-black">{{ withdrawal.name }}</div>
+              <div class="font-medium text-black">
+                {{
+                  `${transaction?.user?.first_name} ${transaction?.user?.last_name}`
+                }}
+              </div>
             </div>
           </td>
 
           <td class="px-6 py-4 whitespace-nowrap text-black font-bold">
-            {{ withdrawal.amount }}
+            {{ transaction.amount }}
           </td>
 
           <td class="px-6 py-4 whitespace-nowrap text-right text-sm">
-            <div class="flex justify-end space-x-3">
+            test
+            <!-- <div class="flex justify-end space-x-3">
               <span
                 role="button"
-                @click="$emit('approve', withdrawal.id)"
+                @click="$emit('approve', transaction.id)"
                 class="text-green hover:opacity-80 cursor-pointer"
               >
                 Approve
@@ -61,12 +70,12 @@
 
               <span
                 role="button"
-                @click="$emit('Reject', withdrawal.id)"
+                @click="$emit('Reject', transaction.id)"
                 class="text-red hover:opacity-80 cursor-pointer"
               >
                 Reject
               </span>
-            </div>
+            </div> -->
           </td>
         </tr>
 
@@ -76,8 +85,8 @@
             class="px-6 py-4 text-black text-center font-semibold"
           >
             <app-empty-state
-              title="No withdrawals"
-              description="No withdrawals available "
+              title="No transactions"
+              description="No transactions available "
             />
           </td>
         </tr>
@@ -90,21 +99,14 @@
   import { defineComponent } from "vue"
   import AppEmptyState from "../AppEmptyState"
   import type { PropType } from "vue"
-
-  interface Withdrawal {
-    id: number
-    name: string
-    avatar: string
-    amount: string
-    status: "active" | "suspended"
-  }
+  import { Transaction } from "@greep/logic/src/gql/graphql"
 
   export default defineComponent({
     name: "AppwithdrawalTable",
     components: { AppEmptyState },
     props: {
-      withdrawals: {
-        type: Array as PropType<Withdrawal[]>,
+      transactions: {
+        type: Array as PropType<Transaction[]>,
         required: true,
       },
       customClass: {

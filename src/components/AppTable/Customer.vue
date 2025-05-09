@@ -29,13 +29,17 @@
       <tbody class="bg-white divide-y divide-gray-200">
         <tr
           v-if="customers && customers.length"
-          v-for="merchant in customers"
-          :key="merchant.id"
+          v-for="(merchant, index) in customers"
+          :key="merchant.auth_user_id"
+          :class="
+            index % 2 !== 0 ? 'bg-light-gray-one bg-opacity-[25%]' : 'bg-white'
+          "
         >
           <td class="px-6 py-4 whitespace-nowrap">
             <div class="flex items-center space-x-3">
               <app-avatar
                 :src="merchant?.user?.profile?.profile_picture || ''"
+                :name="`${merchant?.user?.first_name} ${merchant?.user?.last_name}`"
                 class="w-10 h-10 rounded-full"
                 alt="Admin avatar"
               />
@@ -61,7 +65,7 @@
           </td>
 
           <td class="px-6 py-4 whitespace-nowrap text-right text-sm">
-            <div class="flex justify-end space-x-3">
+            <!-- <div class="flex justify-end space-x-3">
               <span
                 role="button"
                 v-if="merchant.status === 'active'"
@@ -85,7 +89,7 @@
               >
                 Delete
               </span>
-            </div>
+            </div> -->
           </td>
         </tr>
 
@@ -110,6 +114,7 @@
   import AppAvatar from "../AppAvatar"
   import AppEmptyState from "../AppEmptyState"
   import type { PropType } from "vue"
+  import { Profile } from "@greep/logic/src/gql/graphql"
 
   interface Customer {
     id: number
@@ -125,7 +130,7 @@
     components: { AppAvatar, AppEmptyState },
     props: {
       customers: {
-        type: Array as PropType<Customer[]>,
+        type: Array as PropType<Profile[]>,
         required: true,
       },
       customClass: {

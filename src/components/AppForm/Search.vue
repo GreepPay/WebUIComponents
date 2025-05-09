@@ -8,6 +8,7 @@
       <input
         v-model="searchQuery"
         :placeholder="placeholder"
+        @keyup.enter="$emit('search', searchQuery)"
         class="w-full text-very-light-gray text-sm py-2 border-none outline-none"
       />
 
@@ -48,6 +49,7 @@
 
       const clearSearch = () => {
         searchQuery.value = ""
+        emit("clear-search")
       }
 
       return { searchQuery, clearSearch }

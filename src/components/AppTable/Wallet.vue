@@ -31,12 +31,16 @@
       <tbody class="bg-white divide-y divide-gray-200">
         <tr
           v-if="wallets && wallets.length"
-          v-for="wallet in wallets"
+          v-for="(wallet, index) in wallets"
           :key="wallet.id"
+          :class="
+            index % 2 !== 0 ? 'bg-light-gray-one bg-opacity-[25%]' : 'bg-white'
+          "
         >
           <td class="px-6 py-4 whitespace-nowrap">
             <div class="flex items-center space-x-2">
               <app-avatar
+                :name="`${wallet?.user?.first_name} ${wallet?.user?.last_name}`"
                 :src="wallet?.user?.profile?.profile_picture || ''"
                 class="w-10 h-10 rounded-full"
                 alt="Wallet avatar"
@@ -59,21 +63,21 @@
             <div class="flex justify-end space-x-3">
               <span
                 role="button"
-                @click="$emit('see-history', wallet.id)"
+                @click="$emit('see-history', wallet)"
                 class="text-green hover:opacity-80 cursor-pointer"
               >
                 See History
               </span>
 
-              <p class="inline-block w-[1px] h-5 bg-light-gray-two"></p>
+              <!-- <p class="inline-block w-[1px] h-5 bg-light-gray-two"></p> -->
 
-              <span
+              <!-- <span
                 role="button"
                 @click="$emit('freeze', wallet.id)"
                 class="text-red hover:opacity-80 cursor-pointer"
               >
                 Freeze Account
-              </span>
+              </span> -->
             </div>
           </td>
         </tr>
@@ -99,23 +103,14 @@
   import AppAvatar from "../AppAvatar"
   import AppEmptyState from "../AppEmptyState"
   import type { PropType } from "vue"
-
-  type UserType = "Merchant" | "Customer"
-
-  interface WalletUser {
-    id: string
-    name: string
-    type: UserType
-    avatar?: string
-    balance: number
-  }
+  import { Wallet } from "@greep/logic/src/gql/graphql"
 
   export default defineComponent({
     name: "AppWalletTable",
     components: { AppAvatar, AppEmptyState },
     props: {
       wallets: {
-        type: Array as PropType<WalletUser[]>,
+        type: Array as PropType<Wallet[]>,
         required: true,
       },
       customClass: {

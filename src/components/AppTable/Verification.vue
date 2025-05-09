@@ -31,12 +31,16 @@
       <tbody class="bg-white divide-y divide-gray-200">
         <tr
           v-if="verifications && verifications.length"
-          v-for="verificiation in verifications"
+          v-for="(verificiation, index) in verifications"
           :key="verificiation.id"
+          :class="
+            index % 2 !== 0 ? 'bg-light-gray-one bg-opacity-[25%]' : 'bg-white'
+          "
         >
           <td class="px-6 py-4 whitespace-nowrap">
             <div class="flex items-center space-x-3">
               <app-avatar
+                :name="`${verificiation?.user?.first_name} ${verificiation?.user?.last_name}`"
                 :src="verificiation?.user?.profile?.profile_picture || ''"
                 class="w-10 h-10 rounded-full"
                 alt="Admin avatar"
@@ -51,12 +55,18 @@
 
           <td class="px-6 py-4 whitespace-nowrap">
             <div class="flex items-center space-x-3">
-              <div class="flex items-center space-x-2 cusor-pointer">
+              <div
+                class="flex items-center space-x-2 cusor-pointer"
+                @click="showPDF = true"
+              >
                 <app-icon name="document-text" />
                 <span class="text-blue">Passport</span>
               </div>
 
-              <div class="flex items-center space-x-2 cusor-pointer">
+              <div
+                class="flex items-center space-x-2 cusor-pointer"
+                @click="showPDF = true"
+              >
                 <app-icon name="document-text" custom-class="h-5" />
                 <span class="text-blue">Business</span>
               </div>
@@ -67,19 +77,19 @@
             <div class="flex justify-end space-x-3">
               <span
                 role="button"
-                @click="$emit('approve', verificiation.id)"
+                @click="$emit('approve', verificiation)"
                 class="text-green hover:opacity-80 cursor-pointer"
               >
                 Approve
               </span>
 
-              <span
+              <!-- <span
                 role="button"
                 @click="$emit('Reject', verificiation.id)"
                 class="text-red hover:opacity-80 cursor-pointer"
               >
                 Reject
-              </span>
+              </span> -->
             </div>
           </td>
         </tr>
@@ -97,30 +107,36 @@
         </tr>
       </tbody>
     </table>
+
+    <!-- PDF Viewer -->
+    <app-modal
+      :isOpen="showPDF"
+      title="File Details"
+      :showTitle="true"
+      :showFooter="false"
+      @close="showPDF = false"
+    >
+      <AppPDFViewer />
+    </app-modal>
   </div>
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed } from "vue"
+  import { defineComponent, ref } from "vue"
   import type { PropType } from "vue"
   import AppAvatar from "../AppAvatar"
   import AppIcon from "../AppIcon"
   import AppEmptyState from "../AppEmptyState"
-
-  interface Withdrawal {
-    id: number
-    name: string
-    avatar: string
-    amount: string
-    status: "active" | "suspended"
-  }
+  import AppPDFViewer from "../AppPDFViewer"
+  import { Verification } from "@greep/logic/src/gql/graphql"
+  import AppModal from "../AppModal"
 
   export default defineComponent({
     name: "AppVerificationTable",
-    components: { AppIcon, AppAvatar, AppEmptyState },
+    components: { AppIcon, AppAvatar, AppEmptyState, AppPDFViewer, AppModal },
     props: {
       verifications: {
-        type: Array as PropType<Withdrawal[]>,
+        type: Array as PropType<Verification[]>,
         required: true,
       },
       customClass: {
@@ -134,7 +150,9 @@
     },
     emits: ["approve", "Reject"],
     setup() {
-      return {}
+      const showPDF = ref(false)
+
+      return { showPDF }
     },
   })
 </script>
