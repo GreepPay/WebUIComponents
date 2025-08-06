@@ -14,6 +14,7 @@ import AppDivider from "./AppDivider"
 import AppLoading from "./AppLoading"
 import AppLoader from "./AppLoader"
 import AppImageCardContainer from "./AppImageCardContainer"
+import AppCurrencySwitch from "./AppCurrencySwitch"
 import { AppStatCard } from "./AppStat"
 import { AppHeaderText, AppNormalText } from "./AppTypography"
 import {
@@ -71,4 +72,5 @@ export {
   AppImageCardContainer,
   AppLoader,
   AppLoading,
+  AppCurrencySwitch,
 }
