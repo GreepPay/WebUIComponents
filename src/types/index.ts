@@ -55,3 +55,24 @@ export interface FormRule {
   value: any | undefined
   errorMessage: string | undefined
 }
+
+export interface Currency {
+  code: string
+  name: string
+  symbol: string
+  loading?: boolean
+  country_code?: string
+  icon_extension?: string
+  payin_fees?: {
+    type: "percentage" | "fixed"
+    value: number
+    min: number
+    method: "bank_transfer" | "momo"
+  }[]
+  payout_fees?: {
+    type: "percentage" | "fixed"
+    value: number
+    min: number
+    method: "bank_transfer" | "momo"
+  }[]
+}

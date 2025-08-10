@@ -1,46 +1,33 @@
 <template>
-  <div
-    id=""
-    :class="`${customClass} blend-in`"
-    style="
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-    "
-    :style="` ${
-      imageUrl ? `background-image:url(${imageUrl});` : ''
-    }  ${customStyle}`"
-  >
+  <div id="" :class="`relative ${customClass} blend-in`">
+    <img
+      class="absolute top-0 left-0 w-full"
+      :src="imageUrl"
+      style="
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      "
+      :style="`background-image:url(${imageUrl});`"
+    />
+
     <slot />
   </div>
 </template>
 <script lang="ts">
   import { defineComponent, ref, onMounted, watch } from "vue"
 
-  /**
-   * Component that loads and displays an image with a fade-in effect.
-   */
   export default defineComponent({
     name: "AppImageLoader",
     props: {
-      /**
-       * URL of the image to load.
-       * @requires
-       */
       photoUrl: {
         type: String,
         required: true,
       },
-      /**
-       * Custom CSS classes to apply to the container `<div>` element.
-       */
       customClass: {
         type: String,
         default: "",
       },
-      /**
-       * Custom inline styles to apply to the container `<div>` element.
-       */
       customStyle: {
         type: String,
         default: "",

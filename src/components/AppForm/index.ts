@@ -4,6 +4,7 @@ import AppTextField from "./textField.vue"
 import AppFormWrapper from "./wrapper.vue"
 import AppFileAttachment from "./fileAttachment.vue"
 import AppDropdown from "./Dropdown.vue"
+import AppCalendar from "./calendar.vue"
 
 export {
   AppSelect,
@@ -12,4 +13,5 @@ export {
   AppFileAttachment,
   AppSearch,
   AppDropdown,
+  AppCalendar,
 }

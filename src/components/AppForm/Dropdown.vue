@@ -1,5 +1,5 @@
 <template>
-  <div class="relative px-4 h-fit">
+  <div :class="`relative px-4 h-fit ${customClass}`">
     <span
       role="button"
       class="cursor-pointer bg-white select-none py-1.5 pr-2 pl-3 flex items-center space-x-2 sm:text-sm/6'"
@@ -56,6 +56,10 @@
         default: "",
       },
       placeholder: {
+        type: String,
+        default: "Select an option",
+      },
+      customClass: {
         type: String,
         default: "Select an option",
       },

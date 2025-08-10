@@ -1,22 +1,55 @@
 <template>
   <div
-    class="w-full flex flex-col px-4 py-3 mb-2 bg-white block"
+    class="w-full flex flex-col bg-white border rounded-lg px-4"
     :class="customClass"
   >
-    <template v-if="hasItems">
-      <div class="flex items-center gap-4 overflow-x-auto h-fit scrollbar-hide">
-        <slot />
+    <div
+      class="w-full flex justify-between items-center px-4 py-4"
+      :class="headerClass"
+    >
+      <app-header-text class="!font-semibold !text-black !text-lg">
+        {{ title }}
+      </app-header-text>
+
+      <slot name="header-action">
+        <app-normal-text
+          class="text-primary cursor-pointer"
+          role="button"
+          @click="emit('view-more')"
+        >
+          {{ actionText }}
+        </app-normal-text>
+      </slot>
+    </div>
+
+    <div :class="subHeaderClass">
+      <slot name="sub-header" />
+    </div>
+
+    <div>
+      <template v-if="hasItems">
+        <div
+          class="flex flex-col gap-4 py-4 pt-1 scrollbar-hide max-h-80 overflow-y-auto"
+          :class="contentClass"
+        >
+          <slot />
+        </div>
+      </template>
+
+      <div v-else class="pb-4 pt-2">
+        <app-empty-state
+          :title="emptyTitle"
+          :description="emptyDescription"
+          :useIcon="useEmptyStateIcon"
+        />
       </div>
-    </template>
-    <div v-else class="py-4 !pt-2">
-      <app-empty-state :title="emptyTitle" :description="emptyDescription" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
   import { defineComponent, computed } from "vue"
-  import { AppNormalText } from "../AppTypography"
+  import { AppNormalText, AppHeaderText } from "../AppTypography"
   import AppEmptyState from "../AppEmptyState"
 
   export default defineComponent({
@@ -24,8 +57,17 @@
     components: {
       AppNormalText,
       AppEmptyState,
+      AppHeaderText,
     },
     props: {
+      title: {
+        type: String,
+        default: "Title",
+      },
+      actionText: {
+        type: String,
+        default: "See all",
+      },
       items: {
         type: Array as () => any[],
         default: () => [],
@@ -36,16 +78,32 @@
       },
       emptyDescription: {
         type: String,
-        default: "Search for data",
+        default: "",
+      },
+      useEmptyStateIcon: {
+        type: Boolean,
+        default: false,
       },
       customClass: {
         type: String,
         default: "",
       },
+      headerClass: {
+        type: String,
+        default: "",
+      },
+      subHeaderClass: {
+        type: String,
+        default: "",
+      },
+      contentClass: {
+        type: String,
+        default: "",
+      },
     },
+    emits: ["view-more"],
     setup(props, { emit }) {
       const hasItems = computed(() => props.items.length > 0)
-
       return { hasItems, emit }
     },
   })
