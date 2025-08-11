@@ -10,7 +10,6 @@
       "
       :style="`background-image:url(${imageUrl});`"
     />
-
     <slot />
   </div>
 </template>

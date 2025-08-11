@@ -25,6 +25,7 @@ export default {
         red: "#FA1919",
         purple: "#8E3BE0",
         orange: "#FFAA1F",
+        'hot-orange': "#FF7D00"
       },
     },
     screens: {

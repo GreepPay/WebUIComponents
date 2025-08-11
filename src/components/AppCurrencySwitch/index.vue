@@ -6,7 +6,7 @@
       aria-haspopup="listbox"
       aria-expanded="true"
       aria-labelledby="listbox-label"
-      class="w-32 !border-[2px] rounded-full cursor-pointer select-none py-2 px-3 flex items-center justify-between sm:text-sm/6"
+      class="w-32 !border-[2px] bg-white rounded-full cursor-pointer select-none py-2 px-3 flex items-center justify-between sm:text-sm/6"
       :class="customClass"
     >
       <app-loading :loading="loading" />
@@ -42,11 +42,6 @@
         :key="index"
         @click="selectCurrency(currency)"
         class="px-2 py-2 cursor-pointer hover:bg-gray-50 text-sm"
-        :class="
-          selectedCurrency?.code === currency.code
-            ? '!font-semibold !text-black'
-            : 'text-light-black'
-        "
       >
         <div class="flex items-center">
           <template v-if="showCurrencyImage">
@@ -58,7 +53,13 @@
             />
           </template>
 
-          <app-normal-text class="!font-medium">
+          <app-normal-text
+            :class="
+              selectedCurrency?.code === currency.code
+                ? '!font-bold !text-black'
+                : '!font-medium text-light-black'
+            "
+          >
             {{ `${currency.symbol} ${currency.code}` }}
           </app-normal-text>
         </div>

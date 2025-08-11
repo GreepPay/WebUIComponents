@@ -7,9 +7,11 @@
       class="w-full flex justify-between items-center px-4 py-4"
       :class="headerClass"
     >
+      <slot name="header-title">
       <app-header-text class="!font-semibold !text-black !text-lg">
         {{ title }}
       </app-header-text>
+      </slot>
 
       <slot name="header-action">
         <app-normal-text
