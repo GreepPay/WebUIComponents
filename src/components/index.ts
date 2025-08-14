@@ -16,6 +16,8 @@ import AppTransaction from "./AppTransaction"
 import AppLoader from "./AppLoader"
 import AppImageCardContainer from "./AppImageCardContainer"
 import AppCurrencySwitch from "./AppCurrencySwitch"
+import AppSteps from "./AppSteps"
+import AppCheckbox from "./AppCheckbox"
 import { AppStatCard } from "./AppStat"
 import { AppHeaderText, AppNormalText, AppLinkText } from "./AppTypography"
 import { AppTicketCard } from "./AppCard"
@@ -35,6 +37,8 @@ import {
   AppSearch,
   AppDropdown,
   AppCalendar,
+  AppOtpInput,
+  AppKeyboard,
 } from "./AppForm"
 import {
   AppMerchantTable,
@@ -48,8 +52,10 @@ import {
   AppTransactionTable,
   AppAdminTable,
 } from "./AppTable"
+import AppQrCode from "./AppQrCode"
 
 export {
+  AppQrCode,
   AppButton,
   AppHeaderText,
   AppNormalText,
@@ -96,4 +102,8 @@ export {
   AppTicketBestSellerList,
   AppCalendar,
   AppTicketCard,
+  AppSteps,
+  AppCheckbox,
+  AppOtpInput,
+  AppKeyboard,
 }

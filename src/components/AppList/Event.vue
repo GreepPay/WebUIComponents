@@ -10,69 +10,54 @@
       <div class="size-[72px] !rounded-lg">
         <app-image-loader
           class="size-full !rounded-lg relative bg-black"
-          photo-url="images/auth-image.jpg"
-        >
-        </app-image-loader>
+          :photo-url="data.image_url"
+        />
       </div>
 
-      <div class="flex-1 flex flex-col space-y-[1px] !line-clamp-1">
+      <div class="flex-1 flex flex-col space-y-[1px] !h-full !w-full">
         <app-normal-text
           class="!text-left !line-clamp-1 block !text-black !font-semibold !text-base"
         >
-          {{ data.title }}
+          {{ data.name }}
         </app-normal-text>
 
         <app-normal-text
-          v-for="(text, index) in sub_titles"
-          :key="index"
-          customClass="leading-6 !text-xxs !text-black"
+          customClass="leading-6 !text-xxs !text-black   !w-full"
         >
-          {{ text }}
-          <span v-if="index < sub_titles.length - 1" class="!text-black px-2">
-            ●
+          <span v-for="(text, index) in data.sub_titles" :key="index">
+            {{ text }}
+            <span
+              v-if="index < data.sub_titles.length - 1"
+              class="!text-black px-2"
+            >
+              ●
+            </span>
           </span>
         </app-normal-text>
 
-        <app-normal-text
-          customClass="leading-6 !text-xxs !text-black truncate pr-4"
-        >
-          Kyrenia, Cyprus
+        <app-normal-text customClass="!text-xxs !text-black">
+          {{ data.location }}
         </app-normal-text>
-
-        <span class="flex flex-row space-x-1 items-center">
-          <app-normal-text class="!text-[12px] capitalize text-gray-500">
-            {{ data.type }}
-          </app-normal-text>
-
-          <span class="text-very-light-gray">• </span>
-
-          <app-normal-text class="!text-[12px] text-gray-500">
-            {{ data.date }}
-          </app-normal-text>
-        </span>
       </div>
     </div>
 
     <app-normal-text
       class="!text-center !text-sm !whitespace-nowrap"
-      :class="
-        data.transactionType == 'credit' ? '!text-green' : '!text-hot-orange'
-      "
+      :class="data.status == 'active' ? '!text-green' : '!text-hot-orange'"
     >
-      {{ data.transactionType == "credit" ? "Ongoing" : "Upcoming" }}
+      {{ data.status == "active" ? "Ongoing" : "Upcoming" }}
     </app-normal-text>
 
     <app-normal-text class="!text-center !text-sm !whitespace-nowrap">
-      From ₺400
+      {{ data.minAmount }}
     </app-normal-text>
     <app-normal-text class="!text-center !text-sm !whitespace-nowrap">
-      From ₺400
+      {{ data.no_of_tickets_sold }}
     </app-normal-text>
-
     <app-normal-text
       class="!text-right !text-base !font-semibold !whitespace-nowrap"
     >
-      ₺98,400.00
+      {{ data.revenue }}
     </app-normal-text>
   </div>
 </template>
@@ -85,13 +70,6 @@
   import AppImageLoader from "../AppImageLoader"
   import AppAvatar from "../AppAvatar"
 
-  enum TransactionType {
-    Sent = "sent",
-    Received = "received",
-    Added = "added",
-    Redeemed = "redeemed",
-  }
-
   export default defineComponent({
     components: {
       AppIcon,
@@ -102,16 +80,7 @@
     name: "AppEvent",
     props: {
       data: {
-        type: Object as () => {
-          id: string | number
-          title: string
-          amount: number
-          type: TransactionType
-          transactionType: "credit" | "debit"
-          date: string
-          currencySymbol?: string
-          subAmount?: string
-        },
+        type: Object as () => any,
         required: true,
       },
 

@@ -7,26 +7,26 @@
     ]"
   >
     <div class="col-span-6 flex items-center space-x-2 flex-1">
-      <div class="h-12 w-12 flex justify-center items-center rounded-full">
-        <app-avatar custom-class="rounded-full h-full w-full" />
+      <div class="h-12 w-12 flex justify-center items-center !rounded-full">
+        <app-avatar :src="data?.photo_url" customClass="h-full w-full  " />
       </div>
 
       <app-normal-text
         class="!text-right !line-clamp-1 !text-black !font-medium !text-sm"
       >
-        Toyinn Script
+        {{ data?.name }}
       </app-normal-text>
     </div>
 
     <app-normal-text
       class="!text-center !text-sm font-semibold !whitespace-nowrap"
     >
-      regular
+      {{ data?.ticket_type }}
     </app-normal-text>
     <app-normal-text
-      class="!text-right !text-sm font-semibold !whitespace-nowrap"
+      class="!text-right !text-sm font-semibold !whitespace-nowrap pr-3"
     >
-      yes
+      {{ data?.checked_in ? "yes" : "no" }}
     </app-normal-text>
   </div>
 </template>
@@ -39,7 +39,6 @@
   import AppImageLoader from "../AppImageLoader"
   import AppAvatar from "../AppAvatar"
 
-   
   export default defineComponent({
     components: {
       AppIcon,
@@ -50,15 +49,7 @@
     name: "AppEvent",
     props: {
       data: {
-        type: Object as () => {
-          id: string | number
-          title: string
-          amount: number 
-          transactionType: "credit" | "debit"
-          date: string
-          currencySymbol?: string
-          subAmount?: string
-        },
+        type: Object as () => any,
         required: true,
       },
 

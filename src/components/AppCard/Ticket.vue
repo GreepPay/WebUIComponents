@@ -3,18 +3,17 @@
     <div class="!w-3/4 bg-[#D9D9D9] flex flex-col justify-between p-4">
       <div class="w-full flex flex-col">
         <app-header-text customClass="!text-black !text-base">
-          Make It! Pottery Class
+          {{ ticket.ticket_name }}
         </app-header-text>
         <app-normal-text customClass="!text-gray-two !font-medium !text-sm">
-          Sunday, July 27
+          {{ ticket.date }}
         </app-normal-text>
         <app-normal-text customClass="!text-gray-two !font-medium !text-sm">
-          10AM - 4PM
+          {{ ticket.time }}
         </app-normal-text>
       </div>
-
       <app-header-text customClass="!text-black !text-base">
-        ₺450
+        {{ ticket.mappedPrice }}
       </app-header-text>
     </div>
 
@@ -24,7 +23,7 @@
       :style="color ? `background: ${color};` : `background: #009DE3;`"
     >
       <app-header-text customClass="!text-white !text-xl !vertical-rl">
-        Regular
+        {{ ticket.ticket_name }}
       </app-header-text>
     </div>
 

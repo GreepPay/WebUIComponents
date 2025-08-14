@@ -11,7 +11,7 @@
       <app-header-text class="!font-semibold !text-black !text-lg">
         {{ title }}
       </app-header-text>
-      </slot>
+      </slot> 
 
       <slot name="header-action">
         <app-normal-text

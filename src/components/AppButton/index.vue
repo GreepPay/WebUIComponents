@@ -1,7 +1,7 @@
 <template>
   <button
     :class="[
-      'relative flex items-center justify-center space-x-4 gap-2 px-4 py-2 transition-all duration-300 ease-in-out rounded-3xl',
+      'relative flex items-center justify-center font-medium space-x-4 gap-2 px-4 py-2 transition-all duration-300 ease-in-out rounded-3xl',
       baseStyle,
       hoverStyle,
       disabled ? 'opacity-40 cursor-not-allowed' : 'cursor-pointer',
@@ -19,8 +19,6 @@
     <AppIcon v-if="!loading && icon" :name="icon" class="h-5 w-5" />
 
     <slot>{{ text }}</slot>
-    <!-- <span v-if="!loading">
-    </span> -->
   </button>
 </template>
 
@@ -73,9 +71,9 @@
       const baseColors = {
         primary: "black",
         danger: "red-600",
-        success: "green-600",
-        secondary: "blue-600",
-        gray: "gray-600",
+        success: "green",
+        secondary: "blue",
+        gray: "light-gray",
       }
 
       const textColors = {
@@ -91,17 +89,17 @@
         const text = textColors[props.variant]
 
         if (props.outlined) {
-          return `bg-transparent border border-${color} text-${color}`
+          return `bg-transparent  border  border-${color}  text-${color}`
         } else {
-          return `bg-${color} text-${text} border border-${color}`
+          return `bg-${color}  text-${text} border border-${color}`
         }
       })
 
       const hoverStyle = computed(() => {
         const color = baseColors[props.variant]
         return props.outlined
-          ? `hover:bg-${color}/10`
-          : `hover:bg-${color.replace("-600", "-700")}`
+          ? `!hover:bg-${color}/10`
+          : `!hover:bg-${color.replace("-600", "-700")}`
       })
 
       return {

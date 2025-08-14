@@ -1,5 +1,5 @@
 <template>
-  <div class="relative h-fit">
+  <div class="relative h-fit w-fit">
     <div
       role="button"
       @click="isOpen = !isOpen"

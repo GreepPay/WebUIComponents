@@ -1,9 +1,14 @@
 <template>
-  <div class="flex w-full flex-col relative space-y-[2px]">
-    <div
+  <div
+    class="flex w-full flex-col relative space-y-[2px]"
+    @click.stop="
+      action ? action() : fieldType == 'date' ? (ShowCalendarModal = true) : ''
+    "
+  >
+    <!-- <div
       v-if="useFloatingLabel && content.length > 0"
       class="h-[10px] w-full"
-    ></div>
+    ></div> -->
     <div
       class="w-full flex flex-row items-center"
       :tabindex="tabIndex"
@@ -19,14 +24,13 @@
         v-if="label"
         class="absolute left-4 px-1 text-base top-[19px] bg-white transition-all duration-300"
         :class="{
-          '!top-[-14px] text-very-light-gray font-medium':
+          '!top-[-14px] text-[#999999] font-medium':
             isFocused || placeholder || content,
           'text-red': errorMessage,
           'text-green': successMessage && !errorMessage,
         }"
+        >{{ label }}</label
       >
-        {{ label }}
-      </label>
 
       <div
         :class="`flew-grow w-full space-x-1 flex-row flex items-center justify-between px-4 py-4 bg-white rounded-[10px] border-[1.5px] border-[#E0E2E4] relative
@@ -50,12 +54,25 @@
         <!-- Floating label -->
         <template v-if="useFloatingLabel && content.length > 0">
           <app-normal-text
-            class="absolute left-4 top-[-24%] px-1 py-[2px] bg-white !text-very-light-gray z-10"
+            :class="`absolute left-4 ${
+              isTextarea ? 'top-[-10%]' : 'top-[-24%]'
+            } px-1 py-[2px] bg-white !text-veryLightGray z-10`"
           >
             {{ placeholder }}
           </app-normal-text>
         </template>
+
+        <template v-if="usePermanentFloatingLabel">
+          <app-normal-text
+            :class="`absolute left-4 ${
+              isTextarea ? 'top-[-10%]' : '!top-[-18%]'
+            } px-1 py-[2px] bg-white !text-[#616161] !font-[500] z-10`"
+          >
+            {{ name }}
+          </app-normal-text>
+        </template>
         <input
+          v-if="!isTextarea"
           v-model="content"
           :placeholder="placeholder"
           @focus="isFocused = true"
@@ -63,6 +80,7 @@
           @keypress="isNumber"
           :disabled="fieldType == 'date' ? true : disabled"
           :type="fieldType == 'date' ? 'text' : fieldType"
+          :ref="(el) => (inputRef = el as HTMLInputElement)"
           :class="` text-black grow bg-transparent placeholder-gray-400 focus input w-full focus:outline-none ${inputStyle} `"
           @click.stop="
             action
@@ -72,13 +90,27 @@
               : ''
           "
         />
+        <textarea
+          v-if="isTextarea"
+          v-model="content"
+          :placeholder="placeholder"
+          @focus="isFocused = true"
+          @blur=";(isFocused = false), checkValidation()"
+          @keypress="isNumber"
+          :disabled="disabled"
+          :type="fieldType"
+          :ref="(el) => (textAreaRef = el as HTMLTextAreaElement)"
+          :class="` text-black grow bg-transparent placeholder-gray-400 focus input w-full focus:outline-hidden ${inputStyle} `"
+          :rows="textAreaRow"
+        ></textarea>
+
         <!--
           @slot inner-suffix
           Use this slot to add content after the input field.
         -->
         <slot name="inner-suffix" />
         <app-icon
-          :name="`${fieldType == 'password' ? 'eye' : 'eye-slash'}`"
+          :name="`${fieldType == 'password' ? 'show' : 'hide'}`"
           :customClass="`${fieldType == 'password' ? 'h-[12px]' : 'h-[14px]'}`"
           v-if="type == 'password'"
           @click.stop="
@@ -95,24 +127,25 @@
       <slot name="outer-suffix" />
     </div>
     <div
-      v-if="showValidationMessage && (errorMessage || successMessage)"
-      class="w-full flex flex-row pt-1 justify-start items-center gap-1"
+      v-if="!validationStatus || maxCharacter > 0"
+      class="w-full flex flex-row pt-1 justify-between items-center"
     >
-      <!-- <img
-        v-if="errorMessage"
-        src="@/assets/svg/All/linear/info-circle.svg"
-        class="w-4 h-4"
-      />
-      <img
-        v-if="successMessage && !errorMessage"
-        src="@/assets/svg/All/linear/tick-circle.svg"
-        class="w-4 h-4"
-      /> -->
-      <app-normal-text
-        :customClass="'text-left'"
-        :color="errorMessage ? 'text-red' : 'text-green'"
+      <span
+        :customClass="' text-left'"
+        :class="`!text-red dark:!text-red ${
+          !validationStatus ? '' : 'invisible'
+        }`"
       >
-        {{ errorMessage || successMessage }}
+        {{ errorMessage }}
+      </span>
+
+      <app-normal-text
+        v-if="maxCharacter > 0"
+        custom-class="!text-[12px] text-gray-600"
+      >
+        {{ Logic.Common.convertToMoney(content.length, false, "") }}/{{
+          Logic.Common.convertToMoney(maxCharacter, false, "")
+        }}
       </app-normal-text>
     </div>
 
@@ -137,7 +170,7 @@
           >
             <div
               @click.stop="true"
-              class="rounded-t-2xl mdlg:!rounded-[10px] md:!rounded-[10px] flex flex-col space-y-2 !bg-white dark:border-[1px] dark:border-gray-100 w-full absolute mdlg:!relative md:!relative overflow-y-auto h-auto max-h-auto bottom-0 left-0 pb-3 px-3 mdlg:!pb-4 md:!pb-4 lg:!text-sm mdlg:!text-[12px] text-xs"
+              class="rounded-t-2xl mdlg:!rounded-[10px] md:!rounded-[10px] flex flex-col !bg-white dark:border-[1px] dark:border-gray-100 w-full absolute mdlg:!relative md:!relative overflow-y-auto h-auto max-h-auto bottom-0 left-0 pb-3 px-3 mdlg:!pb-4 md:!pb-4 lg:!text-sm mdlg:!text-[12px] text-xs"
             >
               <div
                 class="flex items-center justify-center sticky top-0 !bg-white w-full pt-3"
@@ -148,10 +181,10 @@
               </div>
 
               <div
-                class="flex items-center justify-center sticky top-0 flex-col bg-white w-full"
+                class="flex items-center justify-center sticky top-0 flex-col bg-white w-full pt-2"
               >
                 <app-normal-text
-                  custom-class="!text-xs font-normal w-full text-left py-2"
+                  custom-class="!text-xs font-semibold w-full text-left py-2"
                 >
                   {{ placeholder }}
                 </app-normal-text>
@@ -303,13 +336,13 @@
         default: false,
         required: false,
       },
-
       /**
-       * Determines whether the input is floating label.
+       * Determines whether the input is permanent floating label.
        */
-      showValidationMessage: {
+      usePermanentFloatingLabel: {
         type: Boolean,
-        default: true,
+        default: false,
+        required: false,
       },
       /**
        * Determines whether to prevent back date
@@ -323,7 +356,7 @@
        */
       miminumDate: {
         type: String,
-        default: "",
+        default: new Date().toString(),
       },
 
       /**
@@ -340,6 +373,34 @@
       inputStyle: {
         type: String,
         default: "",
+      },
+      /**
+       * Determines whether the input is a textarea
+       */
+      isTextarea: {
+        type: Boolean,
+        default: false,
+      },
+      /**
+       * Maximum number of characters allowed in the input
+       */
+      maxCharacter: {
+        type: Number,
+        default: 0,
+      },
+      /**
+       * Determines the number of rows for the textarea
+       */
+      textAreaRow: {
+        type: String,
+        default: "5",
+      },
+      /**
+       * Determines whether to watch for updates to the input value
+       */
+      watchUpdates: {
+        type: Boolean,
+        default: false,
       },
     },
     name: "AppTextField",
@@ -687,6 +748,22 @@
 
       const isFocused = ref(false)
 
+      const inputRef = ref<HTMLInputElement | null>(null)
+      const textAreaRef = ref<HTMLTextAreaElement | null>(null)
+
+      watch(
+        () => isFocused.value,
+        (newValue) => {
+          if (newValue) {
+            if (!props.isTextarea && inputRef.value) {
+              inputRef.value.focus()
+            } else if (props.isTextarea && textAreaRef.value) {
+              textAreaRef.value.focus()
+            }
+          }
+        }
+      )
+
       const tabIndex = Math.random()
 
       return {
@@ -704,11 +781,18 @@
         checkValidation,
         isNumber,
         showError,
+        inputRef,
+        textAreaRef,
       }
     },
   })
 </script>
 <style scoped>
+  input,
+  textarea {
+    outline: none !important;
+  }
+
   input:disabled::placeholder,
   textarea:disabled::placeholder {
     -webkit-text-fill-color: var(--placeholder-color);
