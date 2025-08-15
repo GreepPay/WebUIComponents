@@ -4,7 +4,8 @@
       'relative flex items-center justify-center font-medium space-x-4 gap-2 px-4 py-2 transition-all duration-300 ease-in-out rounded-3xl',
       baseStyle,
       hoverStyle,
-      disabled ? 'opacity-40 cursor-not-allowed' : 'cursor-pointer',
+      disabled && 'opacity-40 cursor-not-allowed',
+      loading && 'opacity-80 !cursor-not-allowed',
       customClass,
     ]"
     :disabled="disabled || loading"

@@ -12,45 +12,46 @@
   </h3>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
-/**
- * Header Text Component
- *
- * This component renders a heading (h3) with customizable size, color, and additional CSS classes.
- *
- * @slot Default slot for header text content.
- */
-export default defineComponent({
-  name: "AppHeaderText",
-  props: {
-    /**
-     * Defines the size of the header text.
-     *
-     * @values lg, xl, base, xs
-     * @default lg
-     */
-    size: {
-      type: String,
-      default: "lg",
-      validator: (value: string) => ["lg", "xl", "base", "xs"].includes(value),
+  import { defineComponent } from "vue"
+  /**
+   * Header Text Component
+   *
+   * This component renders a heading (h3) with customizable size, color, and additional CSS classes.
+   *
+   * @slot Default slot for header text content.
+   */
+  export default defineComponent({
+    name: "AppHeaderText",
+    props: {
+      /**
+       * Defines the size of the header text.
+       *
+       * @values lg, xl, base, xs
+       * @default lg
+       */
+      size: {
+        type: String,
+        default: "lg",
+        validator: (value: string) =>
+          ["lg", "xl", "base", "xs"].includes(value),
+      },
+      /**
+       * Defines the color of the header text.
+       * Accepts any valid tailwind color class e.g. `text-red-500`.
+       * @default text-black
+       */
+      color: {
+        type: String,
+        default: "text-black",
+      },
+      /**
+       *  Allows to add custom classes to the header text.
+       *  @default ""
+       */
+      customClass: {
+        type: String,
+        default: "",
+      },
     },
-    /**
-     * Defines the color of the header text.
-     * Accepts any valid tailwind color class e.g. `text-red-500`.
-     * @default text-black
-     */
-    color: {
-      type: String,
-      default: "text-black",
-    },
-    /**
-     *  Allows to add custom classes to the header text.
-     *  @default ""
-     */
-    customClass: {
-      type: String,
-      default: "",
-    },
-  },
-});
+  })
 </script>

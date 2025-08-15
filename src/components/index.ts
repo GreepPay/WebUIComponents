@@ -39,6 +39,7 @@ import {
   AppCalendar,
   AppOtpInput,
   AppKeyboard,
+  AppFileAttachment,
 } from "./AppForm"
 import {
   AppMerchantTable,
@@ -106,4 +107,5 @@ export {
   AppCheckbox,
   AppOtpInput,
   AppKeyboard,
+  AppFileAttachment,
 }
