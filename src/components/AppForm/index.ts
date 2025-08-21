@@ -5,8 +5,9 @@ import AppFormWrapper from "./wrapper.vue"
 import AppFileAttachment from "./fileAttachment.vue"
 import AppDropdown from "./Dropdown.vue"
 import AppCalendar from "./calendar.vue"
-import AppOtpInput from "./otpInput.vue";
-import AppKeyboard from "./keyboard.vue";
+import AppOtpInput from "./otpInput.vue"
+import AppKeyboard from "./keyboard.vue"
+import AppContentEditable from "./contentEditable.vue"
 
 export {
   AppSelect,
@@ -16,6 +17,7 @@ export {
   AppSearch,
   AppDropdown,
   AppCalendar,
-    AppOtpInput,
-    AppKeyboard,
+  AppOtpInput,
+  AppKeyboard,
+  AppContentEditable,
 }

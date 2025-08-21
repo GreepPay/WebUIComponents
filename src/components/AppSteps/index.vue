@@ -8,10 +8,10 @@
         @click="handleStepClick(step.value)"
       >
         <div
-          class="flex items-center justify-center w-6 h-6 rounded-full border"
+          class="flex items-center justify-center w-8 h-8 rounded-full border"
           :class="{
             'bg-black text-white border-black': currentStep === step.value,
-            'bg-green-500 text-white border-green-500': isStepCompleted(
+            '!bg-green-500 !text-white !border-green-500': isStepCompleted(
               step.value
             ),
             'bg-transparent text-gray-400 border-gray-300': isStepUpcoming(

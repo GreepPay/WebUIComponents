@@ -12,10 +12,10 @@
     <app-icon
       v-if="variant == 'switch'"
       :name="`${selected ? 'switch-on' : 'switch-off'}`"
-      :customClass="`!h-6`"
+      :customClass="`!h-7`"
     />
 
-    <div class="flex flex-row space-x-2 items-center">
+    <div class="flex flex-row space-x-2 items-center select-none">
       <!-- @slot The content to display next to the checkbox. Use this slot to provide the label for the checkbox. -->
       <slot name="label" />
     </div>

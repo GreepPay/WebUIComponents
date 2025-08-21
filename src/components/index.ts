@@ -40,6 +40,7 @@ import {
   AppOtpInput,
   AppKeyboard,
   AppFileAttachment,
+  AppContentEditable,
 } from "./AppForm"
 import {
   AppMerchantTable,
@@ -108,4 +109,5 @@ export {
   AppOtpInput,
   AppKeyboard,
   AppFileAttachment,
+  AppContentEditable,
 }
