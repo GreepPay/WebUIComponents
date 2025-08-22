@@ -1,29 +1,23 @@
 <template>
   <Transition name="slide">
-    <pre class="bg-red-600">
-      <!-- {{ setup }} -->
-       ejkw,e.wwqqwqw
-    </pre>
-
-    <!-- <div
-      v-if="isVisible"
-      :class="`w-full flex flex-col items-center justify-center top-0 left-0  fixed z-[999999999999999] `"
+    <!-- v-if="isVisible" -->
+    <div
+      class="!w-80 flex flex-col items-center justify-center top-4 right-4 fixed z-[999999999999999]"
     >
       <div
-        :class="`flex flex-col space-y-2 w-full px-4  cursor-pointer   items-center justify-center mdlg:!border-l-[1px] mdlg:!border-r-[1px] mdlg:!border-gray-500 `"
-        style="padding-top: calc(env(safe-area-inset-top) + 16px)"
+        class="flex flex-col space-y-2 w-full cursor-pointer items-center justify-center"
       >
         <div :class="alertClasses">
-          <app-icon :name="`alert-${setup.type}`" custom-class="!h-7 mt-0.5" />
- 
+          <app-icon :name="`alert-${setup.type}`" custom-class="!h-8 mt-0.5" />
+
           <div class="flex-1 px-2">
-            <app-header-text class="!text-base">
+            <app-header-text class="!text-lg">
               {{ alertTitle }}
             </app-header-text>
-            <app-normal-text class="!font-normal !text-sm !flex-wrap">
+            <app-normal-text class="!font-normal !text-base !flex-wrap">
               {{ setup.message }}
             </app-normal-text>
- 
+
             <div class="mt-1" v-if="setup.action">
               <app-normal-text
                 @click="setup.action?.handler"
@@ -33,94 +27,95 @@
               </app-normal-text>
             </div>
           </div>
-          
+
           <app-icon name="close" custom-class="!h-6" @click="close" />
         </div>
       </div>
-    </div> -->
+    </div>
   </Transition>
 </template>
+
 <script lang="ts">
-  // import { defineComponent, onMounted, ref, computed } from "vue"
-  // import AppIcon from "../AppIcon"
-  // import { AppNormalText, AppHeaderText } from "../AppTypography"
+  import { defineComponent, onMounted, ref, computed } from "vue"
+  import AppIcon from "../AppIcon"
+  import { AppNormalText, AppHeaderText } from "../AppTypography"
 
-  // export default defineComponent({
-  //   components: {
-  //     AppNormalText,
-  //     AppHeaderText,
-  //     AppIcon,
-  //   },
-  //   props: {
-  //     setup: {
-  //       type: Object as () => {
-  //         show: boolean
-  //         message: string
-  //         type: "success" | "error" | "info"
-  //         action?: {
-  //           text: string
-  //           handler: () => void
-  //         }
-  //       },
-  //       default: () => ({
-  //         show: true,
-  //         message: "Hello alert",
-  //         type: "success",
-  //       }),
-  //     },
-  //   },
-  //   setup(props) {
-  //     const isVisible = ref(true)
+  export default defineComponent({
+    components: {
+      AppNormalText,
+      AppHeaderText,
+      AppIcon,
+    },
+    props: {
+      setup: {
+        type: Object as () => {
+          show: boolean
+          message: string
+          type: "success" | "error" | "info"
+          action?: {
+            text: string
+            handler: () => void
+          }
+        },
+        default: () => ({
+          show: true,
+          message: "Hello alert",
+          type: "success",
+        }),
+      },
+    },
+    setup(props) {
+      const isVisible = ref(true)
 
-  //     const close = () => {
-  //       isVisible.value = false
-  //     }
+      const close = () => {
+        isVisible.value = false
+      }
 
-  //     const alertClasses = computed(() => {
-  //       const base =
-  //         "!w-full border-[2px] rounded-[24px] p-3 justify-between items-start flex"
-  //       const typeClasses = {
-  //         success: "!border-green bg-light-green",
-  //         error: "!border-red bg-light-red",
-  //         info: "!border-blue bg-light-blue",
-  //       }
-  //       return `${base} ${typeClasses[props.setup.type] || ""}`
-  //     })
+      const alertClasses = computed(() => {
+        const base =
+          "!w-full border-[2px] rounded-[16px] p-3 justify-between items-start flex  "
+        const typeClasses = {
+          success: "!border-green bg-light-green",
+          error: "!border-red bg-light-red",
+          info: "!border-blue bg-light-blue",
+        }
+        return `${base} ${typeClasses[props.setup.type] || ""}`
+      })
 
-  //     const actionTextClasses = computed(() => {
-  //       const colorClasses = {
-  //         success: "!text-green",
-  //         error: "!text-red",
-  //         info: "!text-blue",
-  //       }
-  //       return `!w-fit !text-sm !font-medium ${
-  //         colorClasses[props.setup.type] || ""
-  //       }`
-  //     })
+      const actionTextClasses = computed(() => {
+        const colorClasses = {
+          success: "!text-green",
+          error: "!text-red",
+          info: "!text-blue",
+        }
+        return `!w-fit !text-sm !font-medium ${
+          colorClasses[props.setup.type] || ""
+        }`
+      })
 
-  //     const alertTitle = computed(() => {
-  //       const type = props.setup.type
-  //       const titlePrefix =
-  //         type === "success"
-  //           ? "Successful"
-  //           : type.charAt(0).toUpperCase() + type.slice(1)
-  //       return `${titlePrefix} message`
-  //     })
+      const alertTitle = computed(() => {
+        const type = props.setup.type
+        const titlePrefix =
+          type === "success"
+            ? "Successful"
+            : type.charAt(0).toUpperCase() + type.slice(1)
+        return `${titlePrefix} message`
+      })
 
-  //     onMounted(() => {
-  //       isVisible.value = true
-  //       setTimeout(() => (isVisible.value = false), 10000)
-  //     })
+      onMounted(() => {
+        isVisible.value = true
+        setTimeout(() => (isVisible.value = false), 10000)
+      })
 
-  //     return {
-  //       isVisible,
-  //       alertClasses,
-  //       actionTextClasses,
-  //       alertTitle,
-  //       close,
-  //     }
-  //   },
-  // })
+      return {
+        isVisible,
+        alertClasses,
+        actionTextClasses,
+        alertTitle,
+        close,
+      }
+    },
+  })
 </script>
 
 <style scoped>
