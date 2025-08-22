@@ -3,42 +3,48 @@
     <template v-for="(step, index) in steps" :key="step.value">
       <!-- Step Item -->
       <div
-        class="flex items-center cursor-pointer"
-        :class="{ 'cursor-not-allowed': !allowStepClick }"
+        class="flex items-center"
+        :class="allowStepClick ? 'cursor-pointer' : 'cursor-not-allowed'"
         @click="handleStepClick(step.value)"
       >
-        <div
-          class="flex items-center justify-center w-8 h-8 rounded-full border"
-          :class="{
-            'bg-black text-white border-black': currentStep === step.value,
-            '!bg-green-500 !text-white !border-green-500': isStepCompleted(
-              step.value
-            ),
-            'bg-transparent text-gray-400 border-gray-300': isStepUpcoming(
-              step.value
-            ),
-          }"
-        >
+        <div>
+          <!-- Checked Step -->
           <template v-if="isStepCompleted(step.value)">
             <app-icon
               v-if="step.checkedIcon || checkedIcon"
               :name="step.checkedIcon || checkedIcon"
-              custom-class="h-3 w-3"
+              custom-class="h-8 w-8"
             />
-            <span v-else>✔</span>
+            <div
+              v-else
+              class="flex items-center justify-center w-8 h-8 rounded-full border !bg-green-500 !border-green-500"
+            >
+              {{ index + 1 }}
+            </div>
           </template>
 
+          <!-- Current Step -->
           <template v-else-if="currentStep === step.value">
-            {{ index + 1 }}
+            <div
+              class="flex items-center justify-center w-8 h-8 rounded-full border bg-black text-white border-black"
+            >
+              {{ index + 1 }}
+            </div>
           </template>
 
+          <!-- Unchecked Step -->
           <template v-else>
             <app-icon
               v-if="step.uncheckedIcon || uncheckedIcon"
               :name="step.uncheckedIcon || uncheckedIcon"
-              custom-class="h-3 w-3"
+              custom-class="h-8 w-8"
             />
-            <span v-else>{{ index + 1 }}</span>
+            <div
+              v-else
+              class="flex items-center justify-center w-8 h-8 rounded-full border bg-transparent text-gray-400 border-gray-300"
+            >
+              {{ index + 1 }}
+            </div>
           </template>
         </div>
 

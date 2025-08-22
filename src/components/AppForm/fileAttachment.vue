@@ -22,7 +22,8 @@
           This slot allows you to place custom content within the file input wrapper when `isWrapper` is true.
           Use this to create custom visual representations for your file upload area.
         -->
-        <slot name="content" />
+
+        <slot name="content" class="cursor-pointer" />
       </div>
     </template>
     <template v-else>
