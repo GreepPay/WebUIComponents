@@ -1,29 +1,30 @@
 <template>
   <div
-    @click="toggleSelect"
+    @click="selected ? (selected = false) : (selected = true)"
     class="flex w-full flex-row space-x-2 items-center cursor-pointer"
   >
     <app-icon
-      v-if="variant === 'normal'"
-      :name="selected ? 'checkbox-active' : 'checkbox'"
-      :customClass="iconClass"
+      v-if="variant == 'normal'"
+      :name="`${selected ? 'checkbox-active' : 'checkbox'}`"
+      :customClass="`h-[17px]`"
     />
     <app-icon
-      v-if="variant === 'tick'"
-      :name="selected ? 'tick-circle-active' : 'checkbox'"
-      :customClass="iconClass"
+      v-if="variant == 'tick'"
+      :name="`${selected ? 'tick-circle-active' : 'checkbox'}`"
+      :customClass="`h-5`"
     />
+
     <app-icon
-      v-if="variant === 'switch'"
-      :name="selected ? 'switch-on' : 'switch-off'"
-      :customClass="iconClass"
+      v-if="variant == 'switch'"
+      :name="`${selected ? 'switch-on' : 'switch-off'}`"
+      :customClass="`!h-40`"
     />
 
     <div class="flex flex-row space-x-2 items-center select-none">
-      <!-- Label slot -->
+      <!-- @slot The content to display next to the checkbox. Use this slot to provide the label for the checkbox. -->
       <slot name="label">
         <app-normal-text
-          customClass="!flex-1"
+          customClass="!flex-1   "
           :class="
             selected
               ? '!text-black !font-medium !text-base'
@@ -36,16 +37,23 @@
     </div>
   </div>
 </template>
-
 <script lang="ts">
   import { ref, watch } from "vue"
   import AppIcon from "../AppIcon/index.vue"
 
+  /**
+   *  Checkbox component.
+   */
   export default {
-    components: { AppIcon },
+    components: {
+      AppIcon,
+    },
     name: "AppCheckbox",
     emits: ["update:modelValue"],
     props: {
+      /**
+       *  Value of the checkbox, use v-model to bind it.
+       */
       modelValue: {
         type: Boolean,
         default: false,
@@ -54,23 +62,14 @@
         type: String,
         default: "",
       },
-      iconClass: {
-        type: String,
-        default: "!h-3",
-      },
       variant: {
         type: String as () => "normal" | "switch" | "tick",
         default: "normal",
       },
-      mode: {
-        type: String as () => "checkbox" | "radio",
-        default: "checkbox", // "checkbox" = toggleable, "radio" = always on when clicked
-      },
     },
-    setup(props, { emit }) {
+    setup(props: any, context: any) {
       const selected = ref(props.modelValue)
 
-      // keep local state in sync with v-model
       watch(
         () => props.modelValue,
         (newValue) => {
@@ -78,22 +77,12 @@
         }
       )
 
-      const toggleSelect = () => {
-        if (props.mode === "radio") {
-          // radio mode → always true when clicked
-          if (!selected.value) {
-            selected.value = true
-          }
-        } else {
-          // checkbox mode → toggle
-          selected.value = !selected.value
-        }
-        emit("update:modelValue", selected.value)
-      }
+      watch(selected, () => {
+        context.emit("update:modelValue", selected.value)
+      })
 
       return {
         selected,
-        toggleSelect,
       }
     },
   }

@@ -18,6 +18,7 @@ import AppImageCardContainer from "./AppImageCardContainer"
 import AppCurrencySwitch from "./AppCurrencySwitch"
 import AppSteps from "./AppSteps"
 import AppCheckbox from "./AppCheckbox"
+import AppEmptyState from "./AppEmptyState"
 import { AppStatCard } from "./AppStat"
 import { AppHeaderText, AppNormalText, AppLinkText } from "./AppTypography"
 import { AppTicketCard } from "./AppCard"
@@ -109,5 +110,5 @@ export {
   AppOtpInput,
   AppKeyboard,
   AppFileAttachment,
-  AppContentEditable,
+  AppContentEditable,AppEmptyState
 }

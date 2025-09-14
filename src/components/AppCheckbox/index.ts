@@ -1,3 +1,3 @@
-import AppCheckbox from "./index.vue";
+import AppCheckbox from "./index.vue"
 
-export default AppCheckbox;
+export default AppCheckbox

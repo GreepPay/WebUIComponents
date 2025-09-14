@@ -22,15 +22,16 @@
       <slot name="outer-prefix" />
       <label
         v-if="label"
-        class="absolute left-4 px-1 text-base top-[19px] bg-white transition-all duration-300"
+        class="absolute left-4 px-1 !select-none text-base top-[19px] bg-white transition-all duration-300"
         :class="{
           '!top-[-14px] text-[#999999] font-medium':
             isFocused || placeholder || content,
           'text-red': errorMessage,
           'text-green': successMessage && !errorMessage,
         }"
-        >{{ label }}</label
       >
+        {{ label }}
+      </label>
 
       <div
         :class="`flew-grow w-full space-x-1 flex-row flex items-center justify-between px-4 py-4 bg-white rounded-[10px] border-[1.5px] border-[#E0E2E4] relative
@@ -56,7 +57,7 @@
           <app-normal-text
             :class="`absolute left-4 ${
               isTextarea ? 'top-[-10%]' : 'top-[-24%]'
-            } px-1 py-[2px] bg-white !text-veryLightGray z-10`"
+            } px-1 py-[2px] bg-white !text-veryLightGray z-5`"
           >
             {{ placeholder }}
           </app-normal-text>

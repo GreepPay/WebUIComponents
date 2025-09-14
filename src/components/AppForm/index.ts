@@ -8,6 +8,7 @@ import AppCalendar from "./calendar.vue"
 import AppOtpInput from "./otpInput.vue"
 import AppKeyboard from "./keyboard.vue"
 import AppContentEditable from "./contentEditable.vue"
+import AppRadio from "./radio.vue"
 
 export {
   AppSelect,
@@ -20,4 +21,5 @@ export {
   AppOtpInput,
   AppKeyboard,
   AppContentEditable,
+  AppRadio,
 }

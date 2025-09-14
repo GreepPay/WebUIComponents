@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full col-span-full flex flex-col space-y-2">
+  <div class="w-full col-span-full flex flex-col space-y-2 select-none">
     <div class="w-full items-center flex flex-row justify-between px-2">
       <div
         class="h-[38px] w-[38px] rounded-md flex items-center justify-center !bg-gray-50"
@@ -70,8 +70,8 @@
                 } ` + currentMonth
               ).add(1, 'hours')
             ) && preventBackDate
-              ? 'opacity-[50%]'
-              : ''
+              ? 'opacity-[50%] cursor-not-allowed'
+              : 'cursor-pointer'
           }`"
           v-for="(item, index) in [...Array(monthDaysCount).keys()]"
           :key="index"
@@ -89,7 +89,7 @@
         >
           <span
             :class="`w-[36px] h-[36px] rounded-md ${
-              dateIsSelected(item + 1) ? 'bg-gray-800  ' : 'bg-gray-100 '
+              dateIsSelected(item + 1) ? 'bg-gray-800  ' : 'bg-gray-100  '
             }  flex justify-center items-center`"
           >
             <app-normal-text

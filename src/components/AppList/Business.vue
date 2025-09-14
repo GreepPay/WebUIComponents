@@ -9,30 +9,21 @@
     <div class="col-span-4 flex items-center space-x-2 flex-1">
       <div class="h-12 w-12 flex justify-center items-center rounded-full">
         <app-avatar
-          :src="`images/logo/merchant/1.png`"
+          :src="data.logo"
           custom-class="rounded-full h-full w-full"
         />
       </div>
-
 
       <div class="flex-1 flex flex-col space-y-[1px] !line-clamp-1">
         <app-normal-text
           class="!text-left !line-clamp-1 !text-black !font-medium !text-sm"
         >
-          {{ data.title }}
+          {{ data.name }}
         </app-normal-text>
 
-        <span class="flex flex-row space-x-1 items-center">
-          <app-normal-text class="!text-[12px] capitalize text-gray-500">
-            {{ data.type }}
-          </app-normal-text>
-
-          <span class="text-very-light-gray">• </span>
-
-          <app-normal-text class="!text-[12px] text-gray-500">
-            {{ data.date }}
-          </app-normal-text>
-        </span>
+        <app-normal-text class="!text-[12px] capitalize text-gray-500">
+          {{ data.category }}
+        </app-normal-text>
       </div>
     </div>
 
@@ -40,9 +31,7 @@
       <app-normal-text
         class="!text-right !text-sm font-semibold !whitespace-nowrap"
       >
-        {{ data.transactionType == "credit" ? "+" : "-" }}
-        {{ data.currencySymbol }}
-        {{ Logic.Common.convertToMoney(data.amount, true, "") }}
+        {{ `${data.currencySymbol}  ${data.balance}` }}
       </app-normal-text>
     </div>
 
@@ -63,11 +52,16 @@
   import AppImageLoader from "../AppImageLoader"
   import AppAvatar from "../AppAvatar"
 
-  enum TransactionType {
-    Sent = "sent",
-    Received = "received",
-    Added = "added",
-    Redeemed = "redeemed",
+  interface BusinessData {
+    name: string | null
+    uuid: string
+    logo: string | null
+    id: number | string
+    description: string | null
+    date: string
+    category: string | null
+    balance: number
+    currencySymbol: string
   }
 
   export default defineComponent({
@@ -77,19 +71,10 @@
       AppImageLoader,
       AppAvatar,
     },
-    name: "AppTransaction",
+    name: "AppBusiness",
     props: {
       data: {
-        type: Object as () => {
-          id: string | number
-          title: string
-          amount: number
-          type: TransactionType
-          transactionType: "credit" | "debit"
-          date: string
-          currencySymbol?: string
-          subAmount?: string
-        },
+        type: Object as () => BusinessData,
         required: true,
       },
 

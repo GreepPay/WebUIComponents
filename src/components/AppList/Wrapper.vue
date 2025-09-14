@@ -8,10 +8,10 @@
       :class="headerClass"
     >
       <slot name="header-title">
-      <app-header-text class="!font-semibold !text-black !text-lg">
-        {{ title }}
-      </app-header-text>
-      </slot> 
+        <app-header-text class="!font-semibold !text-black !text-lg">
+          {{ title }}
+        </app-header-text>
+      </slot>
 
       <slot name="header-action">
         <app-normal-text
@@ -28,7 +28,7 @@
       <slot name="sub-header" />
     </div>
 
-    <div>
+    <div enter-class="w-full">
       <template v-if="hasItems">
         <div
           class="flex flex-col gap-4 py-4 pt-1 scrollbar-hide max-h-80 overflow-y-auto"
@@ -38,7 +38,7 @@
         </div>
       </template>
 
-      <div v-else class="pb-4 pt-2">
+      <div v-else class="pb-4 pt-2 w-full flex items-center justify-center">
         <app-empty-state
           :title="emptyTitle"
           :description="emptyDescription"

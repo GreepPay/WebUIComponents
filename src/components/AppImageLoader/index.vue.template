@@ -1,0 +1,84 @@
+<template>
+  <div
+    :class="`relative ${customClass} blend-in`"
+    :style="{
+      backgroundImage: `url(${currentImage})`,
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center',
+      ...inlineStyle,
+    }"
+  >
+    <slot />
+  </div>
+</template>
+
+<script lang="ts">
+  import { defineComponent, ref, watch, onMounted, computed } from "vue"
+
+  export default defineComponent({
+    name: "AppImageLoader",
+    props: {
+      photoUrl: {
+        type: String,
+        required: false,
+        default: "",
+      },
+      defaultImage: {
+        type: String,
+        required: false,
+        default: "", // can be a default SVG/PNG asset
+      },
+      customClass: {
+        type: String,
+        default: "",
+      },
+      customStyle: {
+        type: Object as () => Record<string, any>,
+        default: () => ({}),
+      },
+    },
+    setup(props) {
+      const currentImage = ref(props.defaultImage || "")
+
+      const loadImage = (url: string) => {
+        if (!url) return
+        const img = new Image()
+        img.onload = () => {
+          currentImage.value = url
+        }
+        img.src = url
+      
+
+      watch(
+        () => props.photoUrl,
+        (newVal) => {
+          if (newVal) loadImage(newVal)
+          else currentImage.value = props.defaultImage
+        },
+        { immediate: true }
+      )
+
+      onMounted(() => {
+        if (props.photoUrl) {
+          loadImage(props.photoUrl)
+        } else {
+          currentImage.value = props.defaultImage
+        }
+      })
+
+      const inlineStyle = computed(() => props.customStyle)
+
+      return {
+        currentImage,
+        inlineStyle,
+      }
+    },
+  })
+</script>
+
+<style scoped>
+  .blend-in {
+    transition: background-image 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+</style>
