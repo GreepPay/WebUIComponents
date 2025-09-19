@@ -10,7 +10,7 @@
     <app-icon v-if="prefixIcon" :name="prefixIcon" />
 
     <!-- Slot for text -->
-    <span> {{ text }} </span>
+    <span> {{ prefixIcon }} {{ text }} {{ suffixIcon }} </span>
 
     <!-- Suffix Icon or Default Icon -->
     <app-icon v-if="suffixIcon" :name="suffixIcon" :customClass="iconClass" />

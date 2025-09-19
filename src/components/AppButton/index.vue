@@ -43,6 +43,10 @@
         type: Boolean,
         default: false,
       },
+      inverted: {
+        type: Boolean,
+        default: false,
+      },
       disabled: {
         type: Boolean,
         default: false,
@@ -72,7 +76,7 @@
       const baseColors = {
         primary: "black",
         danger: "red-600",
-        success: "green",
+        success: "dark-green-2",
         secondary: "blue",
         gray: "light-gray",
       }
@@ -90,9 +94,11 @@
         const text = textColors[props.variant]
 
         if (props.outlined) {
-          return `bg-transparent  border  border-${color}  text-${color}`
+          return `bg-transparent  border  !border-${color}  text-${color}`
+        } else if (props.inverted) {
+          return `bg-white !text-${color}  shadow-sm border`
         } else {
-          return `bg-${color}  text-${text} border border-${color}`
+          return `bg-${color}  text-${text} border !border-${color}`
         }
       })
 

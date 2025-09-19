@@ -56,7 +56,7 @@
       },
       iconClass: {
         type: String,
-        default: "!h-3",
+        default: "!h-8",
       },
       variant: {
         type: String as () => "normal" | "switch" | "tick",

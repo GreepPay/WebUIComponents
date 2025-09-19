@@ -6,7 +6,7 @@
       aria-haspopup="listbox"
       aria-expanded="true"
       aria-labelledby="listbox-label"
-      class="w-32 !border-[2px] bg-white rounded-full cursor-pointer select-none py-2 px-3 flex items-center justify-between sm:text-sm/6"
+      class="w-32 border-[2px] bg-white rounded-full cursor-pointer select-none py-2 px-3 flex items-center justify-between sm:text-sm/6"
       :class="customClass"
     >
       <app-loading :loading="loading" />

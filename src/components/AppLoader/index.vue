@@ -10,30 +10,44 @@
     ]"
     id="innerModal"
   >
-    <!-- Loader Bar -->
-    <div class="loader-container w-full absolute top-0 left-0">
-      <div class="loader"></div>
-    </div>
 
-    <!-- Message Display (optional) -->
+  
+    <template v-if="setup?.loading">
+      <!-- <div :class="`loader-container w-full absolute top-0 left-0`">
+        <div class="loader"></div>
+      </div> --> 
+
+      <div
+        class="w-full flex flex-col space-y-5 xs:space-y-4 h-full absolute top-0 left-0 flex-grow pt-4 items-center justify-center z-50 css-gradient"
+      >
+         <Vue3Lottie :animation-link="'/loader.json'" :height="90" :width="90" />
+      </div>
+
+      
+ 
     <div
       v-if="setup?.isInteractive && messages[currentMessageIndex]"
       class="text-white text-sm text-center mt-8"
     >
       {{ messages[currentMessageIndex] }}
     </div>
+    </template> 
+
+
+     
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, onMounted, onUnmounted } from "vue"
 import AppIcon from "../AppIcon"
-import { Logic } from "../../composable"
+import { Logic } from "../../composable" 
+import { Vue3Lottie } from 'vue3-lottie'
 
 export default defineComponent({
   name: "AppLoader",
   components: {
-    AppIcon,
+    AppIcon,Vue3Lottie
   },
   props: {
     customClass: {
