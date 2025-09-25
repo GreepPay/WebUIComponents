@@ -1,7 +1,7 @@
 <template>
   <button
     :class="[
-      'relative flex items-center justify-center font-medium space-x-4 gap-2 px-4 py-2 transition-all duration-300 ease-in-out rounded-3xl',
+      'relative flex nowrap items-center justify-center font-medium space-x-4 gap-2 px-4 py-2 transition-all duration-300 ease-in-out rounded-3xl',
       baseStyle,
       hoverStyle,
       disabled && 'opacity-40 cursor-not-allowed',

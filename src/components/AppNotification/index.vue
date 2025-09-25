@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full p-3 bg-white border rounded-lg mb-3 flex flex-row items-start"
+    class="w-full p-5 bg-white border rounded-2xl mb-3 flex flex-row items-start"
   >
     <div class="w-[50px]">
       <app-icon :name="notification.icon" customClass="!h-[48px]" />
