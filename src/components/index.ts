@@ -22,6 +22,7 @@ import AppNotification from "./AppNotification"
 import AppVirtualScroller from "./AppVirtualScroller"
 import AppEmptyState from "./AppEmptyState"
 import AppExchangeAd from "./AppExchangeAd"
+import AppDetails from "./AppDetails"
 import { AppStatCard } from "./AppStat"
 import { AppHeaderText, AppNormalText, AppLinkText } from "./AppTypography"
 import { AppTicketCard } from "./AppCard"
@@ -118,4 +119,5 @@ export {
   AppNotification,
   AppVirtualScroller,
   AppExchangeAd,
+  AppDetails,
 }
