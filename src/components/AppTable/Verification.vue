@@ -127,7 +127,7 @@
   import AppAvatar from "../AppAvatar"
   import AppIcon from "../AppIcon"
   import AppEmptyState from "../AppEmptyState"
-  import AppPDFViewer from "../AppPDFViewer"
+  import AppPDFViewer from "../AppPdfViewer"
   import { Verification } from "@greep/logic/src/gql/graphql"
   import AppModal from "../AppModal"
 
