@@ -17,12 +17,12 @@
         class="flex min-h-full justify-center p-4 text-center sm:items-center sm:p-0"
       >
         <div
-          class="relative transform overflow-hidden bg-white text-left box-shadow transition-all sm:my-8 sm:w-full sm:max-w-lg"
+          class="relative transform overflow-hidden bg-white text-left box-shadow transition-all sm:my-8 sm:w-full sm:max-w-lg rounded-lg"
         >
           <!-- Title -->
           <div
             v-if="showTitle"
-            class="bg-white flex items-center space-x-4 justify-between p-4 border-b"
+            class="bg-white flex items-center space-x-4 justify-between p-4 "
           >
             <slot name="title">
               <h2 class="text-lg font-medium text-black">{{ title }}</h2>
@@ -36,7 +36,7 @@
           </div>
 
           <!-- Content Area -->
-          <div class="p-4">
+          <div class="p-4 pt-0">
             <slot />
           </div>
 
@@ -65,7 +65,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { Teleport, defineProps, defineEmits, computed } from "vue"
+  import { Teleport, defineProps, defineEmits, computed,onBeforeUnmount,watch  } from "vue"
   import AppIcon from "../AppIcon"
 
   const props = defineProps({
@@ -104,6 +104,31 @@
       props.close()
     }
   }
+ 
+
+const handleEscape = (e: KeyboardEvent) => {
+  console.log(e);
+  
+  if (e.key === "Escape" && props.canClose && props.isOpen) {
+    props.close()
+  }
+}
+
+// Watch for open state to attach/remove listener
+watch(
+  () => props.isOpen,
+  (newVal) => {
+    if (newVal) {
+      document.addEventListener("keydown", handleEscape)
+    } else {
+      document.removeEventListener("keydown", handleEscape)
+    }
+  }
+)
+
+onBeforeUnmount(() => {
+  document.removeEventListener("keydown", handleEscape)
+})
 </script>
 
 <style scoped>

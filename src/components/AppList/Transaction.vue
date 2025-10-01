@@ -1,7 +1,7 @@
 <template>
   <div
     :class="[
-      ' flex items-center gap-2 py-2 pb-3 truncate',
+      ' flex items-center gap-2 py-2 pb-3 truncate cursor-pointer',
       !isLastItem && 'border-b-[1px] border-[#F0F3F6]',
       customClass,
     ]"

@@ -19,14 +19,17 @@
         >
           {{ item.title }}
         </app-normal-text>
-        <div class="w-full flex flex-row items-center justify-between">
+        <div 
+            :class="`
+            flex items-center 
+            ${isVertical ? 'w-full justify-between' : 'ml-auto'}
+          `">
           <app-normal-text
             :class="` ${
               invertBoldness ? '!text-[#616161]' : '!font-[500] !text-[#0A141E]'
-            } !text-sm break-words`"
-            is-html
-            :htmlContent="item.content"
+            } !text-sm break-words`" 
           >
+          {{item.content}}
           </app-normal-text>
           <div v-if="item.can_copy" @click="Logic.Common.copytext(item.content)" class="flex flex-row items-center cursor-pointer">
             <app-normal-text
