@@ -8,24 +8,24 @@
   >
     <!-- overlay -->
     <div
-      class="fixed inset-0 bg-gray-500/75 !bg-red-800 transition-opacity"
+      class="fixed inset-0 bg-[#05070980] !bg-red-800 transition-opacity"
       aria-hidden="true"
     ></div>
 
-    <div class="fixed inset-0 w-screen overflow-y-auto">
-      <div
-        class="flex min-h-full justify-center p-4 text-center sm:items-center sm:p-0"
-      >
+    <div class="fixed inset-0 w-screen overflow-y-auto  ">
         <div
-          class="relative transform overflow-hidden bg-white text-left box-shadow transition-all sm:my-8 sm:w-full sm:max-w-lg rounded-lg"
-        >
+    class="flex min-h-screen items-center justify-center p-4 text-center sm:p-0"
+  >
+        <div
+         class="relative transform overflow-hidden bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg rounded-lg" 
+           >
           <!-- Title -->
           <div
             v-if="showTitle"
             class="bg-white flex items-center space-x-4 justify-between p-4 "
           >
             <slot name="title">
-              <h2 class="text-lg font-medium text-black">{{ title }}</h2>
+              <h2 class="text-lg font-semibold text-black">{{ title }}</h2>
             </slot>
 
             <app-icon
@@ -36,7 +36,7 @@
           </div>
 
           <!-- Content Area -->
-          <div class="p-4 pt-0">
+          <div class="p-6 pt-0">
             <slot />
           </div>
 
@@ -106,9 +106,7 @@
   }
  
 
-const handleEscape = (e: KeyboardEvent) => {
-  console.log(e);
-  
+const handleEscape = (e: KeyboardEvent) => { 
   if (e.key === "Escape" && props.canClose && props.isOpen) {
     props.close()
   }

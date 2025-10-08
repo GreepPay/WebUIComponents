@@ -6,7 +6,7 @@
       class="flex flex-row items-center pb-3 mb-3 border-b-[1px] border-[#F0F3F6]"
     >
       <div class="w-[32px] mr-2">
-        <app-icon name="bottom-bar/ads-active" custom-class="!h-[32px]" />
+        <app-icon name="bottom-bar/ads-active" custom-class="!h-[32px] !W-[32px]" />
       </div>
 
       <app-normal-text class="!font-[500]">

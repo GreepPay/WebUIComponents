@@ -5,8 +5,7 @@
         v-for="(tab, index) in tabs"
         :key="index"
         @click="selectTab(tab.key)"
-        :class="[getTabClass(tab.key), tabClass]"
-      >
+        :class="[getTabClass(tab.key), tabClass]">
         {{ tab.label }}
       </app-normal-text>
     </div>

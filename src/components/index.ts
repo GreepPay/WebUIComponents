@@ -33,7 +33,7 @@ import {
   AppEventList,
   AppMerchantCustomerList,
   AppMerchantAttendeeList,
-  AppTicketBestSellerList,
+  AppTicketBestSellerList,AppOrderList,AppP2pAdsList
 } from "./AppList"
 import {
   AppSelect,
@@ -119,5 +119,5 @@ export {
   AppNotification,
   AppVirtualScroller,
   AppExchangeAd,
-  AppDetails,
+  AppDetails,AppOrderList,AppP2pAdsList
 }
