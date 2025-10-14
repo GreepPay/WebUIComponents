@@ -18,5 +18,6 @@ export {
   AppWalletHistoryTable,
   AppWithdrawalTable,
   AppVerificationTable,
-  AppTransactionTable,AppAdminTable
+  AppTransactionTable,
+  AppAdminTable
 }

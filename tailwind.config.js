@@ -8,7 +8,6 @@ export default {
   theme: {
     extend: {
       colors: {
-        green: "#10BB76",
         primary: "#10BB76",
         secondary: "#0A141E",
         black: "#0A141E",

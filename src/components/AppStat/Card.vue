@@ -6,7 +6,7 @@
       class="text-2xl font-semibold"
       :class="type === 'currency' ? 'text-green' : 'text-black'"
     >
-      {{ value }}
+       <slot>{{ value }}</slot>
     </span>
   </div>
 </template>

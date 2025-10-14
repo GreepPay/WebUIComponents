@@ -1,3 +1,7 @@
 import AppPagination from "./index.vue"
+import AppCompactPagination from "./AppCompactPagination.vue"
 
-export default AppPagination
+export {
+  AppPagination,
+  AppCompactPagination,
+};
