@@ -9,7 +9,7 @@
     >
       <slot name="header-title">
         <app-header-text class="!font-semibold !text-black !text-lg">
-          {{ title }}
+          {{}}
         </app-header-text>
       </slot>
 

@@ -147,7 +147,7 @@ export default defineComponent({
       }
     })
 
-    // Parse progress data from VALUE (e.g., "170 / 181")
+    // Parse progress data from VALUE (e.g., "170 / 181")events
     const progressData = computed(() => {
       if (props.suffixComponent === 'progressbar') {
         // Try to parse from the value prop first

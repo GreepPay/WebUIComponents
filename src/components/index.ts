@@ -12,6 +12,7 @@ import AppAvatar from "./AppAvatar"
 import AppInfoBox from "./AppInfoBox"
 import AppDivider from "./AppDivider"
 import AppLoading from "./AppLoading"
+import { AppOrderDetails } from "./AppOrderDetails"
 import AppLoader from "./AppLoader"
 import { AppCompactPagination, AppPagination  } from "./AppPagination"
 import AppImageCardContainer from "./AppImageCardContainer"
@@ -56,6 +57,7 @@ export {
   AppEventList1,
   AppProgressBar,
   AppCountdownTimer,
+  AppOrderDetails,
   AppTabs,
   AppCalendar ,
   AppListWrapper1,
