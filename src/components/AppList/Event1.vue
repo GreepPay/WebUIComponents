@@ -1,7 +1,7 @@
 <template>
   <div
     :class="[
-      ' grid grid-cols-8  items-center gap-3 py-2 pb-3 truncate cursor-pointer',
+      'grid grid-cols-8 items-center gap-3 py-2 pb-3 truncate cursor-pointer',
       !isLastItem && 'border-b-[1px] border-[#F0F3F6]',
       customClass,
     ]"
@@ -18,11 +18,11 @@
         <app-normal-text
           class="!text-left !line-clamp-1 block !text-black !font-semibold !text-base"
         >
-          {{ data.name }}
+          {{ data.event_title || 'Untitled Event' }}
         </app-normal-text>
 
         <app-normal-text
-          customClass="leading-6 !text-xxs !text-black   !w-full"
+          customClass="leading-6 !text-xxs !text-black !w-full"
         >
           <span v-for="(text, index) in data.sub_titles" :key="index">
             {{ text }}
@@ -36,7 +36,7 @@
         </app-normal-text>
 
         <app-normal-text customClass="!text-xxs !text-black">
-          {{ data.location }}
+          {{ data.location || 'Location not specified' }}
         </app-normal-text>
       </div>
     </div>
@@ -45,19 +45,21 @@
       class="!text-center !text-sm !whitespace-nowrap"
       :class="data.status == 'active' ? '!text-green' : '!text-hot-orange'"
     >
-      {{ data.status == "active" ? "Ongoing" : "Upcoming" }}
+      {{ data.status == 'active' ? 'Ongoing' : (data.status == 'archived' ? 'Ended' : 'Upcoming') }}
     </app-normal-text>
 
     <app-normal-text class="!text-center !text-sm !whitespace-nowrap">
-      {{ data.minAmount }}
+      {{ data.ticket_price }}
     </app-normal-text>
+    
     <app-normal-text class="!text-center !text-sm !whitespace-nowrap">
-      {{ data.no_of_tickets_sold }}
+      {{ data.no_of_tickets_sold || 0 }}
     </app-normal-text>
+    
     <app-normal-text
       class="!text-right !text-base !font-semibold !whitespace-nowrap"
     >
-      {{ data.revenue }}
+      {{ data.ticket_revenue }}
     </app-normal-text>
   </div>
 </template>
