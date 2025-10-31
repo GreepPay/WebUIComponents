@@ -1,7 +1,5 @@
-import AppOrderDetails from "./index.vue"
+import AppOrderDetails from "./index.vue";
+import AppProductDetails from "./ProductDetails.vue";
+import AppProductOrderDetails from "./ProductOrder.vue";
 
-
-export {
-  
-  AppOrderDetails
-}
+export { AppProductOrderDetails, AppOrderDetails, AppProductDetails };
