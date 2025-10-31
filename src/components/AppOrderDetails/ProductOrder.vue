@@ -8,7 +8,7 @@
         isVertical ? 'flex flex-col space-y-1' : 'flex items-center justify-between space-x-3',
       ]"
     >
-      <!-- Title + Optional Status -->
+      <!-- Title -->
       <div
         :class="[
           'flex',
@@ -40,7 +40,7 @@
       <!-- Main content -->
       <div
         :class="[
-          'text-sm font-semibold text-gray-900',
+          'text-sm font-semibold text-gray-900 whitespace-nowrap',
           isVertical ? 'text-left' : 'text-right',
         ]"
       >
@@ -85,6 +85,4 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
-/* clean and modern — Tailwind handles all colors now */
-</style>
+

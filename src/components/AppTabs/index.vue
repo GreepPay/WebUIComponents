@@ -5,7 +5,7 @@
         v-for="(tab, index) in tabs"
         :key="index"
         @click="selectTab(tab.key)"
-        :class="[getTabClass(tab.key), tabClass, 'flex-1 text-center mx-1']"
+        :class="[getTabClass(tab.key), tabClass, 'flex-1 text-center mx-1 p-4']"
       >  
         <span class="flex items-center justify-center gap-2 whitespace-nowrap">
           <!-- Prefix Icon -->
