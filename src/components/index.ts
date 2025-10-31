@@ -12,13 +12,13 @@ import AppAvatar from "./AppAvatar"
 import AppInfoBox from "./AppInfoBox"
 import AppDivider from "./AppDivider"
 import AppLoading from "./AppLoading"
-import { AppOrderDetails } from "./AppOrderDetails"
+import { AppOrderDetails, AppProductOrderDetails, AppProductDetails } from "./AppOrderDetails"
 import AppLoader from "./AppLoader"
 import { AppCompactPagination, AppPagination  } from "./AppPagination"
 import AppImageCardContainer from "./AppImageCardContainer"
 import { AppStatCard,
   AppStatBigCard } from "./AppStat"
-import { AppEventList, AppListWrapper, AppListWrapper1, AppEventList1, AppTicket  } from "./AppList"
+import { AppEventList, AppListWrapper, AppListWrapper1, AppEventList1, AppTicket, AppProductList  } from "./AppList"
 import { AppHeaderText, AppNormalText } from "./AppTypography"
 import {
   AppSelect,
@@ -54,6 +54,9 @@ export {
   AppImageLoader,
   AppModal,
   AppTicket,
+  AppProductList,
+  AppProductDetails,
+  AppProductOrderDetails,
   AppEventList1,
   AppProgressBar,
   AppCountdownTimer,

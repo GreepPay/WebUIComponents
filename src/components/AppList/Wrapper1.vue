@@ -6,10 +6,10 @@
     <div
       class="w-full flex justify-between items-center py-4"
       :class="headerClass"
+      v-if="showHeader"
     >
       <slot name="header-title">
         <app-header-text class="!font-semibold !text-black !text-lg">
-          {{}}
         </app-header-text>
       </slot>
 
@@ -69,6 +69,10 @@
       actionText: {
         type: String,
         default: "See all",
+      },
+      showHeader: {
+        type: Boolean,
+        default: true,
       },
       items: {
         type: Array as () => any[],

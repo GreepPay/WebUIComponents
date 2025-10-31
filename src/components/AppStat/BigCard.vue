@@ -1,40 +1,45 @@
 <template>
-  <div :class="['flex flex-col rounded-sm shadow-sm border transition-all duration-200', sizeClasses, customClass]">
+  <div
+    :class="[
+      'flex flex-col rounded-sm shadow-sm border transition-all duration-200',
+      sizeClasses,
+      customClass,
+    ]"
+  >
     <span class="text-gray-500 font-medium mb-2" :class="labelSizeClasses">
       {{ label }}
     </span>
-    
+
     <!-- Main content area with value and optional progress bar in a row -->
     <div class="flex flex-row items-center justify-between gap-4">
       <!-- Value on the left -->
-      <span
-        class="font-semibold flex-shrink-0"
-        :class="[valueSizeClasses, valueColor]"
-      >
-        <slot>{{ formattedValue }}</slot>
-      </span>
-      
+      <slot>
+        <span
+          class="font-semibold flex-shrink-0"
+          :class="[valueSizeClasses, dynamicValueColor]"
+        >
+          {{ formattedValue }}
+        </span>
+      </slot>
       <!-- Progress Bar on the right when suffixComponent is 'progressbar' -->
       <div v-if="suffixComponent === 'progressbar'" class="flex-1 min-w-0">
-        <app-progress-bar 
+        <app-progress-bar
           :current="progressData.current"
           :total="progressData.total"
         />
-    
       </div>
     </div>
-    
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue"
-import AppProgressBar from "../AppProgressBar"
+import { defineComponent, computed } from "vue";
+import AppProgressBar from "../AppProgressBar";
 
 export default defineComponent({
   name: "BigCard",
   components: {
-    AppProgressBar
+    AppProgressBar,
   },
   props: {
     label: {
@@ -65,6 +70,10 @@ export default defineComponent({
       type: String,
       default: "",
     },
+    sufixColor: {
+      type: String,
+      default: "",
+    },
   },
 
   setup(props) {
@@ -72,121 +81,139 @@ export default defineComponent({
     const sizeClasses = computed(() => {
       switch (props.size) {
         case "sm":
-          return "p-3"
+          return "p-3";
         case "md":
-          return "p-4"
+          return "p-4";
         case "lg":
-          return "p-6"
+          return "p-6";
         default:
-          return "p-4"
+          return "p-4";
       }
-    })
+    });
 
     const labelSizeClasses = computed(() => {
       switch (props.size) {
         case "sm":
-          return "text-xs"
+          return "text-xs";
         case "md":
-          return "text-sm"
+          return "text-sm";
         case "lg":
-          return "text-base"
+          return "text-base";
         default:
-          return "text-sm"
+          return "text-sm";
       }
-    })
+    });
 
     const valueSizeClasses = computed(() => {
       switch (props.size) {
         case "sm":
-          return "text-lg"
+          return "text-lg";
         case "md":
-          return "text-xl"
+          return "text-xl";
         case "lg":
-          return "text-2xl"
+          return "text-2xl";
         default:
-          return "text-xl"
+          return "text-xl";
       }
-    })
+    });
 
     const subtitleSizeClasses = computed(() => {
       switch (props.size) {
         case "sm":
-          return "text-xs"
+          return "text-xs";
         case "md":
-          return "text-sm"
+          return "text-sm";
         case "lg":
-          return "text-sm"
+          return "text-sm";
         default:
-          return "text-sm"
+          return "text-sm";
       }
-    })
+    });
 
     const formattedValue = computed(() => {
       if (props.type === "currency") {
         return new Intl.NumberFormat("en-US", {
           style: "currency",
           currency: "USD",
-        }).format(Number(props.value))
+        }).format(Number(props.value));
       }
       if (props.type === "percentage") {
-        return `${props.value}%`
+        return `${props.value}%`;
       }
-      return props.value
-    })
+      return props.value;
+    });
 
-    const valueColor = computed(() => {
+    // NEW: Dynamic value color based on sufixColor
+    const dynamicValueColor = computed(() => {
+      if (props.sufixColor) {
+        if (props.sufixColor === "red") return "!text-red-600";
+        else if (props.sufixColor === "green") return "!text-green-600";
+        else if (props.sufixColor === "blue") return "!text-blue-600";
+        else if (props.sufixColor === "orange") return "!text-orange-600";
+        else return getDefaultColor();
+      } else {
+        const defaultColor = getDefaultColor();
+        console.log("using default color:", defaultColor);
+        return defaultColor;
+      }
+    });
+
+    // Helper function for default colors based on type
+    const getDefaultColor = () => {
       switch (props.type) {
         case "currency":
-          return "text-green-600"
+          return "text-green-600";
         case "percentage":
-          return "text-blue-600"
+          return "text-blue-600";
         case "fraction":
-          return "text-purple-600"
+          return "text-purple-600";
         default:
-          return "text-gray-900"
+          return "text-gray-900";
       }
-    })
+    };
 
     // Parse progress data from VALUE (e.g., "170 / 181")events
     const progressData = computed(() => {
-      if (props.suffixComponent === 'progressbar') {
+      if (props.suffixComponent === "progressbar") {
         // Try to parse from the value prop first
-        const valueString = String(props.value)
-        const parts = valueString.split('/').map(part => part.trim())
-        
+        const valueString = String(props.value);
+        const parts = valueString.split("/").map((part) => part.trim());
+
         if (parts.length === 2) {
-          const current = parseInt(parts[0])
-          const total = parseInt(parts[1])
+          const current = parseInt(parts[0]);
+          const total = parseInt(parts[1]);
           if (!isNaN(current) && !isNaN(total)) {
             return {
               current,
-              total
-            }
+              total,
+            };
           }
         }
-        
+
         // If value parsing fails, try subtitle as fallback
         if (props.subtitle) {
-          const subtitleParts = props.subtitle.split('/').map(part => part.trim())
+          const subtitleParts = props.subtitle
+            .split("/")
+            .map((part) => part.trim());
           if (subtitleParts.length === 2) {
-            const current = parseInt(subtitleParts[0])
-            const total = parseInt(subtitleParts[1])
+            const current = parseInt(subtitleParts[0]);
+            const total = parseInt(subtitleParts[1]);
             if (!isNaN(current) && !isNaN(total)) {
               return {
                 current,
-                total
-              }
+                total,
+              };
             }
           }
         }
       }
-      
+
       // Return default values if parsing fails
       return {
         current: 0,
-        total: 0
-      }
-    })
+        total: 0,
+      };
+    });
 
     return {
       sizeClasses,
@@ -194,9 +221,9 @@ export default defineComponent({
       valueSizeClasses,
       subtitleSizeClasses,
       formattedValue,
-      valueColor,
-      progressData
-    }
+      dynamicValueColor,
+      progressData,
+    };
   },
-})
+});
 </script>
