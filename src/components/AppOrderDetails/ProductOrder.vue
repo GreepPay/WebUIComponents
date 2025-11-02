@@ -5,55 +5,54 @@
       :key="index"
       :class="[
         'bg-white rounded-2xl border border-gray-200 shadow-sm p-4',
-        isVertical ? 'flex flex-col space-y-1' : 'flex items-center justify-between space-x-3',
+        isVertical ? 'flex flex-col space-y-2' : 'flex items-center justify-between',
       ]"
     >
-      <!-- Title -->
       <div
         :class="[
-          'flex',
-          isVertical ? 'flex-col items-start space-y-1' : 'items-center justify-between w-full',
+          'w-full',
+          isVertical ? 'flex flex-col space-y-2' : 'flex items-center justify-between',
         ]"
       >
-        <span class="text-gray-500 text-sm font-medium">
-          {{ detail.title }}
-        </span>
+        <!-- Left side: Title and optional status -->
+        <div class="flex items-center space-x-2">
+          <span class="text-gray-500 text-sm font-medium">
+            {{ detail.title }}
+          </span>
+          
+        </div>
 
-        <!-- Status badge -->
-        <span
-          v-if="detail.status"
+        <!-- Right side: Content -->
+        <div
           :class="[
-            'px-2 py-0.5 text-xs font-semibold rounded-full',
-            detail.status.toLowerCase() === 'pending'
-              ? 'bg-yellow-100 text-yellow-700'
-              : detail.status.toLowerCase() === 'delivered'
-              ? 'bg-green-100 text-green-700'
-              : detail.status.toLowerCase() === 'cancelled'
-              ? 'bg-red-100 text-red-700'
-              : 'bg-gray-100 text-gray-600',
+            'flex flex-col',
+            isVertical ? 'items-start text-left' : 'items-end text-right',
           ]"
         >
-          {{ detail.status }}
-        </span>
-      </div>
+          <!-- Main content -->
+          <div v-if="!detail.status" class="text-sm font-semibold text-gray-900 whitespace-nowrap">
+                {{ detail.content }}
+              </div>
+              
+              <!-- Status badge (replaces content when status exists) -->
+              <span
+                v-else
+                :class="[
+                  'px-2 py-0.5 text-xs font-semibold rounded-full',
+                  getStatusClasses(detail.status)
+                ]"
+              >
+                {{ detail.status }}
+              </span>
 
-      <!-- Main content -->
-      <div
-        :class="[
-          'text-sm font-semibold text-gray-900 whitespace-nowrap',
-          isVertical ? 'text-left' : 'text-right',
-        ]"
-      >
-        {{ detail.content }}
-      </div>
-
-      <!-- Optional sub content -->
-      <div
-        v-if="detail.subContent"
-        class="text-xs text-gray-500 mt-1"
-        :class="isVertical ? 'text-left' : 'text-right'"
-      >
-        {{ detail.subContent }}
+          <!-- Optional sub content -->
+          <div
+            v-if="detail.subContent"
+            class="text-xs text-gray-500"
+          >
+            {{ detail.subContent }}
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -82,7 +81,20 @@ export default defineComponent({
       default: false,
     },
   },
+  methods: {
+    getStatusClasses(status: string) {
+      const statusLower = status.toLowerCase()
+      
+      if (statusLower === 'pending') {
+        return 'bg-orange-200 text-yellow-700'
+      } else if (statusLower === 'delivered') {
+        return 'bg-green-100 text-green-700'
+      } else if (statusLower === 'cancelled') {
+        return 'bg-red-100 text-red-700'
+      } else {
+        return 'bg-gray-100 text-gray-600'
+      }
+    }
+  }
 })
 </script>
-
-
