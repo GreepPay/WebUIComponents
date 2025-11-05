@@ -1,6 +1,6 @@
 <!-- AppCompactPagination.vue -->
 <template>
-  <div :class="['flex items-center justify-between w-full px-4 py-3', customClass]">
+  <div :class="['flex items-center justify-between w-full px-6 py-3', customClass]">
     <!-- Left side: Page info -->
     <div class="flex items-center space-x-4">
       <span class="text-sm text-gray-600">
