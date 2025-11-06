@@ -28,7 +28,7 @@
             {{ text }}
             <span
               v-if="index < data.sub_titles.length - 1"
-              class="!text-black px text-[8px]"
+              class="!text-black px-2 text-[8px]"
             >
               ●
             </span>
@@ -49,7 +49,7 @@
     </app-normal-text>
 
     <app-normal-text class="!text-center !text-sm !whitespace-nowrap">
-      {{ data.ticket_price }}
+      from {{ data.ticket_price }}
     </app-normal-text>
     
     <app-normal-text class="!text-center !text-sm !whitespace-nowrap">
