@@ -8,7 +8,7 @@
   >
     <!-- overlay -->
     <div
-      class="fixed inset-0 bg-gray-500/75 !bg-red-800 transition-opacity"
+      class="fixed inset-0 bg-gray-500/75 transition-opacity"
       aria-hidden="true"
     ></div>
 

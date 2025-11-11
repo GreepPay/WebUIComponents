@@ -1,15 +1,15 @@
 <template>
   <div
-    class="w-full flex flex-col bg-white border rounded-lg px-4"
+    class="w-full flex flex-col bg-white border rounded-lg"
     :class="customClass"
   >
     <div
-      class="w-full flex justify-between items-center px-4 py-4"
+      class="w-full flex justify-between items-center py-4"
       :class="headerClass"
+      v-if="showHeader"
     >
       <slot name="header-title">
         <app-header-text class="!font-semibold !text-black !text-lg">
-          {{ title }}
         </app-header-text>
       </slot>
 
@@ -69,6 +69,10 @@
       actionText: {
         type: String,
         default: "See all",
+      },
+      showHeader: {
+        type: Boolean,
+        default: true,
       },
       items: {
         type: Array as () => any[],
