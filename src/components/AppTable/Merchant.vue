@@ -14,11 +14,13 @@
         <col class="w-1/2" />
         <col class="w-1/6" />
         <col class="w-1/6" />
+        <col class="w-1/6" />
       </colgroup>
 
       <thead class="bg-white">
         <tr>
           <th class="px-6 py-3 text-left font-medium text-gray-500">Name</th>
+          <th class="px-6 py-3 text-left font-medium text-gray-500">Status</th>
           <th class="px-6 py-3 text-left font-medium text-gray-500">Joined</th>
           <th class="px-6 py-3 text-right font-medium text-gray-500">
             Actions
@@ -49,6 +51,7 @@
                     `${merchant?.user?.first_name} ${merchant?.user?.last_name}`
                   }}
                 </div>
+                
                 <!-- <div
                   v-if="merchant.status === 'suspended'"
                   class="text-very-light-gray"
@@ -59,6 +62,12 @@
             </div>
           </td>
 
+          <td class="px-6 py-4 whitespace-nowrap text-very-light-gray">
+            {{
+              `${merchant?.verification_status} `
+            }}
+          </td>
+          
           <td class="px-6 py-4 whitespace-nowrap text-very-light-gray">
             {{ merchant.updated_at.split(" ")[0] }}
             • {{ merchant.updated_at.split(" ")[1] }}

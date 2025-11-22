@@ -15,15 +15,16 @@
         <col class="w-1/8" />
         <col class="w-1/8" />
         <col class="w-1/8" />
-        <!-- <col class="w-1/8" /> -->
+         <col class="w-1/8" /> 
       </colgroup>
 
       <thead class="bg-white">
         <tr>
-          <th class="px-6 py-3 text-left font-medium text-gray-500">To/From</th>
-          <th class="px-6 py-3 text-left font-medium text-gray-500">Type</th>
-          <th class="px-6 py-3 text-left font-medium text-gray-500">Time</th>
-          <th class="px-6 py-3 text-left font-medium text-gray-500">Amount</th>
+          <th class="px-4 py-5 text-left font-medium text-gray-500">To/From</th>
+           <th class="px-4 py-5 text-left font-medium text-gray-500">Description</th>
+          <th class="px-4 py-5 text-left font-medium text-gray-500">Type</th>
+          <th class="px-4 py-5 text-left font-medium text-gray-500">Time</th>
+          <th class="px-5 py-5 text-left font-medium text-gray-500">Amount</th>
           <!-- <th class="px-6 py-3 text-right font-medium text-gray-500">Action</th> -->
         </tr>
       </thead>
@@ -52,7 +53,12 @@
               </h3>
             </div>
           </td>
+          
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-left">
+            {{ `${transaction.description} ` }}
+          </td>
 
+          
           <td class="px-6 py-4 whitespace-nowrap text-very-light-gray">
             {{
               `${transaction.user.role.name} ${
