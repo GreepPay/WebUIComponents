@@ -1,5 +1,5 @@
 <template>
-  <div :class="['p-4 flex flex-col']">
+  <div :class="['p-6 flex flex-col']">
     <span class="text-gray-500 text-sm mb-2">{{ label }}</span>
 
     <span

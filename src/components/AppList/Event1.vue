@@ -43,9 +43,19 @@
 
     <app-normal-text
       class="!text-center !text-sm !whitespace-nowrap"
-      :class="data.status == 'active' ? '!text-green' : '!text-hot-orange'"
+      :class="{
+        '!text-green': data.status === 'active',
+        '!text-hot-orange': data.status === 'archived' || data.status === 'discontinued' || data.status === 'out_of_stock',
+        '!text-gray': data.status === 'draft'
+      }"
     >
-      {{ data.status == 'active' ? 'Ongoing' : (data.status == 'archived' ? 'Ended' : 'Upcoming') }}
+      {{
+        data.status === 'active' ? 'Ongoing' :
+        data.status === 'archived' ? 'Ended' :
+        data.status === 'discontinued' ? 'Discontinued' :
+        data.status === 'out_of_stock' ? 'Out of Stock' :
+        data.status === 'draft' ? 'Draft' : 'Unknown'
+      }}
     </app-normal-text>
 
     <app-normal-text class="!text-center !text-sm !whitespace-nowrap">
