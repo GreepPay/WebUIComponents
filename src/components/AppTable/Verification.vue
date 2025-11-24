@@ -29,15 +29,36 @@
       </thead>
 
       <tbody class="bg-white divide-y divide-gray-200">
-        <tr
-          v-if="verifications && verifications.length"
-          v-for="(verificiation, index) in verifications"
-          :key="verificiation.id"
-          :class="
-            index % 2 !== 0 ? 'bg-light-gray-one bg-opacity-[25%]' : 'bg-white'
-          "
-        >
-          <td class="px-6 py-4 whitespace-nowrap">
+          
+          <tr
+             v-if="verifications && verifications.length"
+             v-for="(verification, index) in verifications"
+             :key="verification.id"
+           >
+             <!-- ... rest of verification row -->
+           </tr>
+          
+          <tr
+            v-if="merchants && merchants.length"
+            v-for="(merchant, index) in merchants"
+            :key="merchant.created_at"
+            :class="
+              index % 2 !== 0 ? 'bg-light-gray-one bg-opacity-[25%]' : 'bg-white' "
+          >
+              
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center space-x-3">
+                  <app-avatar
+                    :name="merchant?.business?.business_name || 'Business'"
+                    :src="merchant?.business?.logo || ''"
+                    class="w-10 h-10 rounded-full"
+                  />
+                  <div class="font-medium text-black">
+                    {{ merchant?.business?.business_name || 'No business name' }}
+                  </div>
+                </div>
+              </td>
+          <!-- <td class="px-6 py-4 whitespace-nowrap">
             <div class="flex items-center space-x-3">
               <app-avatar
                 :name="`${verificiation?.user?.first_name} ${verificiation?.user?.last_name}`"
@@ -51,7 +72,7 @@
                 }}
               </div>
             </div>
-          </td>
+          </td> -->
 
           <td class="px-6 py-4 whitespace-nowrap">
             <div class="flex items-center space-x-3">
@@ -128,7 +149,7 @@
   import AppIcon from "../AppIcon"
   import AppEmptyState from "../AppEmptyState"
   import AppPDFViewer from "../AppPdfViewer"
-  import { Verification } from "@greep/logic/src/gql/graphql"
+  import { Verification, Profile } from "@greep/logic/src/gql/graphql"
   import AppModal from "../AppModal"
 
   export default defineComponent({
@@ -137,6 +158,10 @@
     props: {
       verifications: {
         type: Array as PropType<Verification[]>,
+        required: true,
+      },
+      merchants: {
+        type: Array as PropType<Profile[]>,
         required: true,
       },
       customClass: {
