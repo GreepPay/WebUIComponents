@@ -7,7 +7,7 @@ import AppAlert from "./AppAlert"
 import AppTabs from "./AppTabs"
 import AppProgressBar from "./AppProgressBar"
 import AppPdfViewer from "./AppPdfViewer"
-import AppTransactionDetails from "./AppTransactionDetails"
+import { AppTransactionDetails, AppDocumentDetails } from "./AppTransactionDetails"
 import AppAvatar from "./AppAvatar"
 import AppInfoBox from "./AppInfoBox"
 import AppDivider from "./AppDivider"
@@ -71,6 +71,7 @@ export {
   AppMerchantTable,
   AppWalletTable,
   AppCustomerTable,
+  AppDocumentDetails,
   AppAdminTable,
   AppTableHeader,
   AppStatCard,

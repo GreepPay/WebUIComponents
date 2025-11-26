@@ -78,19 +78,20 @@
             <div class="flex items-center space-x-3">
               <div
                 class="flex items-center space-x-2 cusor-pointer"
-                @click="showPDF = true"
+                @click="handleView(merchant)"
+              
               >
                 <app-icon name="document-text" />
-                <span class="text-blue">Passport</span>
+                <span class="text-blue">Documents</span>
               </div>
 
-              <div
+              <!-- <div
                 class="flex items-center space-x-2 cusor-pointer"
                 @click="showPDF = true"
               >
                 <app-icon name="document-text" custom-class="h-5" />
                 <span class="text-blue">Business</span>
-              </div>
+              </div> -->
             </div>
           </td>
 
@@ -98,7 +99,7 @@
             <div class="flex justify-end space-x-3">
               <span
                 role="button"
-                @click="$emit('approve', verificiation)"
+                @click="$emit('approve', merchant)"
                 class="text-green hover:opacity-80 cursor-pointer"
               >
                 Approve
@@ -128,17 +129,23 @@
         </tr>
       </tbody>
     </table>
-
-    <!-- PDF Viewer -->
+    
     <app-modal
-      :isOpen="showPDF"
-      title="File Details"
-      :showTitle="true"
-      :showFooter="false"
-      @close="showPDF = false"
+        :isOpen="showDetails"
+        title="Merchant Documents"
+        :showTitle="true"
+        :showFooter="false"
+        @close="showDetails = false"
     >
-      <AppPDFViewer />
+        <div class="space-y-5">
+            <app-document-details
+                :details="mapVerificationToDetails(selectedDocuments)"
+                @view="handleView"
+            />
+        </div>
     </app-modal>
+
+
   </div>
 </template>
 
@@ -148,13 +155,14 @@
   import AppAvatar from "../AppAvatar"
   import AppIcon from "../AppIcon"
   import AppEmptyState from "../AppEmptyState"
+  import {  AppDocumentDetails   } from "../AppTransactionDetails"
   import AppPDFViewer from "../AppPdfViewer"
   import { Verification, Profile } from "@greep/logic/src/gql/graphql"
   import AppModal from "../AppModal"
 
   export default defineComponent({
     name: "AppVerificationTable",
-    components: { AppIcon, AppAvatar, AppEmptyState, AppPDFViewer, AppModal },
+    components: { AppIcon, AppAvatar, AppEmptyState, AppPDFViewer, AppModal, AppDocumentDetails },
     props: {
       verifications: {
         type: Array as PropType<Verification[]>,
@@ -175,11 +183,59 @@
     },
     emits: ["approve", "Reject"],
     setup() {
-      const showPDF = ref(false)
+      const showDetails = ref(false);
+      const selectedDocuments = ref<Profile  | null>(null);
+      type VerificationDetail = {
+        title: string
+        content: string
+      }
+  const mapVerificationToDetails = (
+        doc: Profile 
+      ): VerificationDetail[] => {
+        if (!doc.verifications.length) {
+          return [
+            {
+              title: "Documents", 
+              content: "No documents available",
+            },
+          ]
+        }
+      
+        // Map each verification to its own set of details
+        const allDetails: VerificationDetail[] = []
+        
+        doc.verifications.forEach((verification, index) => {
+          allDetails.push(
+            // {
+            //   title: `Document type ${doc.verifications.length >= 1 ? index + 1 : ''}`,
+            //   content: `${verification.document_type}`,
+            // },
+            {
+              title: `Document ${doc.verifications.length >= 1 ? index + 1 : ''}`,
+              content: `${verification.document_url}`,
+            }
+          )
+        })
+      
+        return allDetails
+      }
+    const handleView = (merchant: Profile) => {
+    selectedDocuments.value = merchant; 
+    showDetails.value = true;           
+    };
 
-      return { showPDF }
+
+      return { 
+        handleView ,
+        showDetails,
+        selectedDocuments,
+        mapVerificationToDetails 
+      }
     },
   })
+  
+  
+  
 </script>
 
 <style scoped>

@@ -1,3 +1,4 @@
 import AppTransactionDetails from "./index.vue"
+import AppDocumentDetails from "./documentdetails.vue"
 
-export default AppTransactionDetails
+export { AppTransactionDetails, AppDocumentDetails }
