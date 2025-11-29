@@ -67,16 +67,26 @@
               <span
                 role="button"
                 @click="$emit('approve', merchant)"
-                class="text-green hover:opacity-80 cursor-pointer"
+                :class="{
+                  'text-green-600 font-semibold': merchantStatus[merchant.business?.id] === 'approved',
+                  'text-gray-400': merchantStatus[merchant.business?.id] === 'rejected',
+                  'text-green hover:opacity-80': !merchantStatus[merchant.business?.id]
+                }"
+                class="cursor-pointer transition-colors duration-200"
               >
                 Approve
               </span>
-
+          
               <!-- Reject Button -->
               <span
                 role="button"
                 @click="$emit('reject', merchant)"
-                class="text-red hover:opacity-80 cursor-pointer"
+                :class="{
+                  'text-red-600 font-semibold': merchantStatus[merchant.business?.id] === 'rejected',
+                  'text-gray-400': merchantStatus[merchant.business?.id] === 'approved',
+                  'text-red hover:opacity-80': !merchantStatus[merchant.business?.id]
+                }"
+                class="cursor-pointer transition-colors duration-200"
               >
                 Reject
               </span>
@@ -152,6 +162,10 @@ export default defineComponent({
     customStyle: {
       type: String,
       default: "",
+    },
+    merchantStatus: {
+      type: Object as PropType<Record<string, 'approved' | 'rejected' | null>>,
+      default: () => ({})
     },
   },
   // Update emits to include both approve and reject
