@@ -29,74 +29,41 @@
       </thead>
 
       <tbody class="bg-white divide-y divide-gray-200">
-          
-          <tr
-             v-if="verifications && verifications.length"
-             v-for="(verification, index) in verifications"
-             :key="verification.id"
-           >
-             <!-- ... rest of verification row -->
-           </tr>
-          
-          <tr
-            v-if="merchants && merchants.length"
-            v-for="(merchant, index) in merchants"
-            :key="merchant.created_at"
-            :class="
-              index % 2 !== 0 ? 'bg-light-gray-one bg-opacity-[25%]' : 'bg-white' "
-          >
-              
-            <td class="px-6 py-4 whitespace-nowrap">
-                <div class="flex items-center space-x-3">
-                  <app-avatar
-                    :name="merchant?.business?.business_name || 'Business'"
-                    :src="merchant?.business?.logo || ''"
-                    class="w-10 h-10 rounded-full"
-                  />
-                  <div class="font-medium text-black">
-                    {{ merchant?.business?.business_name || 'No business name' }}
-                  </div>
-                </div>
-              </td>
-          <!-- <td class="px-6 py-4 whitespace-nowrap">
+        <tr
+          v-if="merchants && merchants.length"
+          v-for="(merchant, index) in merchants"
+          :key="merchant.created_at"
+          :class="
+            index % 2 !== 0 ? 'bg-light-gray-one bg-opacity-[25%]' : 'bg-white' "
+        >
+          <td class="px-6 py-4 whitespace-nowrap">
             <div class="flex items-center space-x-3">
               <app-avatar
-                :name="`${verificiation?.user?.first_name} ${verificiation?.user?.last_name}`"
-                :src="verificiation?.user?.profile?.profile_picture || ''"
+                :name="merchant?.business?.business_name || 'Business'"
+                :src="merchant?.business?.logo || ''"
                 class="w-10 h-10 rounded-full"
-                alt="Admin avatar"
               />
               <div class="font-medium text-black">
-                {{
-                  `${verificiation?.user?.first_name} ${verificiation?.user?.last_name}`
-                }}
+                {{ merchant?.business?.business_name || 'No business name' }}
               </div>
             </div>
-          </td> -->
+          </td>
 
           <td class="px-6 py-4 whitespace-nowrap">
             <div class="flex items-center space-x-3">
               <div
                 class="flex items-center space-x-2 cusor-pointer"
                 @click="handleView(merchant)"
-              
               >
                 <app-icon name="document-text" />
                 <span class="text-blue">Documents</span>
               </div>
-
-              <!-- <div
-                class="flex items-center space-x-2 cusor-pointer"
-                @click="showPDF = true"
-              >
-                <app-icon name="document-text" custom-class="h-5" />
-                <span class="text-blue">Business</span>
-              </div> -->
             </div>
           </td>
 
           <td class="px-6 py-4 whitespace-nowrap text-right text-sm">
             <div class="flex justify-end space-x-3">
+              <!-- Approve Button -->
               <span
                 role="button"
                 @click="$emit('approve', merchant)"
@@ -105,13 +72,14 @@
                 Approve
               </span>
 
-              <!-- <span
+              <!-- Reject Button -->
+              <span
                 role="button"
-                @click="$emit('Reject', verificiation.id)"
+                @click="$emit('reject', merchant)"
                 class="text-red hover:opacity-80 cursor-pointer"
               >
                 Reject
-              </span> -->
+              </span>
             </div>
           </td>
         </tr>
@@ -144,110 +112,101 @@
             />
         </div>
     </app-modal>
-
-
   </div>
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref } from "vue"
-  import type { PropType } from "vue"
-  import AppAvatar from "../AppAvatar"
-  import AppIcon from "../AppIcon"
-  import AppEmptyState from "../AppEmptyState"
-  import {  AppDocumentDetails   } from "../AppTransactionDetails"
-  import AppPDFViewer from "../AppPdfViewer"
-  import { Verification, Profile } from "@greep/logic/src/gql/graphql"
-  import AppModal from "../AppModal"
+import { defineComponent, ref } from "vue"
+import type { PropType } from "vue"
+import AppAvatar from "../AppAvatar"
+import AppIcon from "../AppIcon"
+import AppEmptyState from "../AppEmptyState"
+import { AppDocumentDetails } from "../AppTransactionDetails"
+import AppPDFViewer from "../AppPdfViewer"
+import { Verification, Profile } from "@greep/logic/src/gql/graphql"
+import AppModal from "../AppModal"
 
-  export default defineComponent({
-    name: "AppVerificationTable",
-    components: { AppIcon, AppAvatar, AppEmptyState, AppPDFViewer, AppModal, AppDocumentDetails },
-    props: {
-      verifications: {
-        type: Array as PropType<Verification[]>,
-        required: true,
-      },
-      merchants: {
-        type: Array as PropType<Profile[]>,
-        required: true,
-      },
-      customClass: {
-        type: String,
-        default: "",
-      },
-      customStyle: {
-        type: String,
-        default: "",
-      },
+export default defineComponent({
+  name: "AppVerificationTable",
+  components: { 
+    AppIcon, 
+    AppAvatar, 
+    AppEmptyState, 
+    AppPDFViewer, 
+    AppModal, 
+    AppDocumentDetails 
+  },
+  props: {
+    verifications: {
+      type: Array as PropType<Verification[]>,
+      required: true,
     },
-    emits: ["approve", "Reject"],
-    setup() {
-      const showDetails = ref(false);
-      const selectedDocuments = ref<Profile  | null>(null);
-      type VerificationDetail = {
-        title: string
-        content: string
-      }
-  const mapVerificationToDetails = (
-        doc: Profile 
-      ): VerificationDetail[] => {
-        if (!doc.verifications.length) {
-          return [
-            {
-              title: "Documents", 
-              content: "No documents available",
-            },
-          ]
-        }
-      
-        // Map each verification to its own set of details
-        const allDetails: VerificationDetail[] = []
-        
-        doc.verifications.forEach((verification, index) => {
-          allDetails.push(
-            // {
-            //   title: `Document type ${doc.verifications.length >= 1 ? index + 1 : ''}`,
-            //   content: `${verification.document_type}`,
-            // },
-            {
-              title: `Document ${doc.verifications.length >= 1 ? index + 1 : ''}`,
-              content: `${verification.document_url}`,
+    merchants: {
+      type: Array as PropType<Profile[]>,
+      required: true,
+    },
+    customClass: {
+      type: String,
+      default: "",
+    },
+    customStyle: {
+      type: String,
+      default: "",
+    },
+  },
+  // Update emits to include both approve and reject
+  emits: ["view", "approve", "reject"],
+  setup(props, { emit }) {
+    const showDetails = ref(false);
+    const selectedDocuments = ref<Profile | null>(null);
+    
+    type VerificationDetail = {
+      title: string
+      content: string
+      displayText?: string
+    }
+    
+    const mapVerificationToDetails = (
+      doc: Profile 
+    ): VerificationDetail[] => {
+      if (doc.business?.documents && Array.isArray(doc.business.documents)) {
+        const validDocuments = doc.business.documents.filter((docUrl): docUrl is string => 
+          docUrl !== null && docUrl !== undefined && docUrl.trim() !== ''
+        );
+    
+        if (validDocuments.length > 0) {
+          const businessDetails: VerificationDetail[] = validDocuments.map((documentUrl: string, index: number) => {
+            return {
+              title: `Business Document ${index + 1}`,
+              content: documentUrl,
+              displayText: `View Document ${index + 1}`,
             }
-          )
-        })
-      
-        return allDetails
+          });
+    
+          return businessDetails;
+        }
       }
+    
+      return [
+        {
+          title: "Documents", 
+          content: "No documents available",
+        },
+      ]
+    }
+    
     const handleView = (merchant: Profile) => {
-    selectedDocuments.value = merchant; 
-    showDetails.value = true;           
+      selectedDocuments.value = merchant; 
+      showDetails.value = true;
+      emit('view', merchant);
     };
 
-
-      return { 
-        handleView ,
-        showDetails,
-        selectedDocuments,
-        mapVerificationToDetails 
-      }
-    },
-  })
-  
-  
-  
+    return { 
+      handleView,
+      showDetails,
+      selectedDocuments,
+      mapVerificationToDetails 
+    }
+  },
+})
 </script>
-
-<style scoped>
-  .blend-in {
-    animation: fadein 0.15s;
-  }
-  @keyframes fadein {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-</style>
